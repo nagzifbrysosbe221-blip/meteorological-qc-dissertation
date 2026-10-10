@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Understanding a missed case · Dissertation review</title><meta name="description" content="A fixed example shows why an undetected fault must remain a miss, even when flags appear after the intervention."><link rel="stylesheet" href="../guide/guide.css"><link rel="stylesheet" href="results.css"><link rel="stylesheet" href="../assets/python-code.css"><script src="../assets/python-sources.js" defer></script><script src="../assets/python-code.js" defer></script></head>
+<body><a class="skip-link" href="#main">Skip to the review</a><header class="site-header"><a class="brand" href="../index.html">Meteorological quality control<span>Dissertation review companion</span></a><nav aria-label="Website"><a href="../index.html">Home</a></nav></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">Study Design and Implementation</p><nav class="guide-chapters" aria-label="Study Design and Implementation"><a href="../guide/index.html">1. Data collection and preparation</a><a href="../guide/four-periods.html">2. Four study periods</a><a href="../guide/fitting-2021.html">3. 2021 — Fitting</a><a href="../guide/selection-2022.html">4. 2022 — Selection</a><a href="../guide/validation-2023.html">5. 2023 — Validation</a><a href="../guide/evaluation-2024.html">6. 2024 — Final evaluation</a></nav><p class="eyebrow">Results and Evidence</p><nav class="guide-chapters" aria-label="Results and Evidence"><a href="index.html">1. Saved results explorer</a><a href="datasets.html">2. Complete datasets</a><a href="figures.html">3. Figures and timelines</a><a href="missed-example.html" aria-current="page">4. Understanding a missed case</a><a href="verification.html">5. Validation and verification</a></nav><p class="eyebrow">Dissertation References</p><nav class="guide-chapters" aria-label="Dissertation References"><a href="../references/index.html">All 30 references</a></nav><p class="eyebrow">On this page</p><nav aria-label="On this page"><a href="#example">The missed example</a><a href="#python-code">Complete Python code</a></nav><div class="sidebar-note">Saved study evidence<p>These pages display completed findings. Humidity remains exploratory, and the background is assumed normal.</p></div></aside>
+<main id="main"><div class="page-intro"><p class="eyebrow">Results and Evidence</p><h1>Understanding a missed case</h1><p class="code-jump"><a href="#python-code">Read, copy or download the complete Python code ↓</a></p><p class="lead">A fixed example shows why an undetected fault must remain a miss, even when flags appear after the intervention.</p></div>
+<section id="example"><h2>Interpreting the first primary gradual-bias example</h2><p>The first primary gradual-bias case is a negative half-scale T ramp lasting 24 hours followed by a 24-hour hold in January. B0/R/H all missed it. H had zero statistical opportunities during the intervention, but range checks were evaluated, so its root category is an evaluated miss. Its paired-response diagnostic has no comparable opportunity. After intervention, both injected and counterpart H had four raw value flags: recovery flags do not rescue the miss or establish a causal response.</p>
+<p>To inspect the underlying records, open the <a href="index.html">saved results explorer</a> and select <strong>fixed roots</strong>, <strong>primary</strong>, <strong>T</strong>, <strong>gradual_bias</strong> and <strong>H</strong>. Select the <strong>record ID</strong> in the first column to open the complete record. The corresponding diagnostic and recovery records are available through the table selector.</p></section><div class="review-links"><a href="verification.html">Next: Validation and verification →</a></div><!-- BEGIN GENERATED PYTHON VIEW -->
+<section id="python-code" class="python-section" data-python-view data-default-file="source/qc-monitor/evaluator.py" data-preferred="[&quot;source/qc-monitor/evaluator.py&quot;,&quot;source/result-analysis/extract.py&quot;]">
+<p class="section-label">Complete Python code</p><h2>How a miss is retained</h2>
+<p class="code-intro">Inspect the root-scoring and extraction code alongside the saved missed-case explanation. A missed detection remains evidence and is not removed from the reported comparison.</p>
+<p class="small">The selected file is displayed in full below. Choose another file to read its complete code. Imports may require related files, configuration and saved inputs. <a href="../demo/verification.html#scientific-and-reporting-environments">Environment requirements</a> · <a href="../demo/verification.html#full-study-reproduction">Full-study prerequisites</a>.</p>
+<label class="code-picker" hidden for="python-file">Python file<select id="python-file"></select></label>
+<p class="code-file-description">Calculates task-specific point scores, root hits and misses, paired differences, alarm burden, recovery and descriptive summaries. Undefined ratios remain null.</p>
+<p class="code-file-path">source/qc-monitor/evaluator.py · 440 lines · Complete file</p>
+<div class="code-shell"><div class="code-toolbar"><button type="button" data-copy-code disabled>Copy code</button><a data-download-code href="../source/qc-monitor/evaluator.py" download="evaluator.py">Download .py</a><label class="code-wrap" hidden><input type="checkbox" data-wrap-code checked>Wrap long lines</label></div>
+<pre class="code-display" tabindex="0" role="region" aria-label="Complete Python code: source/qc-monitor/evaluator.py"><code>&quot;&quot;&quot;Submitted Appendix C scoring primitives. Inputs are completed saved records.
+
+No detector imports, fitting, calibration, point adjustment or data acquisition.
+Private labels enter here only after raw predictions/episodes have been produced.
+&quot;&quot;&quot;
+
+from collections import Counter, defaultdict
+from datetime import timedelta
+
+from evaluation_adapter import CONFIGS, IncompleteRun, combined, time, unit_key
+
+VERSION = &quot;submitted-v2-evaluator-fixtures-1&quot;
+COMPATIBLE = {
+    &quot;missing_cell&quot;: {&quot;Q02&quot;}, &quot;absent_row&quot;: {&quot;Q01&quot;},
+    &quot;duplicate_receipt&quot;: {&quot;Q06&quot;}, &quot;off_grid_timestamp&quot;: {&quot;Q05&quot;, &quot;Q01&quot;},
+    &quot;invalid_timestamp&quot;: {&quot;Q04&quot;, &quot;Q01&quot;},
+    &quot;out_of_range&quot;: {&quot;Q03&quot;, &quot;S01&quot;}, &quot;gradual_bias&quot;: {&quot;Q03&quot;, &quot;S01&quot;},
+}
+ENABLED = {&quot;B0&quot;: {&quot;Q01&quot;, &quot;Q02&quot;, &quot;Q03&quot;},
+           &quot;R&quot;: {&quot;Q01&quot;, &quot;Q02&quot;, &quot;Q03&quot;, &quot;Q04&quot;, &quot;Q05&quot;, &quot;Q06&quot;},
+           &quot;H&quot;: {&quot;Q01&quot;, &quot;Q02&quot;, &quot;Q03&quot;, &quot;Q04&quot;, &quot;Q05&quot;, &quot;Q06&quot;, &quot;S01&quot;}}
+
+
+def ratio(numerator, denominator, reason):
+    if denominator &lt; 0 or numerator &lt; 0:
+        raise ValueError(&quot;Counts cannot be negative&quot;)
+    return {&quot;numerator&quot;: numerator, &quot;denominator&quot;: denominator,
+            &quot;value&quot;: numerator/denominator if denominator else None,
+            &quot;reason&quot;: None if denominator else reason}
+
+
+def confusion(pairs):
+    counts = dict.fromkeys((&quot;TP&quot;, &quot;FP&quot;, &quot;FN&quot;, &quot;TN&quot;), 0)
+    for truth, prediction in pairs:
+        if type(truth) is not bool or type(prediction) is not bool:
+            raise ValueError(&quot;Confusion counts require eligible Boolean truth and predictions&quot;)
+        counts[(&quot;TP&quot; if prediction else &quot;FN&quot;) if truth else (&quot;FP&quot; if prediction else &quot;TN&quot;)] += 1
+    tp, fp, fn, tn = (counts[k] for k in (&quot;TP&quot;, &quot;FP&quot;, &quot;FN&quot;, &quot;TN&quot;))
+    return {**counts, &quot;n&quot;: tp+fp+fn+tn,
+            &quot;precision&quot;: ratio(tp, tp+fp, &quot;no_predicted_positives&quot;),
+            &quot;recall&quot;: ratio(tp, tp+fn, &quot;no_truth_positives&quot;),
+            &quot;fpr&quot;: ratio(fp, fp+tn, &quot;no_truth_negatives&quot;)}
+
+
+def exclusion(unit, label):
+    reasons = []
+    if label.get(&quot;scope&quot;) != &quot;scored&quot;:
+        reasons.append(&quot;outside_point_scope&quot; if label.get(&quot;scope&quot;) else &quot;scope_unknown&quot;)
+    if not unit[&quot;applicable&quot;]:
+        reasons.append(&quot;inapplicable&quot;)
+    if type(label.get(&quot;truth&quot;)) is not bool:
+        reasons.append(&quot;unknown_truth&quot;)
+    if unit[&quot;task&quot;] == &quot;value&quot; and not label.get(&quot;usable&quot;, False):
+        reasons.append(&quot;structurally_unusable&quot;)
+    if not unit[&quot;complete&quot;]:
+        reasons.append(&quot;required_checks_incomplete&quot;)
+    if label.get(&quot;origin&quot;) == &quot;natural_positive&quot;:
+        reasons.append(&quot;independent_natural_positive&quot;)
+    return reasons
+
+
+def point_scores(units, truth):
+    &quot;&quot;&quot;Separate task/variable strata, own/common IDs, counts, coverage, exclusions.
+
+    Cases remain separate. Any later monthly pooling must explicitly retain the
+    exact family, variable/typed task and variant. Natural structural positives
+    are listed separately from synthetic counts.
+    &quot;&quot;&quot;
+    by_key = defaultdict(dict)
+    groups = defaultdict(list)
+    for u in units:
+        if u[&quot;configuration&quot;] in by_key[u[&quot;key&quot;]]:
+            raise IncompleteRun(&quot;Duplicate scoring unit&quot;)
+        by_key[u[&quot;key&quot;]][u[&quot;configuration&quot;]] = u
+    if set(truth)-set(by_key):
+        raise ValueError(&quot;Private truth refers to unknown scoring units&quot;)
+    for key, configs in by_key.items():
+        if set(configs) != set(CONFIGS):
+            raise IncompleteRun(&quot;Missing configuration for scoring unit&quot;)
+        u = configs[&quot;B0&quot;]
+        groups[(u[&quot;case_id&quot;], u[&quot;task&quot;], u[&quot;variable&quot;])].append(key)
+    reports = []
+    for (case, task, var), keys in sorted(groups.items(), key=str):
+        participants = CONFIGS if task in {&quot;value&quot;, &quot;availability&quot;} else (&quot;R&quot;, &quot;H&quot;)
+        own = {c: {k for k in keys if not exclusion(by_key[k][c], truth.get(k, {}))} for c in participants}
+        common = set.intersection(*(own[c] for c in participants))
+        for cfg in CONFIGS:
+            eligible = own.get(cfg, set())
+            scored = [k for k in keys if truth.get(k, {}).get(&quot;scope&quot;) == &quot;scored&quot;]
+            natural = [k for k in scored if truth[k].get(&quot;origin&quot;) == &quot;natural_positive&quot;]
+            def metrics(selected):
+                return confusion((truth[k][&quot;truth&quot;], by_key[k][cfg][&quot;prediction&quot;]) for k in sorted(selected))
+            shared = common if cfg in participants else set()
+            reports.append({&quot;case_id&quot;: case, &quot;task&quot;: task, &quot;variable&quot;: var, &quot;configuration&quot;: cfg,
+                            &quot;status&quot;: &quot;applicable&quot; if cfg in participants else &quot;inapplicable&quot;,
+                            &quot;own_ids&quot;: sorted(eligible), &quot;common_ids&quot;: sorted(shared),
+                            &quot;own&quot;: metrics(eligible), &quot;common&quot;: metrics(shared),
+                            &quot;own_coverage&quot;: ratio(len(eligible), len(scored), &quot;no_scored_subjects&quot;),
+                            &quot;common_coverage&quot;: ratio(len(shared), len(scored), &quot;no_scored_subjects&quot;),
+                            &quot;exclusions&quot;: {k: exclusion(by_key[k][cfg], truth.get(k, {})) for k in keys if k not in eligible},
+                            &quot;natural_structural&quot;: [{&quot;key&quot;: k, &quot;prediction&quot;: by_key[k][cfg][&quot;prediction&quot;],
+                                                    &quot;complete&quot;: by_key[k][cfg][&quot;complete&quot;]} for k in natural]})
+    return reports
+
+
+def root_scores(roots, units, health):
+    &quot;&quot;&quot;One credit per root/configuration, with execution failures outside pairs.
+
+    Sparse members are private (check, subject_id) relations. Overlapping root
+    ownership is rejected: the submitted inventory consists of isolated cases.
+    Health must certify the complete declared window/drain for every config.
+    &quot;&quot;&quot;
+    rows, lookup = [], {}
+    for u in units:
+        for r in u[&quot;checks&quot;]:
+            key = (u[&quot;case_id&quot;], r[&quot;configuration&quot;], r[&quot;subject_id&quot;], r[&quot;check&quot;])
+            if key in lookup and lookup[key] != r:
+                raise IncompleteRun(&quot;Conflicting result copies&quot;)
+            if key not in lookup:
+                rows.append((u[&quot;case_id&quot;], r))
+                lookup[key] = r
+    ownership, root_ids = {}, set()
+    outcomes = []
+    for root in roots:
+        rid, case, family = root[&quot;root_id&quot;], root[&quot;case_id&quot;], root[&quot;family&quot;]
+        if rid in root_ids or family not in COMPATIBLE:
+            raise ValueError(&quot;Invalid root identity/family&quot;)
+        root_ids.add(rid)
+        status = root[&quot;construction&quot;]
+        if status not in {&quot;effective&quot;, &quot;no_effect&quot;, &quot;blocked&quot;, &quot;generation_error&quot;, &quot;pending&quot;}:
+            raise ValueError(&quot;Unknown construction status&quot;)
+        if status in {&quot;effective&quot;, &quot;no_effect&quot;}:
+            if root[&quot;N&quot;] != root[&quot;C&quot;]+root[&quot;Z&quot;]+root[&quot;U&quot;] or min(root[k] for k in (&quot;N&quot;, &quot;C&quot;, &quot;Z&quot;, &quot;U&quot;)) &lt; 0:
+                raise ValueError(&quot;Construction accounting must satisfy N=C+Z+U&quot;)
+            if (root[&quot;C&quot;] &gt; 0) != (status == &quot;effective&quot;):
+                raise ValueError(&quot;Effective roots require actual changes&quot;)
+        members = {tuple(x) for x in root.get(&quot;members&quot;, [])}
+        if len(members) != len(root.get(&quot;members&quot;, [])) or any(c not in COMPATIBLE[family] for c, _ in members):
+            raise ValueError(&quot;Duplicate or incompatible private relation&quot;)
+        for check, subject in members:
+            key = (case, check, subject)
+            if key in ownership:
+                raise ValueError(&quot;One result cannot belong to two isolated roots&quot;)
+            ownership[key] = rid
+        result = {&quot;root_id&quot;: rid, &quot;case_id&quot;: case, &quot;family&quot;: family,
+                  &quot;variable&quot;: root.get(&quot;variable&quot;), &quot;variant&quot;: root.get(&quot;variant&quot;),
+                  &quot;support&quot;: root.get(&quot;support&quot;), &quot;construction&quot;: status,
+                  &quot;paired&quot;: False, &quot;pair_exclusions&quot;: {}, &quot;configurations&quot;: {}}
+        outcomes.append(result)
+        if status != &quot;effective&quot;:
+            if root.get(&quot;first_effect&quot;) is not None or members:
+                raise ValueError(&quot;Non-effective root cannot have realised effects&quot;)
+            continue
+        e = time(root[&quot;first_effect&quot;])
+        onset = time(root[&quot;planned_onset&quot;])
+        if root[&quot;length_hours&quot;] &lt;= 0:
+            raise ValueError(&quot;Positive intended length required&quot;)
+        h = onset+timedelta(hours=root[&quot;length_hours&quot;]-1, minutes=5)
+        if not onset &lt;= e &lt;= h or not members:
+            raise ValueError(&quot;Invalid realised onset/mask&quot;)
+        result.update(first_effect=e.isoformat(), horizon=h.isoformat())
+        for cfg in CONFIGS:
+            state = health.get((case, cfg), {&quot;valid&quot;: False, &quot;reason&quot;: &quot;missing_run&quot;})
+            missing = [(c, s) for c, s in members if c in ENABLED[cfg] and (case, cfg, s, c) not in lookup]
+            if not state[&quot;valid&quot;] or missing:
+                result[&quot;pair_exclusions&quot;][cfg] = state.get(&quot;reason&quot;) or &quot;missing_expected_result&quot;
+        if result[&quot;pair_exclusions&quot;]:
+            continue
+        result[&quot;paired&quot;] = True
+        for cfg in CONFIGS:
+            enabled = COMPATIBLE[family] &amp; ENABLED[cfg]
+            candidates = [r for c, r in rows if c == case and r[&quot;configuration&quot;] == cfg and
+                          (r[&quot;check&quot;], r[&quot;subject_id&quot;]) in members and r[&quot;check&quot;] in enabled and
+                          e &lt;= time(r[&quot;emitted_at&quot;]) &lt;= h]
+            evaluated = [r for r in candidates if r[&quot;execution&quot;] == &quot;evaluated&quot;]
+            positive = sorted((r for r in evaluated if r[&quot;prediction&quot;] is True),
+                              key=lambda r: (time(r[&quot;emitted_at&quot;]), r[&quot;check&quot;], r[&quot;subject_id&quot;], r[&quot;result_id&quot;]))
+            category = (&quot;hit&quot; if positive else &quot;evaluated_miss&quot; if evaluated else
+                        &quot;unavailable_miss&quot; if enabled else &quot;absent_capability_miss&quot;)
+            first = positive[0] if positive else None
+            touched = [u for u in units if u[&quot;case_id&quot;] == case and u[&quot;configuration&quot;] == cfg and
+                       any((r[&quot;check&quot;], r[&quot;subject_id&quot;]) in members and
+                           e &lt;= time(r[&quot;emitted_at&quot;]) &lt;= h for r in u[&quot;checks&quot;])]
+            # Numeric roots have a single value unit per changed slot. Structural
+            # roots may touch dependent T/U availability units; retain identities.
+            result[&quot;configurations&quot;][cfg] = {
+                &quot;category&quot;: category, &quot;result_id&quot;: first[&quot;result_id&quot;] if first else None,
+                &quot;delay_seconds&quot;: (time(first[&quot;emitted_at&quot;])-e).total_seconds() if first else None,
+                &quot;compatible_evaluated_results&quot;: len(evaluated),
+                &quot;statistical_opportunities&quot;: sum(r[&quot;check&quot;] == &quot;S01&quot; for r in evaluated),
+                &quot;required_complete_unit_ids&quot;: sorted(u[&quot;key&quot;] for u in touched if u[&quot;complete&quot;]),
+                &quot;required_unit_ids&quot;: sorted(u[&quot;key&quot;] for u in touched),
+                &quot;full_required_coverage&quot;: ratio(sum(u[&quot;complete&quot;] for u in touched), len(touched), &quot;no_required_units&quot;),
+                &quot;interpretation&quot;: &quot;flagged_during_intervention_not_proof_of_causal_response&quot; if first else None}
+    return outcomes
+
+
+def case_accounting(outcomes):
+    &quot;&quot;&quot;Construction/execution inventory only, with no cross-family ranking.&quot;&quot;&quot;
+    construction = Counter(r[&quot;construction&quot;] for r in outcomes)
+    paired = [r for r in outcomes if r[&quot;paired&quot;]]
+    planned, effective, n = len(outcomes), construction[&quot;effective&quot;], len(paired)
+    return {&quot;planned&quot;: planned, &quot;construction&quot;: dict(construction), &quot;effective&quot;: effective,
+              &quot;paired&quot;: n, &quot;missing_or_failed_pairs&quot;: effective-n,
+              &quot;construction_coverage&quot;: ratio(effective, planned, &quot;no_planned_cases&quot;),
+              &quot;completion&quot;: ratio(n, effective, &quot;no_effective_cases&quot;)}
+
+
+def require_stratum(outcomes, family_rollup=False):
+    fields = (&quot;family&quot;, &quot;variable&quot;, &quot;support&quot;) + (() if family_rollup else (&quot;variant&quot;,))
+    strata = {tuple(r[f] for f in fields) for r in outcomes}
+    if len(strata) &gt; 1:
+        raise ValueError(&quot;Do not pool different family/variable/support/variant strata&quot;)
+
+
+def root_summary(outcomes, *, family_rollup=False):
+    &quot;&quot;&quot;Exact strata by default; optional within-family roll-up weights roots equally.&quot;&quot;&quot;
+    require_stratum(outcomes, family_rollup)
+    result = {**case_accounting(outcomes), &quot;configurations&quot;: {}}
+    paired = [r for r in outcomes if r[&quot;paired&quot;]]
+    n, planned = len(paired), len(outcomes)
+    for cfg in CONFIGS:
+        counts = Counter(r[&quot;configurations&quot;][cfg][&quot;category&quot;] for r in paired)
+        hit, opportunity = counts[&quot;hit&quot;], counts[&quot;hit&quot;]+counts[&quot;evaluated_miss&quot;]
+        result[&quot;configurations&quot;][cfg] = {&quot;counts&quot;: dict(counts),
+            &quot;detection&quot;: ratio(hit, n, &quot;no_valid_pairs&quot;),
+            &quot;opportunity_coverage&quot;: ratio(opportunity, n, &quot;no_valid_pairs&quot;),
+            &quot;conditional_detection&quot;: ratio(hit, opportunity, &quot;no_evaluated_opportunities&quot;),
+            &quot;workflow_yield&quot;: ratio(hit, planned, &quot;no_planned_cases&quot;)}
+    return result
+
+
+def paired_differences(outcomes, *, family_rollup=False):
+    require_stratum(outcomes, family_rollup)
+    pairs = [(&quot;H&quot;, &quot;B0&quot;), (&quot;R&quot;, &quot;B0&quot;), (&quot;H&quot;, &quot;R&quot;)]
+    roster = [r for r in outcomes if r[&quot;paired&quot;]]
+    result = []
+    for a, b in pairs:
+        both, a_only, b_only, neither = [], [], [], []
+        for r in roster:
+            x, y = r[&quot;configurations&quot;][a], r[&quot;configurations&quot;][b]
+            ah, bh = x[&quot;category&quot;] == &quot;hit&quot;, y[&quot;category&quot;] == &quot;hit&quot;
+            if ah and bh:
+                both.append({&quot;root_id&quot;: r[&quot;root_id&quot;], &quot;delay_difference_seconds&quot;: x[&quot;delay_seconds&quot;]-y[&quot;delay_seconds&quot;]})
+            else:
+                (a_only if ah else b_only if bh else neither).append(r[&quot;root_id&quot;])
+        result.append({&quot;comparison&quot;: a+&quot;-&quot;+b, &quot;paired_ids&quot;: [r[&quot;root_id&quot;] for r in roster],
+                       &quot;detection_difference&quot;: (len(a_only)-len(b_only))/len(roster) if roster else None,
+                       &quot;common_hits&quot;: both, &quot;first_only&quot;: a_only, &quot;second_only&quot;: b_only, &quot;neither&quot;: neither})
+    return result
+
+
+def raw_nodes(units):
+    &quot;&quot;&quot;Union timestamp checks once per receipt, retaining partial positives.&quot;&quot;&quot;
+    nodes, receipts = [], defaultdict(list)
+    for u in units:
+        if u[&quot;task&quot;] in {&quot;value&quot;, &quot;availability&quot;}:
+            nodes.append({**u, &quot;domain&quot;: u[&quot;task&quot;], &quot;contributors&quot;: [r[&quot;result_id&quot;] for r in u[&quot;checks&quot;] if r[&quot;prediction&quot;] is True]})
+        else:
+            receipts[(u[&quot;case_id&quot;], u[&quot;configuration&quot;], u[&quot;subject&quot;])].append(u)
+    for (case, cfg, subject), typed in receipts.items():
+        if {u[&quot;task&quot;] for u in typed} != {&quot;Q04&quot;, &quot;Q05&quot;, &quot;Q06&quot;}:
+            raise IncompleteRun(&quot;Timestamp union requires all three explicit task rows&quot;)
+        checks = [r for u in typed for r in u[&quot;checks&quot;]]
+        nodes.append({**typed[0], &quot;key&quot;: unit_key(case, &quot;timestamp&quot;, subject),
+                      &quot;task&quot;: &quot;timestamp&quot;, &quot;domain&quot;: &quot;timestamp&quot;, &quot;checks&quot;: checks,
+                      **combined(checks), &quot;contributors&quot;: [r[&quot;result_id&quot;] for r in checks if r[&quot;prediction&quot;] is True]})
+    return nodes
+
+
+def raw_episodes(nodes):
+    &quot;&quot;&quot;Truth-free episodes; no case/variable/domain/configuration/month resets.&quot;&quot;&quot;
+    groups = defaultdict(list)
+    for n in nodes:
+        groups[(n[&quot;case_id&quot;], n[&quot;configuration&quot;], n[&quot;domain&quot;], n[&quot;variable&quot;])].append(n)
+    episodes = []
+    for group, items in sorted(groups.items(), key=str):
+        current, previous = None, None
+        for n in sorted(items, key=lambda x: (time(x[&quot;time&quot;]), x[&quot;order&quot;], x[&quot;key&quot;])):
+            delta = (time(n[&quot;time&quot;])-time(previous[&quot;time&quot;])).total_seconds() if previous else None
+            adjacent = delta is not None and (0 &lt;= delta &lt;= 3600 if n[&quot;domain&quot;] == &quot;timestamp&quot; else delta == 3600)
+            if n[&quot;prediction&quot;] is True:
+                if current is None or not adjacent:
+                    current = {&quot;episode_id&quot;: &quot;episode:&quot;+str(len(episodes)+1), &quot;group&quot;: list(group), &quot;nodes&quot;: []}
+                    episodes.append(current)
+                current[&quot;nodes&quot;].append(n)
+            else:
+                current = None
+            previous = n
+    return episodes
+
+
+def normal_ids(units, truth, cfg, cohort=&quot;common&quot;):
+    if cohort not in {&quot;common&quot;, &quot;own&quot;}:
+        raise ValueError(&quot;Unknown normal cohort&quot;)
+    index = {(u[&quot;key&quot;], u[&quot;configuration&quot;]): u for u in units}
+    allowed = set()
+    for u in units:
+        if u[&quot;configuration&quot;] != cfg:
+            continue
+        configs = (CONFIGS if u[&quot;task&quot;] in {&quot;value&quot;, &quot;availability&quot;} else (&quot;R&quot;, &quot;H&quot;)) if cohort == &quot;common&quot; else (cfg,)
+        if u[&quot;task&quot;] in {&quot;value&quot;, &quot;availability&quot;}:
+            label = truth.get(u[&quot;key&quot;], {})
+            if label.get(&quot;truth&quot;) is False and all(not exclusion(index[(u[&quot;key&quot;], c)], label) for c in configs):
+                allowed.add(u[&quot;key&quot;])
+        elif cfg != &quot;B0&quot;:
+            keys = [unit_key(u[&quot;case_id&quot;], task, u[&quot;subject&quot;]) for task in (&quot;Q04&quot;, &quot;Q05&quot;, &quot;Q06&quot;)]
+            # All three independently negative conditions and all three complete.
+            if all(truth.get(k, {}).get(&quot;truth&quot;) is False and all(
+                    not exclusion(index[(k, c)], truth[k]) for c in configs) for k in keys):
+                allowed.add(unit_key(u[&quot;case_id&quot;], &quot;timestamp&quot;, u[&quot;subject&quot;]))
+    return allowed
+
+
+def project_burden(nodes, episodes, allowed, source_months):
+    &quot;&quot;&quot;One case/config/domain/variable at a time; exact negative exposure.
+
+    source_months uses original source dates, never converted observation months.
+    Segments crossing a month keep one start, while later months get carry-in.
+    &quot;&quot;&quot;
+    groups = {(n[&quot;case_id&quot;], n[&quot;configuration&quot;], n[&quot;domain&quot;], n[&quot;variable&quot;]) for n in nodes}
+    if len(groups) != 1:
+        raise ValueError(&quot;Burden must keep case/configuration/domain/variable separate&quot;)
+    if any(tuple(e[&quot;group&quot;]) not in groups for e in episodes):
+        raise ValueError(&quot;Episodes and exposure must refer to the same group&quot;)
+    keys = {n[&quot;key&quot;] for n in nodes}
+    if not allowed &lt;= keys:
+        raise ValueError(&quot;Normal exposure contains unknown subjects&quot;)
+    if any(k not in source_months for k in allowed):
+        raise ValueError(&quot;Original source month is required for every exposure subject&quot;)
+    segments = []
+    for episode in episodes:
+        retained = []
+        def finish():
+            if retained:
+                segments.append({&quot;parent_episode_id&quot;: episode[&quot;episode_id&quot;],
+                                 &quot;ids&quot;: [n[&quot;key&quot;] for n in retained],
+                                 &quot;truncated_start&quot;: retained[0][&quot;key&quot;] != episode[&quot;nodes&quot;][0][&quot;key&quot;],
+                                 &quot;truncated_end&quot;: retained[-1][&quot;key&quot;] != episode[&quot;nodes&quot;][-1][&quot;key&quot;]})
+        for n in episode[&quot;nodes&quot;]:
+            if n[&quot;key&quot;] in allowed:
+                retained.append(n)
+            else:
+                finish()
+                retained = []
+        finish()
+    factor = 1000 if nodes[0][&quot;domain&quot;] == &quot;timestamp&quot; else 720
+    monthly = {}
+    for month in sorted({source_months[k] for k in allowed}):
+        exposure = sum(source_months[k] == month for k in allowed)
+        starts = sum(source_months[s[&quot;ids&quot;][0]] == month for s in segments)
+        carry = sum(source_months[s[&quot;ids&quot;][0]] != month and any(source_months[k] == month for k in s[&quot;ids&quot;]) for s in segments)
+        monthly[month] = {&quot;exposure&quot;: exposure, &quot;segment_starts&quot;: starts, &quot;carry_in&quot;: carry,
+                          &quot;burden&quot;: ratio(factor*starts, exposure, &quot;no_eligible_negative_exposure&quot;)}
+    return {&quot;exposure&quot;: len(allowed), &quot;segments&quot;: segments, &quot;segment_count&quot;: len(segments),
+            &quot;rate_factor&quot;: factor, &quot;burden&quot;: ratio(factor*len(segments), len(allowed), &quot;no_eligible_negative_exposure&quot;),
+            &quot;monthly&quot;: monthly, &quot;raw_positive_units&quot;: sum(n[&quot;prediction&quot;] is True for n in nodes),
+            &quot;raw_episodes&quot;: len(episodes), &quot;interpretation&quot;: &quot;false_segments_are_not_notifications&quot;}
+
+
+def excess_response(injected, counterpart, changed_keys, injected_identity, counterpart_identity):
+    &quot;&quot;&quot;Offline numeric diagnostic, after both monitors finish; no point rewriting.&quot;&quot;&quot;
+    if injected_identity != counterpart_identity:
+        raise ValueError(&quot;Counterpart configuration/model/settings must match&quot;)
+    if any(u[&quot;task&quot;] != &quot;value&quot; for u in injected+counterpart):
+        raise ValueError(&quot;Excess response is a value-composite diagnostic&quot;)
+    configs = {u[&quot;configuration&quot;] for u in injected+counterpart}
+    if len(configs) != 1:
+        raise ValueError(&quot;Compare one configuration at a time&quot;)
+    left = {(u[&quot;time&quot;], u[&quot;variable&quot;]): u for u in injected}
+    right = {(u[&quot;time&quot;], u[&quot;variable&quot;]): u for u in counterpart}
+    if len(left) != len(injected) or len(right) != len(counterpart):
+        raise ValueError(&quot;Duplicate counterpart slot&quot;)
+    opportunities, hits = [], []
+    for key in sorted(changed_keys):
+        a, b = left.get(tuple(key)), right.get(tuple(key))
+        if a is None or b is None:
+            raise IncompleteRun(&quot;Changed slot missing from injected/counterpart output&quot;)
+        if a[&quot;complete&quot;] and b[&quot;complete&quot;]:
+            opportunities.append(list(key))
+            if a[&quot;prediction&quot;] is True and b[&quot;prediction&quot;] is False:
+                hits.append(list(key))
+    return {&quot;comparable_opportunities&quot;: opportunities, &quot;hit_slots&quot;: hits, &quot;diagnostic_hit&quot;: bool(hits)}
+
+
+def recovery_units(units, planned_onset, length_hours, month_last_slot):
+    end = time(planned_onset)+timedelta(hours=length_hours-1)
+    return [u for u in units if u[&quot;task&quot;] in {&quot;value&quot;, &quot;availability&quot;} and end &lt; time(u[&quot;time&quot;]) &lt;= time(month_last_slot)]
+
+
+def quantile7(values, p):
+    if not 0 &lt;= p &lt;= 1:
+        raise ValueError(&quot;Quantile probability outside [0,1]&quot;)
+    values = sorted(values)
+    if not values:
+        return None
+    h = (len(values)-1)*p
+    i = int(h)
+    return values[i]+(h-i)*(values[min(i+1, len(values)-1)]-values[i])
+
+
+def monthly_description(contributions):
+    &quot;&quot;&quot;Saved (month,numerator,denominator) contributions, same exact stratum.&quot;&quot;&quot;
+    if len({x[&quot;month&quot;] for x in contributions}) != len(contributions):
+        raise ValueError(&quot;Duplicate source month&quot;)
+    values = [x[&quot;numerator&quot;]/x[&quot;denominator&quot;] for x in contributions if x[&quot;denominator&quot;]]
+    leave_out = []
+    for omitted in contributions:
+        remaining = [x for x in contributions if x is not omitted]
+        leave_out.append({&quot;omitted_month&quot;: omitted[&quot;month&quot;], **ratio(sum(x[&quot;numerator&quot;] for x in remaining),
+                          sum(x[&quot;denominator&quot;] for x in remaining), &quot;no_remaining_denominator&quot;)})
+    defined = [x[&quot;value&quot;] for x in leave_out if x[&quot;value&quot;] is not None]
+    q1, q3 = quantile7(values, .25), quantile7(values, .75)
+    return {&quot;defined_months&quot;: len(values), &quot;undefined_months&quot;: len(contributions)-len(values),
+            &quot;median&quot;: quantile7(values, .5), &quot;q1&quot;: q1, &quot;q3&quot;: q3, &quot;iqr&quot;: q3-q1 if values else None,
+            &quot;leave_one_month_out&quot;: leave_out, &quot;leave_out_range&quot;: [min(defined), max(defined)] if defined else None}
+
+
+def sensitivity_contract(primary, variant, factor):
+    &quot;&quot;&quot;Validate saved inputs/settings identity; caller recomputes each cohort.
+
+    This validates metadata only; it does not calibrate or run sensitivities.
+    &quot;&quot;&quot;
+    if primary[&quot;input_hash&quot;] != variant[&quot;input_hash&quot;] or primary[&quot;scope&quot;] != variant[&quot;scope&quot;]:
+        raise ValueError(&quot;Sensitivity must reuse identical injected inputs and scope&quot;)
+    a, b = primary[&quot;settings&quot;], variant[&quot;settings&quot;]
+    if set(a) != set(CONFIGS) or set(b) != set(CONFIGS):
+        raise ValueError(&quot;All three configurations must be retained&quot;)
+    for cfg in CONFIGS:
+        changes = {k for k in set(a[cfg]) | set(b[cfg]) if a[cfg].get(k) != b[cfg].get(k)}
+        if factor == &quot;alpha&quot;:
+            allowed = {&quot;alpha&quot;, &quot;cutoff&quot;} if cfg == &quot;H&quot; else set()
+            if not changes &lt;= allowed or (cfg == &quot;H&quot; and (b[cfg][&quot;alpha&quot;] not in {.005, .02} or b[cfg][&quot;cutoff&quot;] &lt;= 0)):
+                raise ValueError(&quot;Only H alpha/corresponding cutoff may change&quot;)
+        elif factor == &quot;T_bounds&quot;:
+            if changes != {&quot;T_bounds&quot;} or b[cfg][&quot;T_bounds&quot;] != [-30, 45]:
+                raise ValueError(&quot;T bounds must change across all configurations with EWMA fixed&quot;)
+        else:
+            raise ValueError(&quot;Undeclared sensitivity factor&quot;)
+    return {&quot;valid&quot;: True, &quot;factor&quot;: factor, &quot;cohort_policy&quot;: &quot;recompute_strict_own_and_common_for_each_variant&quot;}
+</code></pre></div>
+<p class="code-status" role="status" aria-live="polite"></p>
+<noscript><p>The complete default file is shown above. File selection and automatic copying require JavaScript. Select the code manually or download a related file:</p><ul><li><a href="../source/qc-monitor/evaluator.py" download="evaluator.py">evaluator.py</a></li><li><a href="../source/result-analysis/extract.py" download="extract.py">extract.py</a></li></ul></noscript>
+<p class="small">These complete public source files document the study. Additional inputs are needed to reproduce the full experiment. See the on-site requirements and source-copy scope. The website does not execute Python.</p>
+<div class="review-links"><a href="#python-code">Back to code controls ↑</a><a href="#main">Back to page overview ↑</a></div>
+</section>
+<!-- END GENERATED PYTHON VIEW -->
+<footer><p>Source: KNMI. KNMI did not participate in or necessarily endorse this derived work. Codex-assisted development and writing.</p><p><a href="../demo/verification.html#using-code">Using the Python files</a> · <a href="../references/index.html#attribution">Attribution and use</a></p></footer></main></div></body></html>

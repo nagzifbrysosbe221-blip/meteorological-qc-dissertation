@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Review the dissertation's 2022 selection: model requirements, original humidity failure, R1 exploratory continuation, alarm calibration and saved development comparison."><title>2022 — Selection · Dissertation review</title><link rel="stylesheet" href="guide.css"><link rel="stylesheet" href="../assets/python-code.css"><script src="../assets/python-sources.js" defer></script><script src="../assets/python-code.js" defer></script></head>
+<body>
+<a class="skip-link" href="#main">Skip to the review</a>
+<header class="site-header"><a class="brand" href="../index.html">Meteorological quality control<span>Dissertation review companion</span></a><nav aria-label="Website"><a href="../index.html">Home</a></nav></header>
+<div class="layout">
+<aside class="sidebar"><p class="eyebrow">Study Design and Implementation</p><nav class="guide-chapters" aria-label="Study Design and Implementation"><a href="index.html">1. Data collection and preparation</a><a href="four-periods.html">2. Four study periods</a><a href="fitting-2021.html">3. 2021 — Fitting</a><a href="selection-2022.html" aria-current="page">4. 2022 — Selection</a><a href="validation-2023.html">5. 2023 — Validation</a><a href="evaluation-2024.html">6. 2024 — Final evaluation</a></nav><p class="eyebrow">Results and Evidence</p><nav class="guide-chapters" aria-label="Results and Evidence"><a href="../demo/index.html">1. Saved results explorer</a><a href="../demo/datasets.html">2. Complete datasets</a><a href="../demo/figures.html">3. Figures and timelines</a><a href="../demo/missed-example.html">4. Understanding a missed case</a><a href="../demo/verification.html">5. Validation and verification</a></nav><p class="eyebrow">Dissertation References</p><nav class="guide-chapters" aria-label="Dissertation References"><a href="../references/index.html">All 30 references</a></nav><p class="eyebrow">On this page</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#workflow">Practical sequence</a><a href="#model-checks">Model requirements and results</a><a href="#humidity">Why humidity continued</a><a href="#calibration">How thresholds were calibrated</a><a href="#development">Comparison of monitoring weights</a><a href="#carry-forward">Selected settings and handover</a><a href="#evidence">Supporting evidence</a><a href="#python-code">Complete Python code</a></nav><div class="sidebar-note">Related dissertation sections<br><strong>3.4, Appendix A2–A3 and E1</strong><p>Period 2 of 4: assess the fitted candidates, then select statistical monitoring settings.</p></div></aside>
+<main id="main">
+<div id="overview" class="page-intro"><p class="eyebrow">Period 2 of 4 / Model and setting selection</p><h1>2022 — Selection</h1><p class="code-jump"><a href="#python-code">Read, copy or download the complete Python code ↓</a></p><p class="lead">The 2022 observations were used for two linked decisions: which fitted prediction model met the study’s requirements, and which statistical monitoring settings detected the controlled development faults most effectively under the declared ranking rule.</p><p class="outcome"><strong>Recorded outcome.</strong> Temperature’s reference-assisted model P passed the original requirements. Neither humidity candidate passed; unchanged humidity P continued as exploratory work under revision R1. Both variables selected a monitoring weight of 0.20, with different alarm thresholds. These settings then moved unchanged into 2023 validation.</p><div class="review-links"><a href="#model-checks">Review the model decisions</a><a href="#development">Review the weight comparison</a><a href="selection-2022-evidence.json">Open the evidence summary</a></div><p class="small">The year identifies the source observations. The saved execution records are dated October 2026. This page reports completed development work; no model fitting or calibration is rerun here.</p></div>
+
+<section id="workflow"><p class="section-label">1 / Practical sequence</p><h2>What happened during this period</h2><p>The inputs were the <a href="fitting-2021.html#results">four saved 2021 candidate models</a>, their fixed residual centres and scales, and the 2022 hourly temperature and humidity observations. S used calendar patterns; P also used the same-variable, same-hour Schiphol observation to predict De Bilt.</p><ol class="workflow">
+<li><strong>Applied the existing models to 2022.</strong> Predictions and errors were calculated using the saved coefficients. No coefficients, residual centres or scales were refitted.</li>
+<li><strong>Checked each model against the original requirements.</strong> Coverage, monthly systematic error and P’s accuracy relative to S determined whether a model qualified. Temperature selected P; humidity had no eligible model.</li>
+<li><strong>Recorded a restricted humidity revision.</strong> Researcher-approved R1 permitted exploration with the exact unchanged humidity P fit. Its original failed status remained in the records.</li>
+<li><strong>Calibrated a threshold for each monitoring weight.</strong> The uninjected 2022 background was replayed chronologically. Each weight received its own threshold using the same declared calibration rule.</li>
+<li><strong>Compared controlled development faults.</strong> Four weights were tested on the same 216 paired gradual-bias cases per variable. The declared ranking rule selected the settings carried into validation.</li>
+</ol><p class="source-note">Sources: <a href="../source/qc-monitor/early-stage-protocol.json">original model-check protocol</a>, <a href="../source/qc-monitor/r1-a3-protocol.json">calibration and development protocol</a> and <a href="selection-2022-evidence.json">saved decisions</a>. Dissertation: Appendix A2–A3.</p></section>
+
+<section id="model-checks"><p class="section-label">2 / Original model requirements</p><h2>Which models qualified?</h2><p>A fitted model had to satisfy the declared checks before being accepted for monitoring. The dissertation calls these the <strong>A2 gates</strong>. They were study-specific feasibility requirements.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Original 2022 model requirements"><table><thead><tr><th scope="col">Requirement</th><th scope="col">Practical meaning</th><th scope="col">Declared limit</th></tr></thead><tbody>
+<tr><th scope="row">Usable coverage</th><td>Enough expected hours must have a usable target and the inputs needed by the model.</td><td>At least 95% annually and 90% in every month.</td></tr>
+<tr><th scope="row">Monthly bias</th><td>The model must not remain too far above or below the observations on average within a month.</td><td>Absolute monthly mean error ÷ the model’s saved 2021 residual scale must be at most 0.5, in every month.</td></tr>
+<tr><th scope="row">Additional accuracy requirement for P</th><td>Using Schiphol must provide sufficient improvement over S on the same usable observations.</td><td>P’s annual error measure must be at most 90% of S’s; in every month it must be at most 110% of S’s.</td></tr>
+</tbody></table></div><p class="small">The accuracy measure was root mean square error (RMSE): a summary of prediction-error size that gives larger errors more weight. These annual and monthly comparisons used the same observations for S and P. Passing one requirement did not override failure of another.</p>
+<h3>Recorded model-check outcomes</h3><div class="table-scroll" tabindex="0" role="region" aria-label="Original model eligibility results"><table><thead><tr><th scope="col">Candidate</th><th scope="col">Coverage</th><th scope="col">Monthly bias failures</th><th scope="col">Original decision</th></tr></thead><tbody>
+<tr><th scope="row">Temperature S</th><td>100% annually and in every month</td><td>February, March and August</td><td>Not eligible</td></tr>
+<tr><th scope="row">Temperature P</th><td>100% annually and in every month</td><td>None</td><td>Eligible and selected; its additional accuracy checks also passed.</td></tr>
+<tr><th scope="row">Humidity S</th><td>100% annually and in every month</td><td>March, June, July and August</td><td>Not eligible</td></tr>
+<tr><th scope="row">Humidity P</th><td>100% annually and in every month</td><td>November</td><td>Not eligible, despite passing its additional accuracy checks.</td></tr>
+</tbody></table></div><p>Each candidate had 8,760 usable hours. The failures therefore came from the monthly bias condition, rather than insufficient coverage. Under the original procedure, P was selected only if all its checks passed; otherwise S could be selected if its own checks passed. Humidity satisfied neither route.</p>
+<details><summary>Recorded prediction-accuracy comparison</summary><div class="details-body"><div class="table-scroll" tabindex="0" role="region" aria-label="2022 prediction error comparison"><table><thead><tr><th scope="col">Variable</th><th scope="col">S annual RMSE</th><th scope="col">P annual RMSE</th><th scope="col">P ÷ S annual ratio</th><th scope="col">Largest monthly ratio</th></tr></thead><tbody>
+<tr><th scope="row">Temperature</th><td>3.8873 °C</td><td>1.1854 °C</td><td>0.3049</td><td>0.4008</td></tr>
+<tr><th scope="row">Humidity</th><td>13.1078 percentage points</td><td>6.4758 percentage points</td><td>0.4940</td><td>0.6935</td></tr>
+</tbody></table></div><p>Both P models met the annual ratio limit of 0.90 and all monthly ratio limits of 1.10. Humidity P still failed the separate bias requirement. Displayed values are rounded; exact values are in the evidence summary.</p></div></details><p class="source-note">Source: <a href="selection-2022-evidence.json">original temperature and humidity 2022 gate records</a>. Rules: dissertation Appendix A2.</p></section>
+
+<section id="humidity"><p class="section-label">3 / Humidity finding and R1</p><h2>Why humidity failed, and why it was still explored</h2><p>Humidity P’s November mean error was <strong>−3.7583 percentage points</strong>. With error defined as observed minus predicted, the model was higher than the observations on average. Its frozen 2021 error scale was <strong>5.8586 percentage points</strong>.</p><p class="outcome"><strong>The actual failed check:</strong> 3.7583 ÷ 5.8586 ≈ <strong>0.6415</strong>, above the maximum of <strong>0.5</strong>. Lower overall prediction error than S could not make this monthly bias check pass.</p><p>The original selection therefore recorded no eligible humidity model and required a revision. <strong>R1</strong>, approved by the researcher after viewing these gate results and before final performance work, allowed the exact unchanged humidity P fit to continue for exploratory monitoring. No supervisor approval is recorded.</p><p>The revision preserved the failed original eligibility result. It did not change the coefficients, residual scale, observations, masks, scenario inventory or scoring rules. The later calibration requirements still applied. A successful calibration or a later detection could not turn humidity into an originally eligible model.</p><p class="source-note">Evidence: <a href="selection-2022-evidence.json">November bias, original selection and selected R1 metadata</a>; <a href="../provenance/freeze-v2/settings.json">retained eligibility and exploratory labels</a>. Dissertation: Appendix A2 execution account and E1.</p></section>
+
+<section id="calibration"><p class="section-label">4 / Statistical alarm calibration</p><h2>How each alarm threshold was established</h2><p><strong>What calibration does.</strong> A residual says how far an observation departs from its expected value. The EWMA combines successive residuals; its weight controls how much the newest one contributes. The alarm threshold sets the point at which the running statistic is flagged. Calibration establishes that threshold on the development data; the later comparison checks how the chosen settings behave when transferred.</p><p>The statistical monitor maintained a running average of standardised residuals, giving greater weight to recent information. This is the exponentially weighted moving average, or <strong>EWMA</strong>. Its weight, written as λ (lambda), controls how much each new residual changes the running value.</p><p>The four prescribed weights were <strong>0.02, 0.05, 0.10 and 0.20</strong>. A separate threshold was calibrated for each variable and weight; the comparison did not use one common numerical threshold for all eight candidates.</p><ol class="workflow">
+<li><strong>Replayed earlier starting context.</strong> Source dates 18–31 December 2021 supplied 336 hours to initialise the running monitor. These hours were excluded from the 2022 calibration counts.</li>
+<li><strong>Replayed the uninjected 2022 background.</strong> The saved P models and their 2021 error summaries converted each new observation into a standardised residual. The monitor updated chronologically, without monthly resets.</li>
+<li><strong>Checked readiness.</strong> Each candidate needed at least 90% ready coverage in every month. All eight candidates recorded 100% monthly readiness and 8,760 ready 2022 states.</li>
+<li><strong>Set the threshold using the same rule.</strong> Absolute ready monitoring values were sorted from smallest to largest. With the declared 1% setting, the 8,673rd of 8,760 sorted values became the candidate’s threshold. Only a strict exceedance counted as a statistical flag.</li>
+</ol><p><strong>The 1% setting described threshold construction.</strong> It did not guarantee a future-year false-positive rate, the combined hybrid monitor’s rate, or an acceptable operational alarm burden. The background remained assumed normal.</p>
+<details><summary>Readiness and the meaning of “0.20”</summary><div class="details-body"><p>The first ready state required 228 valid updates. The earlier context allowed that starting requirement to be met before the 2022 calibration observations. Under the declared gap rule, the state was held through six unavailable scheduled hours and reset on the seventh; a missing reference did not trigger a switch from P to S.</p><p><strong>Illustration only:</strong> with weight 0.20, a current standardised residual of 2 and a previous running value of 0.5 give <strong>0.20 × 2 + 0.80 × 0.5 = 0.8</strong>. These illustrative inputs are not observations from the study. The weight gives 20% to the current residual and 80% to the previous state.</p><p>The threshold applies to the magnitude of this unitless running value. It is not a temperature limit in °C or a humidity limit in percent. Equality with the threshold does not flag.</p></div></details><p class="source-note">Sources: <a href="../source/qc-monitor/r1-a3-protocol.json">prescribed context and calibration rule</a>, <a href="../source/qc-monitor/r1_calibration.py">implementation</a> and <a href="selection-2022-evidence.json">eight saved calibration summaries</a>. Dissertation: Appendix A3–A4.</p></section>
+
+<section id="development"><p class="section-label">5 / Development comparison</p><h2>Why 0.20 was selected</h2><p>After calibration, each candidate weight was tested on the same <strong>216 gradual-bias cases per variable</strong>: 12 months × two directions of bias × three sizes × three ramp durations. Sizes were 0.5, 1 and 2 times the variable’s frozen 2021 residual scale. Ramps lasted 24, 72 or 168 hours, followed by a hold of equal length.</p><p>Each case was replayed as a pair: one copy with the artificial bias and an unchanged counterpart. A development hit required a flag in the altered copy while the counterpart was evaluated and unflagged during the intervention. Reference readings and earlier context were unchanged. Each replay included its prescribed earlier context and month window; January’s development window began on 2 January.</p>
+<div class="table-scroll wide-table" tabindex="0" role="region" aria-label="Comparison of all four 2022 monitoring weights"><table><thead><tr><th scope="col">Weight λ</th><th scope="col">Temperature threshold</th><th scope="col">Temperature paired hits</th><th scope="col">Humidity threshold</th><th scope="col">Humidity paired hits<br>(exploratory)</th></tr></thead><tbody>
+<tr><th scope="row">0.02</th><td>1.1492</td><td>90 / 216</td><td>1.0600</td><td>98 / 216</td></tr>
+<tr><th scope="row">0.05</th><td>1.6211</td><td>94 / 216</td><td>1.3196</td><td>123 / 216</td></tr>
+<tr><th scope="row">0.10</th><td>2.0361</td><td>101 / 216</td><td>1.6986</td><td>121 / 216</td></tr>
+<tr><th scope="row">0.20 — Selected</th><td>2.4817</td><td><strong>102 / 216</strong></td><td>2.0578</td><td><strong>126 / 216</strong></td></tr>
+</tbody></table></div><p>The ranking first maximised the detected fraction over all 216 planned cases. Weight <strong>0.20</strong> had the highest hit count for each variable, so <strong>no tie-break was needed</strong>. All eight candidates completed all 216 development cases; none were blocked by calibration failure.</p>
+<details><summary>The complete ranking rule and what the delay score means</summary><div class="details-body"><ol class="workflow"><li>Prefer the largest detected fraction, retaining every planned case in the denominator.</li><li>If tied, prefer the smallest mean normalised delay. The first-hit position is divided by the intervention length plus one; missed or unavailable cases receive penalty 1.</li><li>If still exactly tied, prefer the larger weight.</li></ol><p>The selected mean delay scores were <strong>0.7874 for temperature</strong> and <strong>0.7031 for humidity</strong>. These are unitless, miss-penalised ranking scores. They are not hours of delay or averages over detected cases only. The exact fractions and saved values remain in the evidence summary.</p><p>No eligible calibration candidate, or zero detections for every candidate, would have required a revision rather than selection of a default weight.</p></div></details><p class="outcome"><strong>Interpretation of these counts.</strong> The 102 and 126 detections are 2022 development-selection results used to choose the settings. They are not the final 2024 detection totals, and their paired-hit rule differs from the final event-scoring rule. The 216 cases are structured scenarios, not 216 independent real sensor failures.</p><p class="source-note">Sources: <a href="selection-2022-evidence.json">saved candidate summaries, decisions and audit counts</a>; <a href="../source/qc-monitor/r1-a3-protocol.json">declared scenario and ranking rules</a>. Dissertation: Appendix A3.</p></section>
+
+<section id="carry-forward"><p class="section-label">6 / Selected settings</p><h2>What moved into 2023 validation</h2><div class="table-scroll" tabindex="0" role="region" aria-label="Selected 2022 settings carried forward"><table><thead><tr><th scope="col">Component</th><th scope="col">Temperature</th><th scope="col">Humidity</th></tr></thead><tbody>
+<tr><th scope="row">Prediction model</th><td>Unchanged 2021 P model</td><td>Unchanged 2021 P model</td></tr>
+<tr><th scope="row">Original eligibility</th><td>Passed</td><td>Failed; exploratory under R1</td></tr>
+<tr><th scope="row">Monitoring weight</th><td>0.20</td><td>0.20</td></tr>
+<tr><th scope="row">Primary threshold</th><td>2.4816976238219928</td><td>2.057779719375828</td></tr>
+<tr><th scope="row">2021 residual centre and scale</th><td>Retained unchanged</td><td>Retained unchanged</td></tr>
+</tbody></table></div>
+<details><summary>Prescribed sensitivity thresholds also saved</summary><div class="details-body"><p>Two alternative calibration settings were calculated from the same ready 2022 states. They preserved the selected model and weight and were reserved for the prescribed later sensitivity comparisons.</p><div class="table-scroll" tabindex="0" role="region" aria-label="Saved sensitivity thresholds"><table><thead><tr><th scope="col">Calibration setting α</th><th scope="col">Temperature threshold</th><th scope="col">Humidity threshold</th></tr></thead><tbody><tr><th scope="row">0.005 (0.5%)</th><td>2.7603226941864003</td><td>2.2975750425842403</td></tr><tr><th scope="row">0.02 (2%)</th><td>2.1323005759800266</td><td>1.7916906157638017</td></tr></tbody></table></div><p>These alternative thresholds did not select the primary weight. Sensitivity performance was evaluated later.</p></div></details>
+<p>The saved end-of-stage status was <code>awaiting_validation</code>. This records where the work stood after 2022 selection; validation and final evaluation subsequently completed. Selection was not the final scientific freeze. The next period transferred the saved settings to previously examined 2023 observations without automatic refitting or retuning.</p><p class="section-conclusion"><strong>Assessment of this stage.</strong> The evidence supports temperature’s original model eligibility and the declared development ranking that selected 0.20 for both variables. Humidity’s failed original eligibility remains a qualification on every later result. Development success alone does not establish future false-alarm behaviour or operational acceptability.</p></section>
+
+<section id="evidence"><p class="section-label">7 / Supporting evidence</p><h2>Where the selection account can be checked</h2><div class="table-scroll" tabindex="0" role="region" aria-label="2022 selection evidence register"><table><thead><tr><th scope="col">Material</th><th scope="col">What it supports</th><th scope="col">Access</th></tr></thead><tbody>
+<tr><th scope="row">Selected 2022 evidence</th><td>Original model gates, selected R1 metadata, eight calibration summaries, development comparisons and saved decisions. Original gate, candidate and decision fingerprints were checked against completion records.</td><td><a href="selection-2022-evidence.json">Open summary</a></td></tr>
+<tr><th scope="row">Declared methods</th><td>Model requirements, starting context, threshold calculation, case construction and ranking rules.</td><td><a href="../source/qc-monitor/early-stage-protocol.json">Model protocol</a><br><a href="../source/qc-monitor/r1-a3-protocol.json">Development protocol</a></td></tr>
+<tr><th scope="row">Saved audit summary</th><td>The historical audit checked 32 files, eight calibration streams and 1,728 development pairs. It checked saved states and ranking; it was not an independent raw-to-prediction audit or independent human review.</td><td><a href="selection-2022-evidence.json">Audit counts and scope</a></td></tr>
+<tr><th scope="row">Settings retained for final work</th><td>Exact model parameters, weights, thresholds and the preserved original eligibility labels.</td><td><a href="../provenance/freeze-v2/settings.json">Saved final settings</a></td></tr>
+</tbody></table></div><p class="small">Complete calibration ledgers, individual development traces and original approval records remain in the separate research archive. The public summary does not replace them. See <a href="../demo/verification.html#full-study-reproduction">evidence access and reproduction scope</a>.</p><div class="review-links"><a href="fitting-2021.html">← 2021 — Fitting</a><a href="validation-2023.html">Next: 2023 — Validation →</a></div></section>
+<!-- BEGIN GENERATED PYTHON VIEW -->
+<section id="python-code" class="python-section" data-python-view data-default-file="source/qc-monitor/r1_calibration.py" data-preferred="[&quot;source/qc-monitor/r1_calibration.py&quot;,&quot;source/qc-monitor/r1_stage.py&quot;,&quot;source/qc-monitor/scientific_models.py&quot;,&quot;source/qc-monitor/ewma.py&quot;]">
+<p class="section-label">Complete Python code</p><h2>Model checks and calibration</h2>
+<p class="code-intro">The model checks establish eligibility; calibration and development comparison then select monitoring settings. The code and the saved decision tables explain different parts of that sequence.</p>
+<p class="small">The selected file is displayed in full below. Choose another file to read its complete code. Imports may require related files, configuration and saved inputs. <a href="../demo/verification.html#scientific-and-reporting-environments">Environment requirements</a> · <a href="../demo/verification.html#full-study-reproduction">Full-study prerequisites</a>.</p>
+<label class="code-picker" hidden for="python-file">Python file<select id="python-file"></select></label>
+<p class="code-file-description">Calibrates empirical thresholds on the development period and compares the declared monitoring weights using the preserved R1 procedure.</p>
+<p class="code-file-path">source/qc-monitor/r1_calibration.py · 197 lines · Complete file</p>
+<div class="code-shell"><div class="code-toolbar"><button type="button" data-copy-code disabled>Copy code</button><a data-download-code href="../source/qc-monitor/r1_calibration.py" download="r1_calibration.py">Download .py</a><label class="code-wrap" hidden><input type="checkbox" data-wrap-code checked>Wrap long lines</label></div>
+<pre class="code-display" tabindex="0" role="region" aria-label="Complete Python code: source/qc-monitor/r1_calibration.py"><code>&quot;&quot;&quot;R1 permission plus A3 statistical calibration/development; not final B0/R/H replay.&quot;&quot;&quot;
+from collections import Counter
+from dataclasses import dataclass
+from datetime import date, timedelta
+from fractions import Fraction
+import calendar
+import json
+import math
+
+from early_scientific import require_role
+from scientific_models import Model, predict
+from records import ROOT, sha256
+
+APPROVAL=ROOT/'evidence/r1-calibration-2026-10-08/approval.json'
+APPROVAL_SHA='4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4'
+WEIGHTS=(.02,.05,.10,.20)
+
+
+def approved_models(path=APPROVAL, expected=APPROVAL_SHA, root=ROOT):
+    if sha256(path)!=expected: raise ValueError('R1 approval missing or changed')
+    a=json.loads(path.read_text())
+    proposal=root/'evidence/humidity-revision-proposal-2026-10-08/proposal.json'
+    if (a['version']!='R1-approved-v1' or a['researcher_approved'] is not True or
+        a['proposal_sha256']!=sha256(proposal) or a['original_U_A2_eligible'] is not False or
+        a['original_U_selected_model'] is not None or a['exploratory_permission']['variable']!='U' or
+        a['exploratory_permission']['model']!='P'):
+        raise ValueError('Wrong R1 permission; cannot relabel original eligibility')
+    run=root/a['original_run']
+    if not run.resolve().is_relative_to(root.resolve()): raise ValueError('Run outside study')
+    for name,h in a['bound_inputs'].items():
+        if sha256(run/name)!=h: raise ValueError('Bound original fit/gate changed')
+    selection=json.loads((run/'selection.json').read_text())
+    if selection['models']!={'T':'P','U':None}: raise ValueError('Original selection changed')
+    models={}
+    for variable in ('T','U'):
+        record=json.loads((run/f'{variable}-P-fit.json').read_text())
+        m=record['model']; m['coefficients']=tuple(m['coefficients']); model=Model(**m)
+        if (model.variable!=variable or model.kind!='P' or model.status!='fitted' or
+            len(model.coefficients)!=14 or not all(math.isfinite(b) for b in model.coefficients) or
+            not math.isfinite(model.centre) or not math.isfinite(model.scale) or model.scale&lt;=0 or
+            record['source_year']!=2021): raise ValueError('Invalid frozen model')
+        models[variable]=model
+    return models, {'approval_sha256':expected,'T_original_A2_eligible':True,
+                   'U_original_A2_eligible':False,'U_original_selected_model':None,
+                   'U_exploratory_model':'P','revision':'R1-approved-v1'}
+
+
+@dataclass(frozen=True)
+class Input:
+    hour: object
+    prediction: float | None
+    u: float | None
+    reason: str | None
+
+
+def prepare(fit_context, development, model):
+    require_role(fit_context,'fit'); require_role(development,'development')
+    if fit_context.variable!=model.variable or development.variable!=model.variable:
+        raise ValueError('Variable mismatch')
+    expected=Counter({m:calendar.monthrange(2022,m)[1]*24 for m in range(1,13)})
+    if Counter(h.source_day.month for h in development.hours)!=expected:
+        raise ValueError('Complete independent 2022 schedule required')
+    hours=[h for h in fit_context.hours if h.source_day&gt;=date(2021,12,18)]+list(development.hours)
+    if len(hours)!=336+8760: raise ValueError('Need exactly 14 earlier source days of context')
+    prepared=[]
+    for i,h in enumerate(hours):
+        if i and h.utc-hours[i-1].utc!=timedelta(hours=1): raise ValueError('Schedule must be contiguous')
+        value,reason=predict(model,h)
+        if h.target.reason!='finite' or h.target.value is None: reason='target_'+h.target.reason
+        u=None if reason else (h.target.value-value-model.centre)/model.scale
+        if u is not None and not math.isfinite(u): raise ArithmeticError('Nonfinite residual')
+        prepared.append(Input(h,value,u,reason))
+    return tuple(prepared)
+
+
+class State:
+    def __init__(self,weight):
+        if weight not in WEIGHTS: raise ValueError('Unspecified lambda')
+        self.weight=weight; self.z=0.; self.count=0; self.gap=0
+    def step(self,u,cutoff=None):
+        if cutoff is not None and (not math.isfinite(cutoff) or cutoff&lt;=0): raise ValueError('Invalid cutoff')
+        if u is None:
+            self.gap+=1
+            if self.gap&gt;=7: self.z=0.; self.count=0
+            return {'z':self.z,'count':self.count,'gap':self.gap,'ready':False,'flag':None,'reason':'unavailable'}
+        if not math.isfinite(u): raise ArithmeticError('Nonfinite state input')
+        self.z=self.weight*u+(1-self.weight)*self.z
+        if not math.isfinite(self.z): raise ArithmeticError('Nonfinite EWMA')
+        self.count+=1; self.gap=0
+        ready=self.count&gt;=228
+        return {'z':self.z,'count':self.count,'gap':0,'ready':ready,
+                'flag':abs(self.z)&gt;cutoff if ready and cutoff is not None else None,
+                'reason':'ready' if ready else 'warm_up'}
+
+
+def order_cutoff(values,alpha=.01):
+    if alpha not in (.005,.01,.02): raise ValueError('Unspecified alpha')
+    if not values or any(not math.isfinite(v) for v in values): raise ValueError('No finite ready states')
+    ordered=sorted(abs(v) for v in values)
+    # Exact decimal alpha avoids a rounding-induced order-statistic index change.
+    k=math.ceil((1-Fraction(str(alpha)))*len(ordered))
+    c=ordered[k-1]
+    if c&lt;=0: raise ValueError('Cutoff must be strictly positive')
+    return c,k
+
+
+def calibrate(inputs,weight,emit=lambda row:None):
+    state=State(weight); expected=Counter(); ready=Counter(); values=[]
+    for index,item in enumerate(inputs):
+        if item.hour.source_day.year not in (2021,2022): raise ValueError('Calibration is 2022 only with earlier 2021 context')
+        if item.hour.source_day.year==2021 and item.hour.source_day&lt;date(2021,12,18): raise ValueError('Context exceeds 14 source days')
+        if index and item.hour.utc-inputs[index-1].hour.utc!=timedelta(hours=1): raise ValueError('Noncontiguous calibration schedule')
+        result=state.step(item.u)
+        h=item.hour
+        context=h.source_day.year==2021
+        if not context:
+            expected[h.source_day.month]+=1
+            if result['ready']: ready[h.source_day.month]+=1; values.append(result['z'])
+        emit({'utc':h.utc.isoformat(),'source_date':h.source_day.isoformat(),'source_hour':h.source_hour,
+              'context':context,'u':item.u,'input_reason':item.reason,**result})
+    monthly={str(m):{'ready':ready[m],'expected':expected[m],
+                    'coverage':ready[m]/expected[m] if expected[m] else None} for m in range(1,13)}
+    failures=[]
+    if any(expected[m]!=calendar.monthrange(2022,m)[1]*24 for m in range(1,13)):
+        failures.append('incomplete_2022_schedule')
+    if any(r['coverage'] is None or r['coverage']&lt;.90 for r in monthly.values()):
+        failures.append('monthly_ready_coverage_below_.90')
+    try: cutoff,k=order_cutoff(values)
+    except ValueError as exc: cutoff=k=None; failures.append(str(exc))
+    return {'lambda':weight,'alpha':.01,'ready_states':len(values),'monthly':monthly,
+            'cutoff':cutoff,'order_index':k,'eligible':not failures,'failures':failures,
+            'ready_state_alphas':{str(a):order_cutoff(values,a)[0] for a in (.005,.02)} if cutoff else {}}
+
+
+def cases(variable):
+    return tuple({'case_id':f'dev-2022-{month:02d}-{variable}-{sign}-{amplitude}-{d}',
+      'variable':variable,'month':month,'sign':sign,'amplitude_scales':amplitude,'ramp_hours':d}
+      for month in range(1,13) for sign in (-1,1) for amplitude in (.5,1.,2.) for d in (24,72,168))
+
+
+def development_pair(inputs,model,weight,cutoff,case,emit=lambda row:None):
+    if case not in cases(model.variable): raise ValueError('Case outside exact development roster')
+    month=case['month']; d=case['ramp_hours']
+    first=date(2022,month,2 if month==1 else 1)
+    begin=first-timedelta(days=14)
+    stop=date(2022,month,calendar.monthrange(2022,month)[1])
+    window=[item for item in inputs if begin&lt;=item.hour.source_day&lt;=stop]
+    expected=((stop-begin).days+1)*24
+    if len(window)!=expected: raise ValueError('Incomplete pair schedule/context')
+    original=State(weight); injected=State(weight)
+    first_hit=None; changed=unsupported=unchanged=0
+    onset=next(item.hour.utc for item in window if item.hour.source_day==date(2022,month,8) and item.hour.source_hour==1)
+    for item in window:
+        j=int((item.hour.utc-onset).total_seconds()/3600)+1
+        active=1&lt;=j&lt;=2*d
+        modified_u=item.u; changed_here=False; y=item.hour.target.value
+        if active:
+            if item.hour.target.reason=='finite' and y is not None and math.isfinite(y):
+                altered=y+case['sign']*case['amplitude_scales']*model.scale*min(j/d,1)
+                if not math.isfinite(altered): raise ArithmeticError('Nonfinite injected value')
+                changed_here=altered!=y
+                changed+=int(changed_here); unchanged+=int(not changed_here)
+                # Reference unavailability stays unavailable; no fallback or filled cell.
+                if item.u is not None: modified_u=(altered-item.prediction-model.centre)/model.scale
+            else: unsupported+=1
+        a=original.step(item.u,cutoff); b=injected.step(modified_u,cutoff)
+        hit=active and changed_here and b['flag'] is True and a['flag'] is False
+        if hit and first_hit is None: first_hit=j
+        if active:
+            emit({'j':j,'utc':item.hour.utc.isoformat(),'changed':changed_here,
+                  'input_reason':item.reason,
+                  'original_u':item.u,'injected_u':modified_u,'original':a,'injected':b,'paired_hit':hit})
+    assert changed+unsupported+unchanged==2*d
+    delay=Fraction(first_hit,2*d+1) if first_hit is not None else Fraction(1)
+    return {**case,'hit':first_hit is not None,'first_hit_j':first_hit,
+            'delay_numerator':delay.numerator,'delay_denominator':delay.denominator,
+            'normalised_delay':float(delay),'N':2*d,'C':changed,'Z':unchanged,'U':unsupported,
+            'context_hours':336,'window_hours':len(window),'full_month_completed':True,
+            'scope':'A3 statistical paired diagnostic, not final C4 event score; zero primary normal exposure'}
+
+
+def rank_candidates(candidates):
+    if len(candidates)!=4 or {c['lambda'] for c in candidates}!=set(WEIGHTS):
+        raise ValueError('All four prescribed lambda candidates required')
+    eligible=[]
+    for c in candidates:
+        if not c['calibration']['eligible']: continue
+        rows=c['cases']
+        if len(rows)!=216 or len({r['case_id'] for r in rows})!=216: raise ValueError('Need every development case')
+        hits=sum(r['hit'] for r in rows)
+        delay=sum((Fraction(r['delay_numerator'],r['delay_denominator']) for r in rows),Fraction())/216
+        eligible.append((hits,delay,c['lambda']))
+    if not eligible: return {'selected_lambda':None,'reason':'no_calibration_candidate_revision_required'}
+    hits,delay,weight=min(eligible,key=lambda x:(-x[0],x[1],-x[2]))
+    if hits==0: return {'selected_lambda':None,'reason':'all_zero_detection_revision_required'}
+    return {'selected_lambda':weight,'hits':hits,'denominator':216,'detected_fraction':hits/216,
+            'mean_normalised_delay':float(delay),'delay_exact':str(delay),'reason':'A3_paired_ranking'}
+</code></pre></div>
+<p class="code-status" role="status" aria-live="polite"></p>
+<noscript><p>The complete default file is shown above. File selection and automatic copying require JavaScript. Select the code manually or download a related file:</p><ul><li><a href="../source/qc-monitor/r1_calibration.py" download="r1_calibration.py">r1_calibration.py</a></li><li><a href="../source/qc-monitor/r1_stage.py" download="r1_stage.py">r1_stage.py</a></li><li><a href="../source/qc-monitor/scientific_models.py" download="scientific_models.py">scientific_models.py</a></li><li><a href="../source/qc-monitor/ewma.py" download="ewma.py">ewma.py</a></li></ul></noscript>
+<p class="small">These complete public source files document the study. Additional inputs are needed to reproduce the full experiment. See the on-site requirements and source-copy scope. The website does not execute Python.</p>
+<div class="review-links"><a href="#python-code">Back to code controls ↑</a><a href="#main">Back to page overview ↑</a></div>
+</section>
+<!-- END GENERATED PYTHON VIEW -->
+<footer><p>Source: KNMI. KNMI did not participate in or necessarily endorse this derived work. Codex-assisted development and writing.</p><p><a href="../demo/verification.html#using-code">Using the Python files</a> · <a href="../references/index.html#attribution">Attribution and use</a></p></footer>
+</main></div></body></html>

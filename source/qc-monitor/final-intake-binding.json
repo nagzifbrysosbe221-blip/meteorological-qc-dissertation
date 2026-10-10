@@ -1,0 +1,23 @@
+{
+  "version": "restricted-final-intake-v1",
+  "bound_records": {
+    "evidence/early-acceptance-2026-10-08/acceptance.json": "0aa1d2efe87a36b32e416f6ffb89410e2957a1abeb5bbab7cd0e36b1108307cd",
+    "data\\raw\\knmi-2023-20261007T172339608278Z\\response.txt": "c48bedc4f582db9e758f7c364f543ae9d3aa27b1c103aa45ac34ea556abc6d99",
+    "evidence/final-intake-2026-10-08/source-review.json": "acc8dbf754e093ecfe174e2b402a32894aad71b34657cacbd946022eb78863cd",
+    "outputs/Final-Intake-Source-Review-2026-10-08.md": "625513b2d7519de1eb136e0e3f37250c7811354f81172c7f4fd774c1313350e3",
+    "evidence/scientific-replay-2026-10-08/prospective-protocol-v1.json": "2a3f7a7ed2eee887ca9b38c9e622b78d7fca58312c8e2bef3e5fb4456ebcd49d",
+    "outputs/Prospective-Final-Intake-and-Label-Review-Protocol-v1-2026-10-08.md": "1486a67bbca355c8745718cf8e4fddde4e573951804e618b3ab2c37927b2af28",
+    "evidence/r1-validation-2026-10-08/completed-validation-review/handoff.json": "8f3c07c335bf070d5c9b53f540b10f626d714c2cf6786e1d5319e1014135ecd4"
+  },
+  "source_review": "evidence/final-intake-2026-10-08/source-review.json",
+  "context_raw": "data\\raw\\knmi-2023-20261007T172339608278Z\\response.txt",
+  "performance_execution_enabled": false,
+  "actual_scientific_freeze": false,
+  "purpose": "Manual restricted intake only; independent review remains pending; no real request launched by Codex",
+  "scope": [
+    "structural checks",
+    "source roles",
+    "immutable raw preservation",
+    "pending independent review template"
+  ]
+}

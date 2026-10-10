@@ -1,0 +1,1531 @@
+{
+  "title": "2022 selection: selected saved evidence",
+  "prepared_date": "2026-10-10",
+  "scope": "Selected model-gate, calibration and development records for examiner review. No scientific fitting, calibration, development replay or evaluation was rerun. Complete ledgers, case records and approval text remain in the separate research archive.",
+  "source_year": 2022,
+  "original_model_gates": {
+    "T": {
+      "year": 2022,
+      "variable": "T",
+      "candidates": {
+        "S": {
+          "annual": {
+            "usable": 8760,
+            "expected": 8760,
+            "coverage": 1.0,
+            "mean_error": 1.093116438356426,
+            "rmse": 3.88729447340258,
+            "absolute_mean_over_frozen_scale": 0.3117680912443073
+          },
+          "monthly": {
+            "1": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": 1.4693290991306451,
+              "rmse": 3.1582496604604384,
+              "absolute_mean_over_frozen_scale": 0.41906782532192804
+            },
+            "2": {
+              "usable": 672,
+              "expected": 672,
+              "coverage": 1.0,
+              "mean_error": 2.933872684177991,
+              "rmse": 4.03562506416953,
+              "absolute_mean_over_frozen_scale": 0.8367707726317606
+            },
+            "3": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": 1.9134660676714947,
+              "rmse": 4.263083726767429,
+              "absolute_mean_over_frozen_scale": 0.5457402730816646
+            },
+            "4": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": 0.9759659291107777,
+              "rmse": 3.5926778152677326,
+              "absolute_mean_over_frozen_scale": 0.278355556793055
+            },
+            "5": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": 1.7462439084515797,
+              "rmse": 3.8934472234687254,
+              "absolute_mean_over_frozen_scale": 0.4980467872238064
+            },
+            "6": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": 0.9661432161480398,
+              "rmse": 3.0719558466694474,
+              "absolute_mean_over_frozen_scale": 0.2755540176671426
+            },
+            "7": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": 0.27505646143189244,
+              "rmse": 3.346047682176107,
+              "absolute_mean_over_frozen_scale": 0.07844894190226541
+            },
+            "8": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": 2.064825348184098,
+              "rmse": 4.018911206707436,
+              "absolute_mean_over_frozen_scale": 0.5889095021973458
+            },
+            "9": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": -0.6025276915883016,
+              "rmse": 3.5913628484005264,
+              "absolute_mean_over_frozen_scale": 0.17184711686411644
+            },
+            "10": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": 1.7312493883213353,
+              "rmse": 3.9473421569259433,
+              "absolute_mean_over_frozen_scale": 0.4937701953109087
+            },
+            "11": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": 0.9091324369205258,
+              "rmse": 3.518815025275896,
+              "absolute_mean_over_frozen_scale": 0.25929395497259816
+            },
+            "12": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -1.1557300110819972,
+              "rmse": 5.557505754651444,
+              "absolute_mean_over_frozen_scale": 0.3296261284759027
+            }
+          },
+          "own_gates_pass": false,
+          "fit_status": "fitted"
+        },
+        "P": {
+          "annual": {
+            "usable": 8760,
+            "expected": 8760,
+            "coverage": 1.0,
+            "mean_error": -0.19713459055005364,
+            "rmse": 1.1854166418324197,
+            "absolute_mean_over_frozen_scale": 0.1808708549205761
+          },
+          "monthly": {
+            "1": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -0.2530568124460323,
+              "rmse": 0.9219441119767173,
+              "absolute_mean_over_frozen_scale": 0.23217945609077834
+            },
+            "2": {
+              "usable": 672,
+              "expected": 672,
+              "coverage": 1.0,
+              "mean_error": -0.0631288933872362,
+              "rmse": 0.7824653815251925,
+              "absolute_mean_over_frozen_scale": 0.05792071744121524
+            },
+            "3": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -0.4939665534793872,
+              "rmse": 1.3446575778710985,
+              "absolute_mean_over_frozen_scale": 0.4532139822884216
+            },
+            "4": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": -0.45795677098968945,
+              "rmse": 1.1889757743684832,
+              "absolute_mean_over_frozen_scale": 0.4201750309494281
+            },
+            "5": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -0.1887639053201677,
+              "rmse": 1.2035649036527079,
+              "absolute_mean_over_frozen_scale": 0.1731907568232506
+            },
+            "6": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": -0.23395019726125765,
+              "rmse": 1.1447785222652738,
+              "absolute_mean_over_frozen_scale": 0.21464914944359867
+            },
+            "7": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -0.26603062100108926,
+              "rmse": 1.34117850126616,
+              "absolute_mean_over_frozen_scale": 0.24408291675885033
+            },
+            "8": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -0.174144486894395,
+              "rmse": 1.4130378491750393,
+              "absolute_mean_over_frozen_scale": 0.15977745019992745
+            },
+            "9": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": -0.35179120447138856,
+              "rmse": 1.3606119827096543,
+              "absolute_mean_over_frozen_scale": 0.32276819470768386
+            },
+            "10": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": 0.059925768906635334,
+              "rmse": 1.0926031680433996,
+              "absolute_mean_over_frozen_scale": 0.0549818528735776
+            },
+            "11": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": 0.11621319222054546,
+              "rmse": 1.032725748868626,
+              "absolute_mean_over_frozen_scale": 0.10662552610036394
+            },
+            "12": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -0.05047845818083027,
+              "rmse": 1.198500262921005,
+              "absolute_mean_over_frozen_scale": 0.04631395160415107
+            }
+          },
+          "own_gates_pass": true,
+          "fit_status": "fitted"
+        }
+      },
+      "common_sample": {
+        "annual": {
+          "n": 8760,
+          "S_rmse": 3.88729447340258,
+          "P_rmse": 1.1854166418324197,
+          "ratio": 0.30494644795839587
+        },
+        "monthly": {
+          "1": {
+            "n": 744,
+            "S_rmse": 3.1582496604604384,
+            "P_rmse": 0.9219441119767173,
+            "ratio": 0.2919161596117477
+          },
+          "2": {
+            "n": 672,
+            "S_rmse": 4.03562506416953,
+            "P_rmse": 0.7824653815251925,
+            "ratio": 0.1938895137886681
+          },
+          "3": {
+            "n": 744,
+            "S_rmse": 4.263083726767429,
+            "P_rmse": 1.3446575778710985,
+            "ratio": 0.3154189933986384
+          },
+          "4": {
+            "n": 720,
+            "S_rmse": 3.5926778152677326,
+            "P_rmse": 1.1889757743684832,
+            "ratio": 0.3309441690862777
+          },
+          "5": {
+            "n": 744,
+            "S_rmse": 3.8934472234687254,
+            "P_rmse": 1.2035649036527079,
+            "ratio": 0.30912577840991906
+          },
+          "6": {
+            "n": 720,
+            "S_rmse": 3.0719558466694474,
+            "P_rmse": 1.1447785222652738,
+            "ratio": 0.3726546146509298
+          },
+          "7": {
+            "n": 744,
+            "S_rmse": 3.346047682176107,
+            "P_rmse": 1.34117850126616,
+            "ratio": 0.40082468292679035
+          },
+          "8": {
+            "n": 744,
+            "S_rmse": 4.018911206707436,
+            "P_rmse": 1.4130378491750393,
+            "ratio": 0.3515971805539579
+          },
+          "9": {
+            "n": 720,
+            "S_rmse": 3.5913628484005264,
+            "P_rmse": 1.3606119827096543,
+            "ratio": 0.3788567293654624
+          },
+          "10": {
+            "n": 744,
+            "S_rmse": 3.9473421569259433,
+            "P_rmse": 1.0926031680433996,
+            "ratio": 0.2767946442459607
+          },
+          "11": {
+            "n": 720,
+            "S_rmse": 3.518815025275896,
+            "P_rmse": 1.032725748868626,
+            "ratio": 0.2934867963932415
+          },
+          "12": {
+            "n": 744,
+            "S_rmse": 5.557505754651444,
+            "P_rmse": 1.198500262921005,
+            "ratio": 0.21565434492225238
+          }
+        }
+      },
+      "P_comparative_gates_pass": true,
+      "selected": "P",
+      "reason": "all_P_gates_pass",
+      "calibration_complete": false,
+      "scientific_freeze": false
+    },
+    "U": {
+      "year": 2022,
+      "variable": "U",
+      "candidates": {
+        "S": {
+          "annual": {
+            "usable": 8760,
+            "expected": 8760,
+            "coverage": 1.0,
+            "mean_error": -4.5706621004545935,
+            "rmse": 13.107788548808612,
+            "absolute_mean_over_frozen_scale": 0.4439783181948558
+          },
+          "monthly": {
+            "1": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -0.36122479137601776,
+              "rmse": 8.554249108663933,
+              "absolute_mean_over_frozen_scale": 0.03508812768055227
+            },
+            "2": {
+              "usable": 672,
+              "expected": 672,
+              "coverage": 1.0,
+              "mean_error": -3.3738476816902767,
+              "rmse": 11.935425259007797,
+              "absolute_mean_over_frozen_scale": 0.3277239022796021
+            },
+            "3": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -8.270712739699677,
+              "rmse": 17.544112233799456,
+              "absolute_mean_over_frozen_scale": 0.8033884482686688
+            },
+            "4": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": -2.9186834024316246,
+              "rmse": 14.375568715246926,
+              "absolute_mean_over_frozen_scale": 0.28351081744282736
+            },
+            "5": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -1.8070722443948424,
+              "rmse": 12.275314459307925,
+              "absolute_mean_over_frozen_scale": 0.17553275177424063
+            },
+            "6": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": -5.297643503435445,
+              "rmse": 13.821443566548053,
+              "absolute_mean_over_frozen_scale": 0.514594778908999
+            },
+            "7": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -10.374446929418868,
+              "rmse": 16.124376115985594,
+              "absolute_mean_over_frozen_scale": 1.0077379160159452
+            },
+            "8": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -11.42207378351837,
+              "rmse": 17.63823888759758,
+              "absolute_mean_over_frozen_scale": 1.1095007675583077
+            },
+            "9": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": -4.440486904849677,
+              "rmse": 14.247226445661685,
+              "absolute_mean_over_frozen_scale": 0.4313335496372306
+            },
+            "10": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -1.4986381729094098,
+              "rmse": 9.020958465537477,
+              "absolute_mean_over_frozen_scale": 0.14557253215562685
+            },
+            "11": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": -3.061943891945505,
+              "rmse": 8.614945814326067,
+              "absolute_mean_over_frozen_scale": 0.2974266462221673
+            },
+            "12": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -1.8226442579967315,
+              "rmse": 7.553131302008336,
+              "absolute_mean_over_frozen_scale": 0.1770453633517157
+            }
+          },
+          "own_gates_pass": false,
+          "fit_status": "fitted"
+        },
+        "P": {
+          "annual": {
+            "usable": 8760,
+            "expected": 8760,
+            "coverage": 1.0,
+            "mean_error": -0.9970319851529871,
+            "rmse": 6.475755744195562,
+            "absolute_mean_over_frozen_scale": 0.17018311591933527
+          },
+          "monthly": {
+            "1": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": 0.018719975006430897,
+              "rmse": 4.368768963873438,
+              "absolute_mean_over_frozen_scale": 0.003195307396319535
+            },
+            "2": {
+              "usable": 672,
+              "expected": 672,
+              "coverage": 1.0,
+              "mean_error": -1.370723851387777,
+              "rmse": 5.054334562934949,
+              "absolute_mean_over_frozen_scale": 0.23396847801059223
+            },
+            "3": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -0.7225818430291684,
+              "rmse": 6.7841509344879665,
+              "absolute_mean_over_frozen_scale": 0.1233372964805847
+            },
+            "4": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": 1.6278782306425519,
+              "rmse": 6.949047384817835,
+              "absolute_mean_over_frozen_scale": 0.2778620884318917
+            },
+            "5": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": 0.7204625446463476,
+              "rmse": 7.2991495036578655,
+              "absolute_mean_over_frozen_scale": 0.12297555402124333
+            },
+            "6": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": 0.04763950292766695,
+              "rmse": 7.136428313289627,
+              "absolute_mean_over_frozen_scale": 0.008131573680491937
+            },
+            "7": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -1.4508931080777636,
+              "rmse": 7.337928596827427,
+              "absolute_mean_over_frozen_scale": 0.24765254643327722
+            },
+            "8": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -2.5334814684257245,
+              "rmse": 7.810867206790858,
+              "absolute_mean_over_frozen_scale": 0.4324392565544677
+            },
+            "9": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": -0.2306053565368146,
+              "rmse": 7.71414223775145,
+              "absolute_mean_over_frozen_scale": 0.03936196501971046
+            },
+            "10": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -1.6846666844824687,
+              "rmse": 5.238935231497919,
+              "absolute_mean_over_frozen_scale": 0.28755529403274854
+            },
+            "11": {
+              "usable": 720,
+              "expected": 720,
+              "coverage": 1.0,
+              "mean_error": -3.7582771133494606,
+              "rmse": 5.469475170322659,
+              "absolute_mean_over_frozen_scale": 0.6414992890523917
+            },
+            "12": {
+              "usable": 744,
+              "expected": 744,
+              "coverage": 1.0,
+              "mean_error": -2.609993759266713,
+              "rmse": 5.237943212379454,
+              "absolute_mean_over_frozen_scale": 0.44549911848000845
+            }
+          },
+          "own_gates_pass": false,
+          "fit_status": "fitted"
+        }
+      },
+      "common_sample": {
+        "annual": {
+          "n": 8760,
+          "S_rmse": 13.107788548808612,
+          "P_rmse": 6.475755744195562,
+          "ratio": 0.4940387709247991
+        },
+        "monthly": {
+          "1": {
+            "n": 744,
+            "S_rmse": 8.554249108663933,
+            "P_rmse": 4.368768963873438,
+            "ratio": 0.5107133201730882
+          },
+          "2": {
+            "n": 672,
+            "S_rmse": 11.935425259007797,
+            "P_rmse": 5.054334562934949,
+            "ratio": 0.423473353755903
+          },
+          "3": {
+            "n": 744,
+            "S_rmse": 17.544112233799456,
+            "P_rmse": 6.7841509344879665,
+            "ratio": 0.3866910359486882
+          },
+          "4": {
+            "n": 720,
+            "S_rmse": 14.375568715246926,
+            "P_rmse": 6.949047384817835,
+            "ratio": 0.4833928676120882
+          },
+          "5": {
+            "n": 744,
+            "S_rmse": 12.275314459307925,
+            "P_rmse": 7.2991495036578655,
+            "ratio": 0.5946201645468386
+          },
+          "6": {
+            "n": 720,
+            "S_rmse": 13.821443566548053,
+            "P_rmse": 7.136428313289627,
+            "ratio": 0.5163301705012837
+          },
+          "7": {
+            "n": 744,
+            "S_rmse": 16.124376115985594,
+            "P_rmse": 7.337928596827427,
+            "ratio": 0.4550829467164721
+          },
+          "8": {
+            "n": 744,
+            "S_rmse": 17.63823888759758,
+            "P_rmse": 7.810867206790858,
+            "ratio": 0.44283713677804365
+          },
+          "9": {
+            "n": 720,
+            "S_rmse": 14.247226445661685,
+            "P_rmse": 7.71414223775145,
+            "ratio": 0.5414487000099887
+          },
+          "10": {
+            "n": 744,
+            "S_rmse": 9.020958465537477,
+            "P_rmse": 5.238935231497919,
+            "ratio": 0.580751507892657
+          },
+          "11": {
+            "n": 720,
+            "S_rmse": 8.614945814326067,
+            "P_rmse": 5.469475170322659,
+            "ratio": 0.6348821325407868
+          },
+          "12": {
+            "n": 744,
+            "S_rmse": 7.553131302008336,
+            "P_rmse": 5.237943212379454,
+            "ratio": 0.6934796977495563
+          }
+        }
+      },
+      "P_comparative_gates_pass": true,
+      "selected": null,
+      "reason": "no_eligible_candidate_revision_required",
+      "calibration_complete": false,
+      "scientific_freeze": false
+    }
+  },
+  "monitoring_candidates": {
+    "T": [
+      {
+        "lambda": 0.02,
+        "calibration": {
+          "lambda": 0.02,
+          "alpha": 0.01,
+          "ready_states": 8760,
+          "monthly": {
+            "1": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "2": {
+              "ready": 672,
+              "expected": 672,
+              "coverage": 1.0
+            },
+            "3": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "4": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "5": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "6": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "7": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "8": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "9": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "10": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "11": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "12": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            }
+          },
+          "cutoff": 1.1491558130630926,
+          "order_index": 8673,
+          "eligible": true,
+          "failures": [],
+          "ready_state_alphas": {
+            "0.005": 1.2707318961343599,
+            "0.02": 0.9584942663555032
+          }
+        },
+        "planned_count": 216,
+        "executed_count": 216,
+        "blocked_count": 0,
+        "variable": "T",
+        "exploratory": false,
+        "revision": "R1-approved-v1",
+        "saved_audit_summary": {
+          "lambda": 0.02,
+          "hits": 90,
+          "mean_delay": "428773057/517187160",
+          "cutoff": 1.1491558130630926,
+          "min_monthly_ready_coverage": 1.0
+        },
+        "record_sha256": "3cac407b26ec696599fa2de2f58d17126d9484073904dd739af6e33cde284275"
+      },
+      {
+        "lambda": 0.05,
+        "calibration": {
+          "lambda": 0.05,
+          "alpha": 0.01,
+          "ready_states": 8760,
+          "monthly": {
+            "1": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "2": {
+              "ready": 672,
+              "expected": 672,
+              "coverage": 1.0
+            },
+            "3": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "4": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "5": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "6": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "7": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "8": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "9": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "10": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "11": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "12": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            }
+          },
+          "cutoff": 1.6211203835926453,
+          "order_index": 8673,
+          "eligible": true,
+          "failures": [],
+          "ready_state_alphas": {
+            "0.005": 1.794039815331879,
+            "0.02": 1.3863229228610083
+          }
+        },
+        "planned_count": 216,
+        "executed_count": 216,
+        "blocked_count": 0,
+        "variable": "T",
+        "exploratory": false,
+        "revision": "R1-approved-v1",
+        "saved_audit_summary": {
+          "lambda": 0.05,
+          "hits": 94,
+          "mean_delay": "210898441/258593580",
+          "cutoff": 1.6211203835926453,
+          "min_monthly_ready_coverage": 1.0
+        },
+        "record_sha256": "a04124729f910b5c6733cd14f36fc96358baf071c8f0d1e6508c768f9e492ffc"
+      },
+      {
+        "lambda": 0.1,
+        "calibration": {
+          "lambda": 0.1,
+          "alpha": 0.01,
+          "ready_states": 8760,
+          "monthly": {
+            "1": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "2": {
+              "ready": 672,
+              "expected": 672,
+              "coverage": 1.0
+            },
+            "3": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "4": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "5": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "6": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "7": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "8": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "9": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "10": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "11": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "12": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            }
+          },
+          "cutoff": 2.036053299801088,
+          "order_index": 8673,
+          "eligible": true,
+          "failures": [],
+          "ready_state_alphas": {
+            "0.005": 2.2795545547657676,
+            "0.02": 1.6949655008860274
+          }
+        },
+        "planned_count": 216,
+        "executed_count": 216,
+        "blocked_count": 0,
+        "variable": "T",
+        "exploratory": false,
+        "revision": "R1-approved-v1",
+        "saved_audit_summary": {
+          "lambda": 0.1,
+          "hits": 101,
+          "mean_delay": "413240617/517187160",
+          "cutoff": 2.036053299801088,
+          "min_monthly_ready_coverage": 1.0
+        },
+        "record_sha256": "ff8c1d75ad3b23cf418d7b2a1691d4d84a3cd659d6c04120c2900e011059698d"
+      },
+      {
+        "lambda": 0.2,
+        "calibration": {
+          "lambda": 0.2,
+          "alpha": 0.01,
+          "ready_states": 8760,
+          "monthly": {
+            "1": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "2": {
+              "ready": 672,
+              "expected": 672,
+              "coverage": 1.0
+            },
+            "3": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "4": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "5": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "6": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "7": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "8": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "9": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "10": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "11": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "12": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            }
+          },
+          "cutoff": 2.4816976238219928,
+          "order_index": 8673,
+          "eligible": true,
+          "failures": [],
+          "ready_state_alphas": {
+            "0.005": 2.7603226941864003,
+            "0.02": 2.1323005759800266
+          }
+        },
+        "planned_count": 216,
+        "executed_count": 216,
+        "blocked_count": 0,
+        "variable": "T",
+        "exploratory": false,
+        "revision": "R1-approved-v1",
+        "saved_audit_summary": {
+          "lambda": 0.2,
+          "hits": 102,
+          "mean_delay": "407242361/517187160",
+          "cutoff": 2.4816976238219928,
+          "min_monthly_ready_coverage": 1.0
+        },
+        "record_sha256": "fa45be43e0b6a15cb2e1de0806c9742347136c7c61eb2fe10e71ed8cdfdcb155"
+      }
+    ],
+    "U": [
+      {
+        "lambda": 0.02,
+        "calibration": {
+          "lambda": 0.02,
+          "alpha": 0.01,
+          "ready_states": 8760,
+          "monthly": {
+            "1": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "2": {
+              "ready": 672,
+              "expected": 672,
+              "coverage": 1.0
+            },
+            "3": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "4": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "5": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "6": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "7": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "8": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "9": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "10": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "11": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "12": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            }
+          },
+          "cutoff": 1.0599570046751328,
+          "order_index": 8673,
+          "eligible": true,
+          "failures": [],
+          "ready_state_alphas": {
+            "0.005": 1.1392562064941751,
+            "0.02": 0.9882968471087233
+          }
+        },
+        "planned_count": 216,
+        "executed_count": 216,
+        "blocked_count": 0,
+        "variable": "U",
+        "exploratory": true,
+        "revision": "R1-approved-v1",
+        "saved_audit_summary": {
+          "lambda": 0.02,
+          "hits": 98,
+          "mean_delay": "101424751/129296790",
+          "cutoff": 1.0599570046751328,
+          "min_monthly_ready_coverage": 1.0
+        },
+        "record_sha256": "60d2856077a6e1e28e9da6868e1c22ac1833d4c81d315d0976f932b96bfd28fa"
+      },
+      {
+        "lambda": 0.05,
+        "calibration": {
+          "lambda": 0.05,
+          "alpha": 0.01,
+          "ready_states": 8760,
+          "monthly": {
+            "1": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "2": {
+              "ready": 672,
+              "expected": 672,
+              "coverage": 1.0
+            },
+            "3": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "4": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "5": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "6": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "7": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "8": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "9": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "10": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "11": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "12": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            }
+          },
+          "cutoff": 1.3195831348756917,
+          "order_index": 8673,
+          "eligible": true,
+          "failures": [],
+          "ready_state_alphas": {
+            "0.005": 1.4639898098968191,
+            "0.02": 1.1944984872949378
+          }
+        },
+        "planned_count": 216,
+        "executed_count": 216,
+        "blocked_count": 0,
+        "variable": "U",
+        "exploratory": true,
+        "revision": "R1-approved-v1",
+        "saved_audit_summary": {
+          "lambda": 0.05,
+          "hits": 123,
+          "mean_delay": "60591641/86197860",
+          "cutoff": 1.3195831348756917,
+          "min_monthly_ready_coverage": 1.0
+        },
+        "record_sha256": "665e48d65da4e6f25bd40a446bb60512164ea496cfcdaaafc67521401d72adca"
+      },
+      {
+        "lambda": 0.1,
+        "calibration": {
+          "lambda": 0.1,
+          "alpha": 0.01,
+          "ready_states": 8760,
+          "monthly": {
+            "1": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "2": {
+              "ready": 672,
+              "expected": 672,
+              "coverage": 1.0
+            },
+            "3": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "4": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "5": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "6": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "7": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "8": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "9": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "10": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "11": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "12": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            }
+          },
+          "cutoff": 1.6985848611058034,
+          "order_index": 8673,
+          "eligible": true,
+          "failures": [],
+          "ready_state_alphas": {
+            "0.005": 1.8329204128307603,
+            "0.02": 1.446604264688367
+          }
+        },
+        "planned_count": 216,
+        "executed_count": 216,
+        "blocked_count": 0,
+        "variable": "U",
+        "exploratory": true,
+        "revision": "R1-approved-v1",
+        "saved_audit_summary": {
+          "lambda": 0.1,
+          "hits": 121,
+          "mean_delay": "24600109/34479144",
+          "cutoff": 1.6985848611058034,
+          "min_monthly_ready_coverage": 1.0
+        },
+        "record_sha256": "a9cd7f3ac998dfe7cbc4ccb79a8e7710acb98fe126108d7af2eb7a5989bd735c"
+      },
+      {
+        "lambda": 0.2,
+        "calibration": {
+          "lambda": 0.2,
+          "alpha": 0.01,
+          "ready_states": 8760,
+          "monthly": {
+            "1": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "2": {
+              "ready": 672,
+              "expected": 672,
+              "coverage": 1.0
+            },
+            "3": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "4": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "5": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "6": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "7": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "8": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "9": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "10": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            },
+            "11": {
+              "ready": 720,
+              "expected": 720,
+              "coverage": 1.0
+            },
+            "12": {
+              "ready": 744,
+              "expected": 744,
+              "coverage": 1.0
+            }
+          },
+          "cutoff": 2.057779719375828,
+          "order_index": 8673,
+          "eligible": true,
+          "failures": [],
+          "ready_state_alphas": {
+            "0.005": 2.2975750425842403,
+            "0.02": 1.7916906157638017
+          }
+        },
+        "planned_count": 216,
+        "executed_count": 216,
+        "blocked_count": 0,
+        "variable": "U",
+        "exploratory": true,
+        "revision": "R1-approved-v1",
+        "saved_audit_summary": {
+          "lambda": 0.2,
+          "hits": 126,
+          "mean_delay": "121204331/172395720",
+          "cutoff": 2.057779719375828,
+          "min_monthly_ready_coverage": 1.0
+        },
+        "record_sha256": "1ba7ba0d025b81bb6ce11c16c0e2ad29032be6aefa54c7786d2342f65adfc684"
+      }
+    ]
+  },
+  "decisions": {
+    "T": {
+      "selected_lambda": 0.2,
+      "hits": 102,
+      "denominator": 216,
+      "detected_fraction": 0.4722222222222222,
+      "mean_normalised_delay": 0.7874177715471513,
+      "delay_exact": "407242361/517187160",
+      "reason": "A3_paired_ranking",
+      "variable": "T",
+      "original_A2_eligible": true,
+      "exploratory": false,
+      "revision": "R1-approved-v1",
+      "model": "P",
+      "cutoff": 2.4816976238219928,
+      "alpha_sensitivity_cutoffs": {
+        "0.005": 2.7603226941864003,
+        "0.02": 2.1323005759800266
+      }
+    },
+    "U": {
+      "selected_lambda": 0.2,
+      "hits": 126,
+      "denominator": 216,
+      "detected_fraction": 0.5833333333333334,
+      "mean_normalised_delay": 0.7030588172374581,
+      "delay_exact": "121204331/172395720",
+      "reason": "A3_paired_ranking",
+      "variable": "U",
+      "original_A2_eligible": false,
+      "exploratory": true,
+      "revision": "R1-approved-v1",
+      "model": "P",
+      "cutoff": 2.057779719375828,
+      "alpha_sensitivity_cutoffs": {
+        "0.005": 2.2975750425842403,
+        "0.02": 1.7916906157638017
+      }
+    }
+  },
+  "records": {
+    "T-2022-gates.json": {
+      "sha256": "2ded708660e58be5705675598b13cdc6329bbbaf1dc159f8433486bbe966138c",
+      "source": "original combined fit-and-gates run"
+    },
+    "T-0.02-candidate.json": {
+      "sha256": "3cac407b26ec696599fa2de2f58d17126d9484073904dd739af6e33cde284275",
+      "source": "completed A3 development run"
+    },
+    "T-0.05-candidate.json": {
+      "sha256": "a04124729f910b5c6733cd14f36fc96358baf071c8f0d1e6508c768f9e492ffc",
+      "source": "completed A3 development run"
+    },
+    "T-0.10-candidate.json": {
+      "sha256": "ff8c1d75ad3b23cf418d7b2a1691d4d84a3cd659d6c04120c2900e011059698d",
+      "source": "completed A3 development run"
+    },
+    "T-0.20-candidate.json": {
+      "sha256": "fa45be43e0b6a15cb2e1de0806c9742347136c7c61eb2fe10e71ed8cdfdcb155",
+      "source": "completed A3 development run"
+    },
+    "T-decision.json": {
+      "sha256": "147fcde8dd6b7748648dd504863d4e2f14a27b3a94fe9537130420dad482b214",
+      "source": "completed A3 development run"
+    },
+    "U-2022-gates.json": {
+      "sha256": "121dea6ce7ec8d60025770e20a399671601da2bc1a5d312f8b516007c7c89e6a",
+      "source": "original combined fit-and-gates run"
+    },
+    "U-0.02-candidate.json": {
+      "sha256": "60d2856077a6e1e28e9da6868e1c22ac1833d4c81d315d0976f932b96bfd28fa",
+      "source": "completed A3 development run"
+    },
+    "U-0.05-candidate.json": {
+      "sha256": "665e48d65da4e6f25bd40a446bb60512164ea496cfcdaaafc67521401d72adca",
+      "source": "completed A3 development run"
+    },
+    "U-0.10-candidate.json": {
+      "sha256": "a9cd7f3ac998dfe7cbc4ccb79a8e7710acb98fe126108d7af2eb7a5989bd735c",
+      "source": "completed A3 development run"
+    },
+    "U-0.20-candidate.json": {
+      "sha256": "1ba7ba0d025b81bb6ce11c16c0e2ad29032be6aefa54c7786d2342f65adfc684",
+      "source": "completed A3 development run"
+    },
+    "U-decision.json": {
+      "sha256": "0058c3ce89831eb4ae12d23e2b22a3d3bccc04b769b0dca68f11130c3e320a14",
+      "source": "completed A3 development run"
+    }
+  },
+  "R1": {
+    "version": "R1-approved-v1",
+    "recorded_utc": "2026-10-07T20:53:12.647921+00:00",
+    "researcher_approved": true,
+    "original_U_A2_eligible": false,
+    "original_U_selected_model": null,
+    "exploratory_permission": {
+      "variable": "U",
+      "model": "P",
+      "scope": "R1 exploratory A3 and later replay subject to all remaining gates"
+    },
+    "supervisor_approval": null,
+    "record_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4"
+  },
+  "completed_development_run": {
+    "state": "awaiting_validation",
+    "scientific_freeze": false,
+    "scope": "R1 A3 statistical development, not final B0/R/H research batch",
+    "record_sha256": "20b0d4a7c448105a26997aff533dae7097e48f3927576623a84125e6f689ec43"
+  },
+  "saved_audit": {
+    "recorded_utc": "2026-10-07T21:05:01.897334+00:00",
+    "success": true,
+    "files_hashed": 32,
+    "calibration_streams": 8,
+    "pairs": 1728,
+    "intervention_trace_rows_checked": 304128,
+    "record_sha256": "ea337ff07d4a383d4ad8bf267cfbb0b356f61c2b4285d64229fd5319ead24cfc",
+    "scope": "Saved calibration-state and intervention-state/ranking audit. It accepted saved initial intervention states and was not an independent raw-to-prediction audit or independent human review."
+  },
+  "preserved_rules": {
+    "version": "R1-A3-v1",
+    "scope": "2022 statistical calibration and paired development only; U exploratory following failed original A2",
+    "approval_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+    "models": "Exact frozen 2021 T-P and U-P from approved bound original run; no refit",
+    "continuous_calibration_context": "Source 18-31 December 2021, 336 scheduled hours, unscored; source 1 January-31 December 2022 scored for ready coverage/order statistic; HH24 retains source-month ownership",
+    "development_context": "Full source month; January begins day 2 as C1. Exactly 14 strictly earlier source days of unscored context, including accepted late-2021 context where required. Each pair starts at zero at context start; no month/intervention resets inside the window.",
+    "lambdas": [
+      0.02,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "alpha": 0.01,
+    "ready_coverage_each_month_min": 0.9,
+    "warmup_updates": 228,
+    "gap_rule": "Hold through six unavailable scheduled hours; reset count/state on seventh; no P-to-S substitution",
+    "cutoff": "One-based ceil((1-alpha)*n) of absolute ready 2022 states only. Decimal alpha evaluated as exact fraction for index. n>0, finite cutoff>0; strict exceedance.",
+    "development": "216 cases per variable per eligible lambda: 12 months, signs -1/+1, amplitudes .5/1/2 frozen scales, ramps 24/72/168 plus equal hold. Day 8 HH01 start; missing hours never compressed. Full month/context both replays; save every intervention state and support count. Reference and context unchanged.",
+    "selection": "Max hits/216, then minimum exact-rational mean j/(2d+1) with unavailable/miss penalty 1, then larger lambda. No eligible calibration lambda or all-zero development detection => revision_required, no defaults. Failed calibration candidates retain all 216 planned blocked cases via roster and count.",
+    "sensitivity": "Precompute .005/.02 cutoffs from the same ready calibration states; later retain selected model/lambda. No sensitivity performance or best-variant selection here.",
+    "preserved_final_design": "B0/R/H, 7 families, 78 monthly variants, 936 cases, prescribed alpha and T range sensitivities remain required. This stage is statistical A3 tuning only, not final C4/C6 evaluation or integration into B0/R/H replay.",
+    "validation": "Not executed here; next transfer unchanged to exposed 2023. Above .01 annual or .03 monthly FPR prompts diagnosis/disclosure, not automatic retuning.",
+    "completion": "All candidate ledgers, rosters and decisions retained. Awaiting_validation is not scientific_freeze. No final intake or batch execution enabled.",
+    "recovery": "Fresh directory per attempt; preserve failures, no partial resume for this bounded early stage. Researcher manually launches processing.",
+    "resources": "Sequential variables/lambdas/pairs; 256 MiB available RAM and 1 GiB disk preflight are allowances, not guaranteed capacity. Scientific full-batch pilot remains pending.",
+    "source": "source/qc-monitor/r1-a3-protocol.json"
+  },
+  "limitations": [
+    "Humidity remains originally A2-ineligible and exploratory under R1.",
+    "The candidate ranking uses 2022 development pairs, not final 2024 root-event scoring.",
+    "The 1% calibration setting does not guarantee a transferred false-alarm rate or a combined-H operational alarm budget.",
+    "No refit of the 2021 coefficients or residual centre/scale took place.",
+    "Awaiting validation is the historical end-of-stage state; later validation and final evaluation subsequently completed."
+  ]
+}

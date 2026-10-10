@@ -1,0 +1,212 @@
+{
+  "title": "Early data collection and preparation evidence summary",
+  "prepared_date": "2026-10-10",
+  "scope": "Selected metadata and descriptive summaries from the preserved acquisition manifests and completed independent parser audit. This is an explanatory derivative, not the full raw archive or a rerun.",
+  "source_snapshots": [
+    {
+      "url": "https://www.daggegevens.knmi.nl/klimatologie/uurgegevens",
+      "parameters": {
+        "stns": "240:260",
+        "vars": "T:U",
+        "start": "2021010101",
+        "end": "2021123124"
+      },
+      "method": "POST",
+      "status": 200,
+      "finished_utc": "2026-10-07T17:20:42.581697+00:00",
+      "bytes": 581446,
+      "sha256": "a2c570cacd74040841489cac181465ea85dab70795d2fded21708c4749f4dce3",
+      "source_year": 2021,
+      "source_role": "fit",
+      "returned_rows_checked": 17568,
+      "selected_rows": 17520,
+      "boundary_rows": 48,
+      "original_manifest_sha256": "f1dd638b40a0fe634115649f49c4a6111e3065c08bd0e3133167248f6b0b2e77",
+      "station_summary": [
+        {
+          "station": 240,
+          "unique_rows": 8760,
+          "variables": {
+            "T": {
+              "finite": 8760,
+              "minimum": -9.7,
+              "maximum": 28.9
+            },
+            "U": {
+              "finite": 8760,
+              "minimum": 28.0,
+              "maximum": 99.0
+            }
+          },
+          "exclusions": 0,
+          "outlier_cleaning": false
+        },
+        {
+          "station": 260,
+          "unique_rows": 8760,
+          "variables": {
+            "T": {
+              "finite": 8760,
+              "minimum": -10.4,
+              "maximum": 30.3
+            },
+            "U": {
+              "finite": 8760,
+              "minimum": 24.0,
+              "maximum": 100.0
+            }
+          },
+          "exclusions": 0,
+          "outlier_cleaning": false
+        }
+      ]
+    },
+    {
+      "url": "https://www.daggegevens.knmi.nl/klimatologie/uurgegevens",
+      "parameters": {
+        "stns": "240:260",
+        "vars": "T:U",
+        "start": "2022010101",
+        "end": "2022123124"
+      },
+      "method": "POST",
+      "status": 200,
+      "finished_utc": "2026-10-07T17:23:42.403089+00:00",
+      "bytes": 581446,
+      "sha256": "d0247e07fc92d629bd7500202f1ba5decb7c6b6a61c143271cbad96af6cdcd02",
+      "source_year": 2022,
+      "source_role": "development",
+      "returned_rows_checked": 17568,
+      "selected_rows": 17520,
+      "boundary_rows": 48,
+      "original_manifest_sha256": "ffa334f0697f028a4fb91e562bda4805db42c10fb49e8a77aaf016e2d7a74b51",
+      "station_summary": [
+        {
+          "station": 240,
+          "unique_rows": 8760,
+          "variables": {
+            "T": {
+              "finite": 8760,
+              "minimum": -6.2,
+              "maximum": 35.4
+            },
+            "U": {
+              "finite": 8760,
+              "minimum": 22.0,
+              "maximum": 100.0
+            }
+          },
+          "exclusions": 0,
+          "outlier_cleaning": false
+        },
+        {
+          "station": 260,
+          "unique_rows": 8760,
+          "variables": {
+            "T": {
+              "finite": 8760,
+              "minimum": -7.5,
+              "maximum": 35.3
+            },
+            "U": {
+              "finite": 8760,
+              "minimum": 21.0,
+              "maximum": 100.0
+            }
+          },
+          "exclusions": 0,
+          "outlier_cleaning": false
+        }
+      ]
+    },
+    {
+      "url": "https://www.daggegevens.knmi.nl/klimatologie/uurgegevens",
+      "parameters": {
+        "stns": "240:260",
+        "vars": "T:U",
+        "start": "2023010101",
+        "end": "2023123124"
+      },
+      "method": "POST",
+      "status": 200,
+      "finished_utc": "2026-10-07T17:23:42.235286+00:00",
+      "bytes": 581446,
+      "sha256": "c48bedc4f582db9e758f7c364f543ae9d3aa27b1c103aa45ac34ea556abc6d99",
+      "source_year": 2023,
+      "source_role": "validation",
+      "returned_rows_checked": 17568,
+      "selected_rows": 17520,
+      "boundary_rows": 48,
+      "original_manifest_sha256": "fa9d89d245d66b59de93b751b008195296ed824d99f8a54ae2047a4f69edf3f0",
+      "station_summary": [
+        {
+          "station": 240,
+          "unique_rows": 8760,
+          "variables": {
+            "T": {
+              "finite": 8760,
+              "minimum": -4.4,
+              "maximum": 31.8
+            },
+            "U": {
+              "finite": 8760,
+              "minimum": 22.0,
+              "maximum": 100.0
+            }
+          },
+          "exclusions": 0,
+          "outlier_cleaning": false
+        },
+        {
+          "station": 260,
+          "unique_rows": 8760,
+          "variables": {
+            "T": {
+              "finite": 8760,
+              "minimum": -5.6,
+              "maximum": 31.9
+            },
+            "U": {
+              "finite": 8760,
+              "minimum": 18.0,
+              "maximum": 100.0
+            }
+          },
+          "exclusions": 0,
+          "outlier_cleaning": false
+        }
+      ]
+    }
+  ],
+  "audit": {
+    "started_utc": "2026-10-07T19:58:18.037391+00:00",
+    "finished_utc": "2026-10-07T19:58:19.689249+00:00",
+    "independent_of_detector_and_existing_parser": true,
+    "success": true,
+    "fitting_performed": false
+  },
+  "acceptance": {
+    "decision": "bounded_early_snapshot_acceptance_with_metadata_limitations",
+    "recorded_utc": "2026-10-07T19:59:19.916829+00:00",
+    "bounded_review_complete": true,
+    "station_history_completeness_verified": false,
+    "review_independent_of_detector_outputs": true,
+    "independent_human_review": false,
+    "accepted_for_2021_fit": true,
+    "accepted_for_2022_model_gates_calibration_selection": true,
+    "accepted_for_2023_exposed_validation": true,
+    "reference_model_accepted": false,
+    "numeric_truth_status": "assumed_normal_not_certified"
+  },
+  "record_fingerprints": {
+    "independent_audit_sha256": "be97d9ee02d1bd982fe42a72862cca0fcfeea89fed21a10a03ebbc445ede3d43",
+    "acceptance_sha256": "0aa1d2efe87a36b32e416f6ffb89410e2957a1abeb5bbab7cd0e36b1108307cd"
+  },
+  "availability": "Original raw files and complete audit records are preserved in the separate research archive. This public summary omits raw observation sequences and historical local filesystem paths.",
+  "limitations": [
+    "Acceptance concerns specified early analytical use; it does not certify sensor health.",
+    "The audit was independent of the implementation parser and detector, not an independent human scientific review.",
+    "2023 was previously examined.",
+    "Source years and UTC retrieval dates are distinct."
+  ]
+}

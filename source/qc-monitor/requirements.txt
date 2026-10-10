@@ -1,0 +1,3 @@
+# Python 3.12.14; original data/replay components still use the standard library.
+# Scientific S/P solve, pinned and installed locally; licence retained in dist-info.
+numpy==2.3.5

@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Review the completed 2024 meteorological quality-control evaluation: fixed comparisons, seven fault families, detection and misses, background false alarms and all four prescribed passes."><title>2024 — Final evaluation · Dissertation review</title><link rel="stylesheet" href="guide.css"><link rel="stylesheet" href="../assets/python-code.css"><script src="../assets/python-sources.js" defer></script><script src="../assets/python-code.js" defer></script></head>
+<body>
+<a class="skip-link" href="#main">Skip to the review</a>
+<header class="site-header"><a class="brand" href="../index.html">Meteorological quality control<span>Dissertation review companion</span></a><nav aria-label="Website"><a href="../index.html">Home</a></nav></header>
+<div class="layout">
+<aside class="sidebar"><p class="eyebrow">Study Design and Implementation</p><nav class="guide-chapters" aria-label="Study Design and Implementation"><a href="index.html">1. Data collection and preparation</a><a href="four-periods.html">2. Four study periods</a><a href="fitting-2021.html">3. 2021 — Fitting</a><a href="selection-2022.html">4. 2022 — Selection</a><a href="validation-2023.html">5. 2023 — Validation</a><a href="evaluation-2024.html" aria-current="page">6. 2024 — Final evaluation</a></nav><p class="eyebrow">Results and Evidence</p><nav class="guide-chapters" aria-label="Results and Evidence"><a href="../demo/index.html">1. Saved results explorer</a><a href="../demo/datasets.html">2. Complete datasets</a><a href="../demo/figures.html">3. Figures and timelines</a><a href="../demo/missed-example.html">4. Understanding a missed case</a><a href="../demo/verification.html">5. Validation and verification</a></nav><p class="eyebrow">Dissertation References</p><nav class="guide-chapters" aria-label="Dissertation References"><a href="../references/index.html">All 30 references</a></nav><p class="eyebrow">On this page</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#workflow">Practical sequence</a><a href="#comparison">What was compared</a><a href="#cases">Fault cases and completion</a><a href="#scoring">How results were counted</a><a href="#results">Primary detection results</a><a href="#background">False alarms and coverage</a><a href="#sensitivities">All four evaluation passes</a><a href="#interpretation">What the findings establish</a><a href="#evidence">Supporting evidence</a><a href="#python-code">Complete Python code</a></nav><div class="sidebar-note">Related dissertation sections<br><strong>3.4–3.6, 4.4–4.6, Appendices C and E3–E9</strong><p>Period 4 of 4: evaluate the fixed comparison and retain both gains and limitations.</p></div></aside>
+<main id="main">
+<div id="overview" class="page-intro"><p class="eyebrow">Period 4 of 4 / Completed final comparison</p><h1>2024 — Final evaluation</h1><p class="code-jump"><a href="#python-code">Read, copy or download the complete Python code ↓</a></p><p class="lead">The final period compared three monitoring configurations on the same controlled faults and assumed-normal background. The models and settings established earlier were retained, including humidity’s exploratory status and negative validation finding.</p><p class="outcome"><strong>Principal result.</strong> In the primary temperature gradual-bias comparison, hybrid monitoring H detected <strong>95 of 216 cases</strong>, while B0 and R detected none. H still had <strong>121 evaluated misses</strong> and raised <strong>22 false-positive value hours among 8,557 eligible background negatives</strong>. The result shows a gain within these cases, accompanied by misses and false alarms.</p><div class="review-links"><a href="#results">Review all primary detection results</a><a href="#sensitivities">Compare the four passes</a><a href="evaluation-2024-evidence.json">Open the evidence summary</a></div><p class="small">All 3,748 jobs completed: 3,744 constructed fault cases and four uninjected backgrounds. The saved processing completed in October 2026. The final period is not described as a newly untouched holdout; prior exposure remains disclosed.</p></div>
+
+<section id="workflow"><p class="section-label">1 / Practical sequence</p><h2>How the final evaluation was carried out</h2><ol class="workflow">
+<li><strong>Prepared the final observations and labels.</strong> The restricted intake preserved original data and checked their structure. Background-label review was kept separate from detector outputs. It did not establish that the sensors were healthy, and it was not independent human review.</li>
+<li><strong>Recorded the final scientific freeze.</strong> The accepted data, implementation, prediction models, monitoring settings and scoring rules were bound to saved file identities before the final batch. Humidity’s failed original eligibility and negative 2023 finding remained part of those records.</li>
+<li><strong>Completed a measured pilot and the prescribed batch.</strong> Each pass included one continuous background and 936 fault cases. Checkpoints preserved completed work and the history of stopped, failed or abandoned attempts.</li>
+<li><strong>Replayed each fault and its unchanged counterpart.</strong> The three configurations received the same input sequence within each copy. They processed current observations in time order. The detector did not receive the hidden fault labels or original values that could reveal how to repair the input.</li>
+<li><strong>Joined the evaluation labels after prediction.</strong> Saved flags, availability states and alarm episodes were assessed against known injected faults and assumed-normal labels. Misses and unavailable checks remained visible.</li>
+<li><strong>Combined the saved results.</strong> A separate analysis produced twelve complete datasets and 52 figures. It read saved outputs without running the detector again. This page presents selected results from those completed tables.</li>
+</ol><p class="source-note">Sources: <a href="../provenance/freeze-v2/freeze-summary.json">final freeze</a>, <a href="../provenance/freeze-v2/design.json">saved design</a>, <a href="../demo/verification.html#analysis-scope">analysis scope</a> and <a href="evaluation-2024-evidence.json">completion evidence</a>. Dissertation: Sections 4.3–4.4 and Appendix E2–E3.</p></section>
+
+<section id="comparison"><p class="section-label">2 / Fixed comparison and data window</p><h2>What B0, R and H actually did</h2><div class="table-scroll" tabindex="0" role="region" aria-label="Three final monitoring configurations"><table><thead><tr><th scope="col">Configuration</th><th scope="col">Checks included</th><th scope="col">Purpose in the comparison</th></tr></thead><tbody>
+<tr><th scope="row">B0 — Basic checks</th><td>Expected-row availability, explicit missing-cell checks, and fixed value ranges.</td><td>Establish what the simpler checks could detect.</td></tr>
+<tr><th scope="row">R — Added integrity rules</th><td>All B0 checks, plus invalid timestamps, off-grid timestamps and duplicate receipts.</td><td>Measure the contribution of direct record-integrity checks.</td></tr>
+<tr><th scope="row">H — Hybrid monitoring</th><td>All R checks, plus the running monitor of prediction errors using the selected P model and reference observations.</td><td>Measure the additional contribution of residual monitoring.</td></tr>
+</tbody></table></div><p>Unusable or non-finite inputs could leave a check unavailable; they were not silently treated as healthy readings. The primary comparison was H against B0. R against B0 and H against R helped explain where differences came from. H against R assesses the whole residual-monitoring component, including its prediction model and reference data; it does not isolate the EWMA calculation alone.</p><p>Both statistical weights remained <strong>0.20</strong>. Primary thresholds remained <strong>2.4816976238219928 for temperature</strong> and <strong>2.057779719375828 for humidity</strong>. Primary value ranges were −40 to 50 °C and 0 to 100% relative humidity. The four prescribed passes changed only the settings described in the <a href="#sensitivities">sensitivity section</a>.</p>
+<h3>Which 2024 observations were scored?</h3><p>Final scoring covered original source dates <strong>2 January–31 December 2024</strong>: 365 days and <strong>8,760 expected hourly slots per station</strong>. Although 2024 was a leap year, 1 January was excluded from scoring and supplied 24 hours of starting context.</p><details><summary>Continuous background, monthly cases and starting context</summary><div class="details-body"><p>Each pass replayed the full background continuously, without resetting at month boundaries. Fault cases and their counterparts used full source-month windows. January had one earlier context day; February–December had fourteen earlier context days, or 336 hours, before their scored month.</p><p>Context initialised the monitor and was not scored. A one-hour completion period after each window allowed outstanding processing to finish without adding scored observations. Source dates still owned their records after hour 24 was converted to the next UTC midnight.</p><p>The continuous background began with only 24 context hours. The statistical monitor required 228 valid updates before it was ready. This left the first 203 scored hours outside H’s eligible value-hour count. The same excluded hours were removed from the shared comparison with B0 and R.</p></div></details><p class="source-note">Sources: <a href="../provenance/freeze-v2/settings.json">fixed settings</a>, <a href="../provenance/freeze-v2/design.json">context and scored windows</a>, <a href="../source/qc-monitor/replay.py">shared replay implementation</a>. Dissertation: Sections 3.4–3.6 and Appendix A4/C.</p></section>
+
+<section id="cases"><p class="section-label">3 / Controlled faults and completed work</p><h2>Seven fault families, repeated across the year</h2><p>Each month contained 78 prescribed case variants, giving <strong>936 cases per pass</strong>. A case altered one designated part of a copy of the observations and retained an unchanged counterpart. Whole-record faults were counted once, rather than twice for temperature and humidity.</p><div class="table-scroll" tabindex="0" role="region" aria-label="Final fault inventory"><table><thead><tr><th scope="col">Fault family</th><th scope="col">Practical alteration</th><th scope="col">Cases per pass</th></tr></thead><tbody>
+<tr><th scope="row">Missing cell</th><td>Remove the temperature or humidity value while retaining the row.</td><td>96: 48 per variable</td></tr>
+<tr><th scope="row">Absent row</th><td>Remove the entire expected target record.</td><td>48</td></tr>
+<tr><th scope="row">Duplicate receipt</th><td>Add one or two copies of a target record.</td><td>72</td></tr>
+<tr><th scope="row">Invalid timestamp</th><td>Insert an invalid date token or source hour 0.</td><td>72</td></tr>
+<tr><th scope="row">Off-grid timestamp</th><td>Shift a timestamp 15 or 30 minutes away from the hourly grid.</td><td>72</td></tr>
+<tr><th scope="row">Out-of-range value</th><td>Replace values with numbers beyond the primary physical-range limits.</td><td>144: 72 per variable</td></tr>
+<tr><th scope="row">Gradual bias</th><td>Add a growing positive or negative offset, then hold that offset.</td><td>432: 216 per variable</td></tr>
+</tbody></table></div><details><summary>Exact sizes and durations</summary><div class="details-body"><p>Missing-cell and absent-row cases lasted 1, 6, 7 or 24 hours. Duplicate, invalid-time and off-grid cases lasted 1, 6 or 7 hours, crossed with their two specified alternatives.</p><p>Out-of-range cases lasted 1, 6 or 24 hours. Temperature replacements were −41 or 51 °C; humidity replacements were −1 or 101%. These were controlled faulty values, not observed weather.</p><p>Gradual-bias cases combined two signs, three sizes (0.5, 1 or 2 times the variable’s frozen 2021 residual scale) and three ramp durations (24, 72 or 168 hours), followed by an equal-length hold. That gave 18 cases per variable per month, or 216 annually. Reference observations and earlier context were not corrupted.</p></div></details><p class="outcome"><strong>Completion describes construction.</strong> All four passes completed all 936 cases with full construction support and valid pairs: <strong>3,744 effective cases in total</strong>. In each pass, all 79,896 intended units were changed, with none unsupported or supported-but-unchanged. This confirms that the faults were constructed; it does not mean that they were all detected.</p><p class="source-note">Sources: <a href="../provenance/freeze-v2/design.json">case inventory</a>, <a href="../results/construction.jsonl.gz">complete construction table</a> and <a href="evaluation-2024-evidence.json">per-pass counts</a>. Dissertation: Appendix E3.</p></section>
+
+<section id="scoring"><p class="section-label">4 / Meaning of the result measures</p><h2>What was counted, and why the denominators differ</h2><p><strong>Read evaluation in four steps.</strong> First check whether a fault case was constructed and executed. Then check whether the relevant method could evaluate it. Next inspect hits, misses and, where comparable, detection delays. Finally compare these gains with the separately measured background false alarms and coverage. Successful construction is not a successful detection.</p><div class="table-scroll" tabindex="0" role="region" aria-label="Final scoring measures"><table><thead><tr><th scope="col">Measure</th><th scope="col">What it asks</th><th scope="col">How to read it</th></tr></thead><tbody>
+<tr><th scope="row">Fault-case detection</th><td>Was the injected fault detected by a compatible check within its declared interval?</td><td>Detected root events ÷ valid paired cases. A “root” is the original injected fault, including any permitted linked consequence.</td></tr>
+<tr><th scope="row">Individual-reading results</th><td>Which eligible affected and unaffected readings were flagged?</td><td>Point counts retain detected faulty readings, missed faulty readings, false positives and correct negatives. Detecting one case does not mean detecting every affected reading.</td></tr>
+<tr><th scope="row">Background false alarms</th><td>How much did each configuration flag when no faults were injected?</td><td>False-positive units and false-alarm segments on the separate continuous assumed-normal background.</td></tr>
+<tr><th scope="row">Detection delay</th><td>For faults both configurations detected, which flagged earlier?</td><td>Compare delay only on common detections. Misses keep an undefined delay and their observation horizon; they are not assigned zero delay.</td></tr>
+</tbody></table></div><p>Value hours, availability slots and timestamp records were separate scoring tasks. They were not pooled into one denominator. The primary detection table below uses annual, full-support case groups.</p><p><strong>Misses were classified.</strong> An evaluated miss means a compatible check had an opportunity but did not detect the fault. An unavailable miss means no compatible opportunity was available. A capability miss means the configuration lacked the required check. B0’s duplicate-receipt misses belong to the last category.</p><p>The final root-hit rule did not require the counterpart to be unflagged at the same hour. A separate stricter paired-response diagnostic tested that question. This is one reason the 2022 selection counts and final 2024 detection counts should not be treated as identical measures.</p><p class="source-note">Sources: <a href="../demo/verification.html#analysis-scope">scoring and aggregation contract</a> and <a href="../results/root_summary.jsonl.gz">root outcome table</a>. Dissertation: Appendices C and E5–E7.</p></section>
+
+<section id="results"><p class="section-label">5 / Primary detection findings</p><h2>What each configuration detected</h2><div class="table-scroll" tabindex="0" role="region" aria-label="Primary annual fault detection results"><table><thead><tr><th scope="col">Fault family and variable</th><th scope="col">B0 detected / cases</th><th scope="col">R detected / cases</th><th scope="col">H detected / cases</th></tr></thead><tbody>
+<tr><th scope="row">Missing temperature cell</th><td>48 / 48</td><td>48 / 48</td><td>48 / 48</td></tr>
+<tr><th scope="row">Missing humidity cell<br><span class="cell-note">Humidity: exploratory</span></th><td>48 / 48</td><td>48 / 48</td><td>48 / 48</td></tr>
+<tr><th scope="row">Absent row</th><td>48 / 48</td><td>48 / 48</td><td>48 / 48</td></tr>
+<tr><th scope="row">Duplicate receipt</th><td>0 / 72</td><td>72 / 72</td><td>72 / 72</td></tr>
+<tr><th scope="row">Invalid timestamp</th><td>72 / 72<br><span class="cell-note">Absent-slot consequence</span></td><td>72 / 72</td><td>72 / 72</td></tr>
+<tr><th scope="row">Off-grid timestamp</th><td>72 / 72<br><span class="cell-note">Absent-slot consequence</span></td><td>72 / 72</td><td>72 / 72</td></tr>
+<tr><th scope="row">Out-of-range temperature</th><td>72 / 72</td><td>72 / 72</td><td>72 / 72</td></tr>
+<tr><th scope="row">Out-of-range humidity<br><span class="cell-note">Humidity: exploratory</span></th><td>72 / 72</td><td>72 / 72</td><td>72 / 72</td></tr>
+<tr><th scope="row">Gradual temperature bias</th><td>0 / 216</td><td>0 / 216</td><td>95 / 216</td></tr>
+<tr><th scope="row">Gradual humidity bias<br><span class="cell-note">Humidity: exploratory</span></th><td>94 / 216</td><td>94 / 216</td><td>154 / 216</td></tr>
+</tbody></table></div><p><strong>Temperature gradual bias:</strong> H detected 95/216 (43.98%), a gain of 43.98 percentage points over B0 and R, while retaining 121 evaluated misses. <strong>Humidity gradual bias:</strong> H detected 154/216 (71.30%), compared with 94/216 (43.52%) for B0 and R, a gain of 27.78 points with 62 evaluated misses. All humidity findings remain exploratory.</p><p><strong>Integrity rules supplied direct explanations.</strong> B0 lacked duplicate detection and missed all 72 cases. For invalid and off-grid timestamps, B0’s 72/72 counts came from the resulting absent slots. R and H directly detected the timestamp problem, five simulated minutes earlier. Equal totals therefore do not imply equal diagnostic capability.</p><p>H added no further case detections to the integrity cases already found by R. These families have different faults and opportunities, so their totals are not combined into an overall ranking.</p>
+<details><summary>A detected case can still contain many missed readings</summary><div class="details-body"><p>For the specific temperature variant with a negative 0.5-scale bias, 72-hour ramp and 72-hour hold, H’s primary annual shared-hour counts were:</p><div class="table-scroll" tabindex="0" role="region" aria-label="One exact temperature variant point results"><table><thead><tr><th scope="col">Count</th><th scope="col">Meaning</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">True positives</th><td>Affected readings flagged</td><td>14</td></tr><tr><th scope="row">False negatives</th><td>Affected readings missed</td><td>1,655</td></tr><tr><th scope="row">False positives</th><td>Eligible negative readings flagged</td><td>16</td></tr><tr><th scope="row">True negatives</th><td>Eligible negative readings left unflagged</td><td>6,872</td></tr></tbody></table></div><p>Precision was 14/(14+16) = <strong>46.67%</strong>, but point recall was 14/(14+1,655) = <strong>0.84%</strong>. This example concerns one exact variant, not all gradual-bias cases. Its false positives also belong to that case-based point assessment, not the separate continuous-background total.</p></div></details>
+<details><summary>Delay, stricter paired responses and recovery</summary><div class="details-body"><p>H and B0 shared no temperature gradual-bias detections, so their paired delay difference was undefined. For humidity, both detected 94 cases, H alone detected 60, and neither detected 62. The median H−B0 delay difference was zero, with a range from −59 to 0 hours; a negative value means H flagged earlier.</p><p>The stricter paired-response diagnostic required a compatible flag in the altered copy while the same opportunity in the unchanged counterpart was evaluated and unflagged. H met that rule in <strong>86/216 temperature</strong> and <strong>154/216 humidity</strong> cases. Six cases per variable had no comparable opportunity. These diagnostic totals are separate from the primary root-hit counts.</p><p>Post-intervention recovery and remaining alarm activity were recorded separately. A later flag outside the declared fault interval could not turn an earlier miss into a detection. Saved replay delays are not measurements of live operational response time.</p></div></details><p class="source-note">Sources: <a href="../results/root_summary.jsonl.gz">root results</a>, <a href="../results/point_annual.jsonl.gz">exact-variant point results</a>, <a href="../results/contrasts.jsonl.gz">paired comparisons</a>, <a href="../results/diagnostics.jsonl.gz">paired-response diagnostics</a> and <a href="../results/recovery.jsonl.gz">recovery</a>. Selected rows: <a href="evaluation-2024-evidence.json">evidence summary</a>. Dissertation: Sections 4.5 and Appendix E5–E7.</p></section>
+
+<section id="background"><p class="section-label">6 / False alarms and assessment coverage</p><h2>The cost alongside the detection gain</h2><p>For a fair value comparison, B0, R and H were assessed on the same <strong>8,557 eligible hours out of 8,760 (97.68%)</strong> for each variable. The other <strong>203 hours</strong> were excluded from this shared assessment. B0 and R could assess all 8,760 hours on their own; H’s starting readiness limited the shared count.</p><div class="table-scroll wide-table" tabindex="0" role="region" aria-label="Primary common-background value results"><table><thead><tr><th scope="col">Variable</th><th scope="col">B0 and R, each<br>False positives / negatives</th><th scope="col">H<br>False positives / negatives</th><th scope="col">H rate</th><th scope="col">H false segments</th><th scope="col">Segments per 720 eligible hours</th></tr></thead><tbody>
+<tr><th scope="row">Temperature</th><td>0 / 8,557</td><td>22 / 8,557</td><td>0.2571%</td><td>7</td><td>0.5890</td></tr>
+<tr><th scope="row">Humidity — exploratory</th><td>0 / 8,557</td><td>38 / 8,557</td><td>0.4441%</td><td>11</td><td>0.9256</td></tr>
+</tbody></table></div><p>A segment groups consecutive eligible false-positive units under the scoring rules. The 22 temperature flagged hours formed seven segments; they were not 22 separate incidents. The normalised segment rate allows the burden to be stated against a fixed amount of eligible exposure.</p><p><strong>Only the full continuous background supplied this exposure.</strong> Reusing unchanged counterparts across fault cases did not create additional independent background hours. The labels were assumed normal, not a certification of sensor health, and no acceptable operational alarm budget was established.</p><details><summary>Unavailable checks and undefined ratios</summary><div class="details-body"><p>Complete construction support did not mean every check could evaluate every affected hour. In the primary gradual-bias cases, H had all required checks available at 37,020 of 38,016 affected opportunities per variable. Every case still had at least one compatible opportunity, so its remaining root misses were evaluated misses.</p><p>Background recall was undefined because the background had no labelled positive faults. B0/R background precision was undefined because they made no positive predictions. These are missing denominators, not zero performance scores or evidence of perfect sensor health.</p><p>The 2023 validation rates used the statistical monitor alone on 8,760 ready hours. These 2024 figures use the final combined configuration and shared eligible value-hour denominator. They should not be compared as if scope and exposure were identical.</p></div></details><p class="source-note">Sources: <a href="../results/background_points.jsonl.gz">background point counts</a> and <a href="../results/background_burden.jsonl.gz">segment burden</a>. Dissertation: Section 4.4–4.5 and Appendix E4.</p></section>
+
+<section id="sensitivities"><p class="section-label">7 / Prescribed sensitivity comparisons</p><h2>All four evaluation passes</h2><p>Each pass repeated the full comparison using the same prescribed cases. These are four passes within the final period, not the four years of the study. The alternative thresholds were established from the earlier calibration data; they were not fitted to improve the 2024 results.</p><div class="table-scroll wide-table" tabindex="0" role="region" aria-label="Four passes detection and false-positive comparison"><table><thead><tr><th scope="col">Pass</th><th scope="col">H temperature<br>Gradual-bias hits</th><th scope="col">H humidity<br>Gradual-bias hits, exploratory</th><th scope="col">H temperature<br>Background false-positive hours</th><th scope="col">H humidity<br>Background false-positive hours</th></tr></thead><tbody>
+<tr><th scope="row">Primary: α = 0.01</th><td>95 / 216<br><span class="cell-note">121 misses</span></td><td>154 / 216<br><span class="cell-note">62 misses</span></td><td>22</td><td>38</td></tr>
+<tr><th scope="row">α = 0.005: higher statistical threshold</th><td>58 / 216<br><span class="cell-note">158 misses</span></td><td>141 / 216<br><span class="cell-note">75 misses</span></td><td>10</td><td>23</td></tr>
+<tr><th scope="row">α = 0.02: lower statistical threshold</th><td>121 / 216<br><span class="cell-note">95 misses</span></td><td>170 / 216<br><span class="cell-note">46 misses</span></td><td>56</td><td>85</td></tr>
+<tr><th scope="row">Temperature range −30 to 45 °C</th><td>95 / 216<br><span class="cell-note">121 misses</span></td><td>154 / 216<br><span class="cell-note">62 misses</span></td><td>22</td><td>38</td></tr>
+</tbody></table></div><p>Every detection denominator is 216 cases; every false-positive column uses 8,557 eligible background negatives. B0 and R remained at 0/216 temperature and 94/216 humidity gradual-bias detections across these passes, with zero false positives on the shared value background.</p><p><strong>The trade-off:</strong> the higher statistical threshold at α = 0.005 reduced both detections and false alarms. The lower threshold at α = 0.02 increased both. The narrower temperature range gave the same displayed detection and background totals as the primary pass; this does not establish equivalence for every possible fault or weather condition.</p><p>In the α = 0.02 temperature pass, <strong>18 of H’s detections already had an alarm active when the fault first took effect</strong>. They were retained as ongoing-alarm hits, rather than presented as 18 newly triggered responses.</p>
+<details><summary>Exact settings and variation across months</summary><div class="details-body"><div class="table-scroll" tabindex="0" role="region" aria-label="Exact sensitivity settings"><table><thead><tr><th scope="col">Pass</th><th scope="col">Temperature statistical threshold</th><th scope="col">Humidity statistical threshold</th><th scope="col">Temperature bounds</th></tr></thead><tbody><tr><th scope="row">Primary</th><td>2.4816976238219928</td><td>2.057779719375828</td><td>−40 to 50 °C</td></tr><tr><th scope="row">α = 0.005</th><td>2.7603226941864003</td><td>2.2975750425842403</td><td>−40 to 50 °C</td></tr><tr><th scope="row">α = 0.02</th><td>2.1323005759800266</td><td>1.7916906157638017</td><td>−40 to 50 °C</td></tr><tr><th scope="row">T-range</th><td>2.4816976238219928</td><td>2.057779719375828</td><td>−30 to 45 °C</td></tr></tbody></table></div><p>Both weights stayed at 0.20, and humidity’s range remained 0–100%. Alpha is a calibration setting, not a guaranteed future false-positive rate.</p><p>Primary monthly H gradual-bias detection ranged from <strong>22.22–88.89% for temperature</strong> and <strong>55.56–88.89% for humidity</strong>. Recalculating the pooled result while omitting one month at a time gave <strong>39.90–45.96%</strong> and <strong>69.70–72.73%</strong>, respectively. These describe variation in saved contributions. They are not confidence intervals, and no model was refitted.</p></div></details><p class="source-note">Sources: <a href="../provenance/freeze-v2/settings.json">prescribed settings</a>, <a href="../results/root_summary.jsonl.gz">all-pass root results</a>, <a href="../results/background_points.jsonl.gz">background results</a>, <a href="../results/sensitivity.jsonl.gz">matched sensitivity records</a> and <a href="../results/monthly_description.jsonl.gz">monthly descriptions</a>. Dissertation: Section 4.6 and Appendix E8.</p></section>
+
+<section id="interpretation"><p class="section-label">8 / Interpretation</p><h2>What the final findings establish</h2><ul class="limitations">
+<li><strong>Residual monitoring added gradual-bias detections in this study.</strong> Temperature provides the originally eligible comparison. Its 121 primary H misses and added background flags remain part of the result.</li>
+<li><strong>Integrity checks provided capabilities that B0 lacked.</strong> Direct duplicate and timestamp checks made some faults identifiable earlier and with more specific explanations, even when root totals were equal.</li>
+<li><strong>Humidity remains exploratory.</strong> Its stronger detection total does not reverse the 2022 model failure or negative 2023 validation. Researcher approval of R1 is recorded; supervisor approval is not.</li>
+<li><strong>Transfer beyond the study is limited.</strong> One target station, a reference whose condition is not independently certified, controlled fault shapes, seasonal dependence and assumed-normal background constrain the conclusions.</li>
+<li><strong>The evidence supports comparison and traceability.</strong> It does not demonstrate physical sensor diagnosis, acceptable operator workload, field readiness or participant-tested usability. No overall cross-family ranking or newly untouched holdout claim is made.</li>
+</ul><p class="section-conclusion"><strong>How the four periods connect.</strong> The 2021 data established the prediction models; 2022 selected models and alarm settings; 2023 exposed a transfer limitation; and 2024 measured the fixed comparison while preserving that limitation. The final account includes detections, misses, unavailable checks, false alarms and adverse sensitivity changes.</p></section>
+
+<section id="evidence"><p class="section-label">9 / Supporting evidence and review route</p><h2>Where an examiner can check the account</h2><div class="table-scroll" tabindex="0" role="region" aria-label="Final evaluation evidence register"><table><thead><tr><th scope="col">Material</th><th scope="col">What to inspect</th><th scope="col">Access</th></tr></thead><tbody>
+<tr><th scope="row">Selected evidence summary</th><td>Completion, construction counts, exact settings and selected canonical rows with their original row identifiers and table fingerprints.</td><td><a href="evaluation-2024-evidence.json">Open summary</a></td></tr>
+<tr><th scope="row">Saved-results explorer</th><td>Choose primary, gradual_bias, T and root_summary for the main comparison. Then inspect background_points on common value hours and the alternative passes.</td><td><a href="../demo/index.html">Open explorer</a></td></tr>
+<tr><th scope="row">Original figures and plotted values</th><td>Review the saved primary detection-versus-background-burden figure. Its plotted values remain linked separately.</td><td><a href="../demo/figures/F3-primary.svg">Primary comparison figure</a><br><a href="../demo/figures/F3-primary-data.json">Exact plotted data</a></td></tr>
+<tr><th scope="row">Complete tables</th><td>Download all twelve complete datasets; the guide and compact explorer are selected views.</td><td><a href="../demo/datasets.html">Complete downloads</a><br><a href="../provenance/publication/table-inventory.json">Table inventory</a></td></tr>
+<tr><th scope="row">Design and freeze</th><td>Check the 936-case roster, scored windows, four passes and retained scientific qualifications.</td><td><a href="../provenance/freeze-v2/design.json">Design</a><br><a href="../provenance/freeze-v2/freeze-summary.json">Freeze</a></td></tr>
+</tbody></table></div><p>Timeline examples followed a fixed rule: within each pass and fault family, select the first effective case and the first case missed by any configuration, removing duplicates. The resulting 28 examples include a missed primary temperature gradual-bias case. They were not chosen only to show successful detections.</p><p class="small">This guide checks selected saved records and presentation. It does not repeat the experiment, the full analysis or every historical verification. Original raw snapshots, full per-case histories and interruption records remain in the separate research archive. See <a href="../demo/verification.html#full-study-reproduction">access and reproduction scope</a>.</p><div class="review-links"><a href="validation-2023.html">← 2023 — Validation</a><a href="four-periods.html">Return to the four-period overview</a><a href="../demo/index.html">Explore the completed results →</a></div></section>
+<!-- BEGIN GENERATED PYTHON VIEW -->
+<section id="python-code" class="python-section" data-python-view data-default-file="source/qc-monitor/final_worker.py" data-preferred="[&quot;source/qc-monitor/final_worker.py&quot;,&quot;source/qc-monitor/replay.py&quot;,&quot;source/qc-monitor/scenarios.py&quot;,&quot;source/qc-monitor/evaluator.py&quot;,&quot;source/qc-monitor/final_controller.py&quot;]">
+<p class="section-label">Complete Python code</p><h2>Final comparison and evaluation</h2>
+<p class="code-intro">Follow one fixed job from released observations to saved predictions, then to scoring. The replay receives public inputs; scoring uses truth after the predictions have been produced.</p>
+<p class="small">The selected file is displayed in full below. Choose another file to read its complete code. Imports may require related files, configuration and saved inputs. <a href="../demo/verification.html#scientific-and-reporting-environments">Environment requirements</a> · <a href="../demo/verification.html#full-study-reproduction">Full-study prerequisites</a>.</p>
+<label class="code-picker" hidden for="python-file">Python file<select id="python-file"></select></label>
+<p class="code-file-description">Runs a frozen final comparison job and saves monitoring and evaluation evidence. Exact frozen settings and separately preserved inputs are required.</p>
+<p class="code-file-path">source/qc-monitor/final_worker.py · 255 lines · Complete file</p>
+<div class="code-shell"><div class="code-toolbar"><button type="button" data-copy-code disabled>Copy code</button><a data-download-code href="../source/qc-monitor/final_worker.py" download="final_worker.py">Download .py</a><label class="code-wrap" hidden><input type="checkbox" data-wrap-code checked>Wrap long lines</label></div>
+<pre class="code-display" tabindex="0" role="region" aria-label="Complete Python code: source/qc-monitor/final_worker.py"><code>&quot;&quot;&quot;One final job: public replay first, saved evidence checks, then private scoring.
+
+Continuous replay uses disk sinks without month resets. Evaluation is partitioned
+only after monitoring; raw episodes are formed across all saved month partitions.
+&quot;&quot;&quot;
+from collections import defaultdict
+from contextlib import ExitStack
+from dataclasses import asdict
+from datetime import datetime, timedelta
+import csv
+import gc
+import json
+import os
+os.environ['OPENBLAS_NUM_THREADS']='1'
+os.environ['OMP_NUM_THREADS']='1'
+from pathlib import Path
+import sys
+import time
+
+from demo import process_peak_bytes
+from evaluation_adapter import adapt, CONFIGS, unit_key
+from evaluator import (point_scores, raw_nodes, raw_episodes, root_scores, normal_ids,
+                       project_burden, excess_response, recovery_units)
+from final_contract import (read, lines, STREAMS, LABELS, REVIEW, REVIEW_HASH,
+                            verify_files, verify_freeze, roster, window)
+from lossless_storage import inventory_files
+from records import save_json, sha256, utc_now
+from replay import _replay, Receipt, utc
+from scenarios import _build, public_copy, planned_root
+from scientific_replay import load_frozen, identity
+
+
+def write_lines(path, rows):
+    with path.open('x',encoding='utf-8',newline='\n') as stream:
+        for row in rows: stream.write(json.dumps(row,allow_nan=False)+'\n')
+
+
+class DiskSink:
+    def __init__(self, folder, name, stack):
+        self.folder,self.name,self.stack = folder,name,stack
+        self.files={}; self.count=0; self.last_progress=None
+    def append(self, row):
+        stamp = row.get('slot_utc') or row.get('received_at') or row['emitted_at']
+        dt = utc(stamp)
+        if self.name=='ledger' and row['check'] not in ('Q04','Q05','Q06'): dt-=timedelta(minutes=5)
+        month=(dt-timedelta(hours=1)).strftime('%Y-%m')
+        if month not in self.files:
+            folder=self.folder/month;folder.mkdir(exist_ok=True)
+            f=self.stack.enter_context((folder/(self.name+'.jsonl')).open('x',encoding='utf-8',newline='\n'))
+            writer=None
+            if self.name=='ledger':
+                c=self.stack.enter_context((folder/'ledger.csv').open('x',encoding='utf-8',newline=''))
+                writer=csv.writer(c);writer.writerow(row.keys())
+            self.files[month]=(f,writer)
+        f,writer=self.files[month]
+        f.write(json.dumps(row,allow_nan=False)+'\n')
+        if writer: writer.writerow(json.dumps(v,allow_nan=False) for v in row.values())
+        self.count+=1
+        if self.name=='states' and row['variable']=='U':
+            day=stamp[:10]
+            if day!=self.last_progress:
+                print('REPLAY_DAY '+day,flush=True);self.last_progress=day
+
+
+def monitor_save(folder, public, slots, settings, bounds, provenance, run_id):
+    folder.mkdir()
+    save_json(folder/'public-inputs.json',public);save_json(folder/'schedule.json',slots)
+    save_json(folder/'provenance.json',provenance)
+    with ExitStack() as stack:
+        sinks={k:DiskSink(folder,k,stack) for k in STREAMS}
+        run=_replay([Receipt.from_public(r) for r in public],slots,settings,run_id=run_id,
+            protocol='submitted-v2-final-scientific-v1',purpose=provenance['purpose'],bounds=bounds,sinks=sinks)
+        meta={k:v for k,v in run.items() if k not in STREAMS}
+        meta['stream_counts']={k:s.count for k,s in sinks.items()}
+    save_json(folder/'run.json',meta)
+    save_json(folder/'completed.json',{'state':'monitor_complete','files':inventory_files(folder)})
+
+
+def verify_monitor(folder):
+    done=read(folder/'completed.json')
+    if done.get('state')!='monitor_complete': raise ValueError('Monitor did not complete')
+    verify_files(folder,done['files'])
+    actual=inventory_files(folder);actual.pop('completed.json')
+    if actual!=done['files']: raise ValueError('Unlisted monitor evidence')
+    run=read(folder/'run.json');slots=read(folder/'schedule.json')
+    if run['slots_closed']!=len(slots) or run['drain_until']!=(utc(slots[-1])+timedelta(hours=1)).isoformat():
+        raise ValueError('Monitor truncated its schedule/drain')
+    for name in STREAMS:
+        count=sum(1 for p in folder.glob('*/'+name+'.jsonl') for _ in lines(p))
+        if count!=run['stream_counts'][name]: raise ValueError('Missing saved stream rows')
+    return run,read(folder/'public-inputs.json'),slots
+
+
+def read_units(folder, case_id, month=None):
+    meta=read(folder/'run.json'); public=read(folder/'public-inputs.json');slots=read(folder/'schedule.json')
+    paths=sorted(p for p in folder.iterdir() if p.is_dir() and (month is None or p.name==month))
+    run={**meta,**{name:[r for p in paths for r in lines(p/(name+'.jsonl'))] for name in STREAMS}}
+    if month is not None:
+        slots=[s for s in slots if (utc(s)-timedelta(hours=1)).strftime('%Y-%m')==month]
+        public=[r for r in public if (utc(r['received_at'])-timedelta(hours=1)).strftime('%Y-%m')==month]
+        run.update(slots_closed=len(slots),drain_until=(utc(slots[-1])+timedelta(hours=1)).isoformat())
+    return adapt(run,public,slots,case_id=case_id),public,slots
+
+
+def background_generation(originals, case_id):
+    root=planned_root({'case_id':case_id,'family':'missing_cell','variable':None,
+        'planned_onset':originals[0]['timestamp'],'length_hours':1,'variant':'continuous_background'})
+    root.update(construction='no_effect',C=0,Z=1,U=0,accounting_assessed=True,unassessed_units=0)
+    public=[public_copy(r) for r in originals]
+    return {'public':public,'counterpart':public,'root':root,
+            'lineage':[{'identity':r['identity'],'parent_id':r['identity'],'original':r} for r in originals]}
+
+
+def compact_nodes(units):
+    return [{k:v for k,v in n.items() if k!='checks'} for n in raw_nodes(units)]
+
+
+def source_months(nodes, truth):
+    result={}
+    for n in nodes:
+        key=n['key'] if n['domain']!='timestamp' else unit_key(n['case_id'],'Q04',n['subject'])
+        result[n['key']]=truth[key]['source_month']
+    return result
+
+
+def score_background(public_dir, private_dir, generated, win):
+    case_id=generated['root']['case_id']; folder=public_dir/'background'
+    verify_monitor(folder)
+    months=sorted(p.name for p in folder.iterdir() if p.is_dir())
+    all_nodes=[]
+    # First pass is truth-free. No labels are opened until full raw episodes exist.
+    for month in months:
+        units,_,_=read_units(folder,case_id,month)
+        all_nodes.extend(compact_nodes(units));del units;gc.collect()
+    episodes=raw_episodes(all_nodes)
+    save_json(public_dir/'raw-episodes.json',episodes)
+    from final_labels import load_labels, reviewed_truth
+    labels=load_labels(REVIEW/'numeric-labels.jsonl',REVIEW_HASH)
+    allowed=defaultdict(set); ownership={}; totals={}; scored_keys=set()
+    for month in months:
+        print('SCORE_MONTH '+month,flush=True)
+        units,receipts,slots=read_units(folder,case_id,month)
+        part={**generated,'public':receipts,'counterpart':receipts}
+        truth=reviewed_truth(part,{**win,'slots':slots},labels,background=True)
+        write_lines(private_dir/(month+'-truth.jsonl'),({'key':k,**v} for k,v in truth['units'].items()))
+        points=point_scores(units,truth['units']);save_json(public_dir/(month+'-points.json'),points)
+        for p in points:
+            key='|'.join((p['task'],str(p['variable']),p['configuration']))
+            t=totals.setdefault(key,{cohort:{k:0 for k in ('TP','FP','FN','TN','n')} for cohort in ('own','common')})
+            for cohort in t:
+                for k in t[cohort]: t[cohort][k]+=p[cohort][k]
+        nodes=compact_nodes(units);ownership.update(source_months(nodes,truth['units']))
+        for n in nodes:
+            k=n['key'] if n['domain']!='timestamp' else unit_key(n['case_id'],'Q04',n['subject'])
+            if truth['units'][k]['scope']=='scored':scored_keys.add(n['key'])
+        for cfg in CONFIGS:
+            for cohort in ('own','common'):
+                allowed[cfg,cohort].update(normal_ids(units,truth['units'],cfg,cohort))
+        del units,truth,nodes,points;gc.collect()
+    groups=defaultdict(list)
+    for n in all_nodes:groups[(n['case_id'],n['configuration'],n['domain'],n['variable'])].append(n)
+    burdens=[]
+    for group,nodes in sorted(groups.items(),key=str):
+        keys={n['key'] for n in nodes};eps=[e for e in episodes if tuple(e['group'])==group]
+        for cohort in ('own','common'):
+            burdens.append({'group':list(group),'cohort':cohort,
+                **project_burden(nodes,eps,allowed[group[1],cohort]&amp;keys,ownership),
+                'raw_replay_counts_include_unscored_context':True,
+                'raw_positive_units_scored':sum(n['prediction'] is True and n['key'] in scored_keys for n in nodes),
+                'raw_episodes_with_scored_positive':sum(any(n['key'] in scored_keys for n in e['nodes']) for e in eps)})
+    for t in totals.values():
+        for counts in t.values():
+            d=counts['FP']+counts['TN'];counts['fpr']={'value':counts['FP']/d if d else None,
+                'denominator':d,'reason':None if d else 'no_truth_negatives'}
+    save_json(public_dir/'background-evaluation.json',{'annual_counts':totals,'burden':burdens,
+        'labels':LABELS,'monthly_point_files':[m+'-points.json' for m in months],
+        'primary_exposure_source':'this continuous run only; no monthly resets',
+        'scored_schedule_hours':win['scored_hours']})
+
+
+def score_pair(public_dir, private_dir, generated, win):
+    case_id=generated['root']['case_id']
+    for side in ('injected','counterpart'): verify_monitor(public_dir/side)
+    units,receipts,slots=read_units(public_dir/'injected',case_id)
+    controls,control_public,_=read_units(public_dir/'counterpart',case_id+'-control')
+    episodes=raw_episodes(compact_nodes(units));save_json(public_dir/'raw-episodes.json',episodes)
+    save_json(public_dir/'counterpart-raw-episodes.json',raw_episodes(compact_nodes(controls)))
+    from final_labels import load_labels, reviewed_truth
+    labels=load_labels(REVIEW/'numeric-labels.jsonl',REVIEW_HASH)
+    truth=reviewed_truth(generated,win,labels)
+    control_truth=reviewed_truth(generated,win,labels,counterpart=True)
+    save_json(private_dir/'truth.json',truth);save_json(private_dir/'counterpart-truth.json',control_truth)
+    health={(case_id,c):{'valid':True,'reason':None} for c in CONFIGS}
+    diagnostics={}
+    settings_id=identity(read(public_dir/'injected/run.json')['settings'])
+    control_settings_id=identity(read(public_dir/'counterpart/run.json')['settings'])
+    for cfg in CONFIGS:
+        select=lambda rows:[u for u in rows if u['task']=='value' and u['configuration']==cfg]
+        changed={(s,generated['root']['variable']) for s in generated['root']['actual_change_mask']}
+        diagnostics[cfg]=(excess_response(select(units),select(controls),changed,settings_id,control_settings_id)
+            if generated['root']['family'] in ('gradual_bias','out_of_range') else {'status':'inapplicable'})
+    save_json(public_dir/'evaluation.json',{'point_scores':point_scores(units,truth['units']),
+        'counterpart_point_scores':point_scores(controls,control_truth['units']),
+        'root_outcomes':root_scores(truth['roots'],units,health),'excess_response':diagnostics,
+        'labels':LABELS,'primary_normal_exposure_hours':0})
+    for side,items in (('injected',units),('counterpart',controls)):
+        write_lines(public_dir/(side+'-recovery.jsonl'),recovery_units(items,generated['root']['planned_onset'],
+            generated['root']['length_hours'],win['last_scored']))
+
+
+def execute(job, public_dir, private_dir, freeze_folder):
+    start=time.perf_counter();freeze=verify_freeze(freeze_folder)
+    pass_id=job['pass'];settings,bounds,proof=load_frozen(pass_id)
+    frozen=read(freeze_folder/'settings.json')[pass_id]
+    if {v:asdict(s) for v,s in settings.items()} != {v:{**s,'coefficients':tuple(s['coefficients'])} for v,s in frozen['settings'].items()}:
+        raise ValueError('Settings changed after freeze')
+    case=job.get('case');win=window(None if case is None else int(case['source_month'][-2:]))
+    if case is not None and case not in roster(): raise ValueError('Unspecified final case')
+    from final_data import load_originals
+    originals=load_originals(freeze_folder,win)
+    scales={'kind':'frozen_scientific',**{v:s.scale for v,s in settings.items()},
+            'model_sha256':{v:s.model_sha256 for v,s in settings.items()}}
+    g=background_generation(originals,job['job_id']) if case is None else _build(case,originals,scales,'frozen_scientific')
+    save_json(private_dir/'construction.json',{**g,'public':None,'counterpart':None})
+    save_json(public_dir/'window.json',win);save_json(public_dir/'job.json',job)
+    provenance={'purpose':'final performance; assumed-normal background; exploratory humidity R1',
+        'freeze_sha256':sha256(freeze_folder/'freeze.json'),'labels':LABELS,'scientific_adapter':proof,
+        'actual_scientific_freeze':True,'pass':pass_id,'input_identity':identity(g['public']),
+        'counterpart_identity':identity(g['counterpart'])}
+    save_json(public_dir/'provenance.json',provenance)
+    status=g['root']['construction']
+    if g['public'] is not None:
+        for side,key in ([('background','public')] if case is None else [('injected','public'),('counterpart','counterpart')]):
+            print('MONITOR '+side+' '+job['job_id'],flush=True)
+            monitor_save(public_dir/side,g[key],win['slots'],settings,bounds,provenance,job['job_id']+'-'+side)
+        print('MONITORS_SAVED; VERIFY_AND_SCORE '+job['job_id'],flush=True)
+        if case is None:score_background(public_dir,private_dir,g,win)
+        else:score_pair(public_dir,private_dir,g,win)
+    else:
+        save_json(public_dir/'construction-disposition.json',g['root'])
+    verify_freeze(freeze_folder)
+    save_json(public_dir/'worker-completed.json',{'state':'complete','job_id':job['job_id'],'pass':pass_id,
+        'kind':job['kind'],'construction':status,'labels':LABELS,
+        'configurations':list(CONFIGS),'freeze_sha256':sha256(freeze_folder/'freeze.json'),
+        'public_files':inventory_files(public_dir),'private_files':inventory_files(private_dir),
+        'primary_normal_exposure_hours':win['scored_hours'] if case is None else 0,
+        'exposure_count_meaning':'scheduled background hours, not eligible performance denominator',
+        'worker_seconds':time.perf_counter()-start,'peak_process_bytes':process_peak_bytes(),'finished_utc':utc_now()})
+
+
+if __name__=='__main__':
+    from batch_controller import exclusive_lock
+    from lossless_storage import within_work
+    with exclusive_lock(within_work(sys.argv[5]),'worker.lock'):
+        execute(read(Path(sys.argv[1])),within_work(sys.argv[2]),within_work(sys.argv[3]),within_work(sys.argv[4]))
+</code></pre></div>
+<p class="code-status" role="status" aria-live="polite"></p>
+<noscript><p>The complete default file is shown above. File selection and automatic copying require JavaScript. Select the code manually or download a related file:</p><ul><li><a href="../source/qc-monitor/final_worker.py" download="final_worker.py">final_worker.py</a></li><li><a href="../source/qc-monitor/replay.py" download="replay.py">replay.py</a></li><li><a href="../source/qc-monitor/scenarios.py" download="scenarios.py">scenarios.py</a></li><li><a href="../source/qc-monitor/evaluator.py" download="evaluator.py">evaluator.py</a></li><li><a href="../source/qc-monitor/final_controller.py" download="final_controller.py">final_controller.py</a></li></ul></noscript>
+<p class="small">These complete public source files document the study. Additional inputs are needed to reproduce the full experiment. See the on-site requirements and source-copy scope. The website does not execute Python.</p>
+<div class="review-links"><a href="#python-code">Back to code controls ↑</a><a href="#main">Back to page overview ↑</a></div>
+</section>
+<!-- END GENERATED PYTHON VIEW -->
+<footer><p>Source: KNMI. KNMI did not participate in or necessarily endorse this derived work. Codex-assisted development and writing.</p><p><a href="../demo/verification.html#using-code">Using the Python files</a> · <a href="../references/index.html#attribution">Attribution and use</a></p></footer>
+</main></div></body></html>

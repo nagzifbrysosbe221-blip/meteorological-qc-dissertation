@@ -1,0 +1,418 @@
+{
+  "primary": {
+    "settings": {
+      "T": {
+        "variable": "T",
+        "kind": "P",
+        "coefficients": [
+          -0.5203030131877825,
+          0.3736701454474271,
+          0.08457483270385148,
+          -0.03684117712612795,
+          0.13714872320494773,
+          -0.3526945797364374,
+          -0.20074829942233735,
+          0.04018553762010735,
+          -0.060065361377373123,
+          -0.04673889615170355,
+          0.05352211291420226,
+          0.2583391863149144,
+          0.06745817689599226,
+          1.0363462079567853
+        ],
+        "centre": -2.0279668355563954e-14,
+        "scale": 1.0899190510080756,
+        "weight": 0.2,
+        "cutoff": 2.4816976238219928,
+        "alpha": 0.01,
+        "original_A2_eligible": true,
+        "exploratory": false,
+        "revision": "R1-approved-v1",
+        "model_sha256": "7523eac4b25b7615c3682dd9635135d43a744888953089f6072a793e259d1bd8",
+        "decision_sha256": "147fcde8dd6b7748648dd504863d4e2f14a27b3a94fe9537130420dad482b214",
+        "permission_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "validation_state": "diagnosis_required",
+        "validation_disposition": "negative_U_retained_unchanged"
+      },
+      "U": {
+        "variable": "U",
+        "kind": "P",
+        "coefficients": [
+          8.744146583616068,
+          -1.333677619871727,
+          1.0223692989134536,
+          0.30246531294541906,
+          0.2887544807103866,
+          1.543310591550443,
+          2.478360640398944,
+          -0.6365309936013656,
+          -0.3120441907080541,
+          0.7344908427792132,
+          0.14375504098215164,
+          -1.1355666075233581,
+          -1.5194491349016301,
+          0.8973770907283711
+        ],
+        "centre": 6.898429062890981e-14,
+        "scale": 5.8585834427051395,
+        "weight": 0.2,
+        "cutoff": 2.057779719375828,
+        "alpha": 0.01,
+        "original_A2_eligible": false,
+        "exploratory": true,
+        "revision": "R1-approved-v1",
+        "model_sha256": "e5723583c46829db39eef6fb7b9867a9fa53917b9fe2408cefc1187b26dbed5b",
+        "decision_sha256": "0058c3ce89831eb4ae12d23e2b22a3d3bccc04b769b0dca68f11130c3e320a14",
+        "permission_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "validation_state": "diagnosis_required",
+        "validation_disposition": "negative_U_retained_unchanged"
+      }
+    },
+    "proof": {
+      "protocol_sha256": "0e5a85000e75ac91c7282ff94bec2a4d44ff7793d51e2e4ba7ac31ee85bb3f3f",
+      "bound_evidence": {
+        "evidence/r1-calibration-2026-10-08/approval.json": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "evidence/r1-calibration-2026-10-08/manual-A3-20261007T210253930632Z/completed.json": "20b0d4a7c448105a26997aff533dae7097e48f3927576623a84125e6f689ec43",
+        "evidence/r1-validation-2026-10-08/manual-2023-20261007T211804852813Z/completed.json": "3b7d61eba28851129fc8712689c11cb94c20996be10ec64627d1676fb1f4159c",
+        "evidence/r1-validation-2026-10-08/completed-validation-review/audit.json": "1a87a56a6818af971c1e545077e63b5a4001afdbb768cf6763bb91f68cbc039e",
+        "evidence/r1-validation-2026-10-08/completed-validation-review/handoff.json": "8f3c07c335bf070d5c9b53f540b10f626d714c2cf6786e1d5319e1014135ecd4",
+        "outputs/2023-Validation-Review-and-Disposition-2026-10-08.md": "52d172c652f14dba8a6d885fce2be10d919244ad11b6aa28f33d1bb863fffc60",
+        "working/qc-monitor/r1-validation-protocol.json": "3f62e9179c3adef57570b6c1e1c68793673f08465dd82c9244ed221c70e4241b",
+        "reference/Chapters-1-to-3-Supervisor-Review-v2.pdf": "b759751cf3f59dac0622fb11ce9b03a178c6a98b78e4b7a20007a8ecaff674f2"
+      },
+      "pass_id": "primary",
+      "settings_ids": {
+        "T": "scientific-settings:f114ffc63c2abe6ff39a2944d2f035a649a99bf055d40f31d48b60ae3508802f",
+        "U": "scientific-settings:ba02cf4f6a823fd15c76dce2dba8dfb2cfad08ebc934e905cac1c7970d350ac5"
+      },
+      "U_original_A2_eligible": false,
+      "U_exploratory": true,
+      "validation_original_state": "diagnosis_required",
+      "validation_disposition": "negative_U_retained_unchanged",
+      "scientific_freeze": false,
+      "final_execution_enabled": false
+    },
+    "bounds": {
+      "T": [
+        -40.0,
+        50.0
+      ],
+      "U": [
+        0.0,
+        100.0
+      ]
+    }
+  },
+  "alpha-0005": {
+    "settings": {
+      "T": {
+        "variable": "T",
+        "kind": "P",
+        "coefficients": [
+          -0.5203030131877825,
+          0.3736701454474271,
+          0.08457483270385148,
+          -0.03684117712612795,
+          0.13714872320494773,
+          -0.3526945797364374,
+          -0.20074829942233735,
+          0.04018553762010735,
+          -0.060065361377373123,
+          -0.04673889615170355,
+          0.05352211291420226,
+          0.2583391863149144,
+          0.06745817689599226,
+          1.0363462079567853
+        ],
+        "centre": -2.0279668355563954e-14,
+        "scale": 1.0899190510080756,
+        "weight": 0.2,
+        "cutoff": 2.7603226941864003,
+        "alpha": 0.005,
+        "original_A2_eligible": true,
+        "exploratory": false,
+        "revision": "R1-approved-v1",
+        "model_sha256": "7523eac4b25b7615c3682dd9635135d43a744888953089f6072a793e259d1bd8",
+        "decision_sha256": "147fcde8dd6b7748648dd504863d4e2f14a27b3a94fe9537130420dad482b214",
+        "permission_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "validation_state": "diagnosis_required",
+        "validation_disposition": "negative_U_retained_unchanged"
+      },
+      "U": {
+        "variable": "U",
+        "kind": "P",
+        "coefficients": [
+          8.744146583616068,
+          -1.333677619871727,
+          1.0223692989134536,
+          0.30246531294541906,
+          0.2887544807103866,
+          1.543310591550443,
+          2.478360640398944,
+          -0.6365309936013656,
+          -0.3120441907080541,
+          0.7344908427792132,
+          0.14375504098215164,
+          -1.1355666075233581,
+          -1.5194491349016301,
+          0.8973770907283711
+        ],
+        "centre": 6.898429062890981e-14,
+        "scale": 5.8585834427051395,
+        "weight": 0.2,
+        "cutoff": 2.2975750425842403,
+        "alpha": 0.005,
+        "original_A2_eligible": false,
+        "exploratory": true,
+        "revision": "R1-approved-v1",
+        "model_sha256": "e5723583c46829db39eef6fb7b9867a9fa53917b9fe2408cefc1187b26dbed5b",
+        "decision_sha256": "0058c3ce89831eb4ae12d23e2b22a3d3bccc04b769b0dca68f11130c3e320a14",
+        "permission_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "validation_state": "diagnosis_required",
+        "validation_disposition": "negative_U_retained_unchanged"
+      }
+    },
+    "proof": {
+      "protocol_sha256": "0e5a85000e75ac91c7282ff94bec2a4d44ff7793d51e2e4ba7ac31ee85bb3f3f",
+      "bound_evidence": {
+        "evidence/r1-calibration-2026-10-08/approval.json": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "evidence/r1-calibration-2026-10-08/manual-A3-20261007T210253930632Z/completed.json": "20b0d4a7c448105a26997aff533dae7097e48f3927576623a84125e6f689ec43",
+        "evidence/r1-validation-2026-10-08/manual-2023-20261007T211804852813Z/completed.json": "3b7d61eba28851129fc8712689c11cb94c20996be10ec64627d1676fb1f4159c",
+        "evidence/r1-validation-2026-10-08/completed-validation-review/audit.json": "1a87a56a6818af971c1e545077e63b5a4001afdbb768cf6763bb91f68cbc039e",
+        "evidence/r1-validation-2026-10-08/completed-validation-review/handoff.json": "8f3c07c335bf070d5c9b53f540b10f626d714c2cf6786e1d5319e1014135ecd4",
+        "outputs/2023-Validation-Review-and-Disposition-2026-10-08.md": "52d172c652f14dba8a6d885fce2be10d919244ad11b6aa28f33d1bb863fffc60",
+        "working/qc-monitor/r1-validation-protocol.json": "3f62e9179c3adef57570b6c1e1c68793673f08465dd82c9244ed221c70e4241b",
+        "reference/Chapters-1-to-3-Supervisor-Review-v2.pdf": "b759751cf3f59dac0622fb11ce9b03a178c6a98b78e4b7a20007a8ecaff674f2"
+      },
+      "pass_id": "alpha-0005",
+      "settings_ids": {
+        "T": "scientific-settings:5bbbdb0e91e8332dcc9921d51343f127634fe781add9271aa5e5dfbec12f4138",
+        "U": "scientific-settings:2f56fbf917760f7f123da3482da39c6ee7206f4a521e1de80534cf411bbc0772"
+      },
+      "U_original_A2_eligible": false,
+      "U_exploratory": true,
+      "validation_original_state": "diagnosis_required",
+      "validation_disposition": "negative_U_retained_unchanged",
+      "scientific_freeze": false,
+      "final_execution_enabled": false
+    },
+    "bounds": {
+      "T": [
+        -40.0,
+        50.0
+      ],
+      "U": [
+        0.0,
+        100.0
+      ]
+    }
+  },
+  "alpha-002": {
+    "settings": {
+      "T": {
+        "variable": "T",
+        "kind": "P",
+        "coefficients": [
+          -0.5203030131877825,
+          0.3736701454474271,
+          0.08457483270385148,
+          -0.03684117712612795,
+          0.13714872320494773,
+          -0.3526945797364374,
+          -0.20074829942233735,
+          0.04018553762010735,
+          -0.060065361377373123,
+          -0.04673889615170355,
+          0.05352211291420226,
+          0.2583391863149144,
+          0.06745817689599226,
+          1.0363462079567853
+        ],
+        "centre": -2.0279668355563954e-14,
+        "scale": 1.0899190510080756,
+        "weight": 0.2,
+        "cutoff": 2.1323005759800266,
+        "alpha": 0.02,
+        "original_A2_eligible": true,
+        "exploratory": false,
+        "revision": "R1-approved-v1",
+        "model_sha256": "7523eac4b25b7615c3682dd9635135d43a744888953089f6072a793e259d1bd8",
+        "decision_sha256": "147fcde8dd6b7748648dd504863d4e2f14a27b3a94fe9537130420dad482b214",
+        "permission_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "validation_state": "diagnosis_required",
+        "validation_disposition": "negative_U_retained_unchanged"
+      },
+      "U": {
+        "variable": "U",
+        "kind": "P",
+        "coefficients": [
+          8.744146583616068,
+          -1.333677619871727,
+          1.0223692989134536,
+          0.30246531294541906,
+          0.2887544807103866,
+          1.543310591550443,
+          2.478360640398944,
+          -0.6365309936013656,
+          -0.3120441907080541,
+          0.7344908427792132,
+          0.14375504098215164,
+          -1.1355666075233581,
+          -1.5194491349016301,
+          0.8973770907283711
+        ],
+        "centre": 6.898429062890981e-14,
+        "scale": 5.8585834427051395,
+        "weight": 0.2,
+        "cutoff": 1.7916906157638017,
+        "alpha": 0.02,
+        "original_A2_eligible": false,
+        "exploratory": true,
+        "revision": "R1-approved-v1",
+        "model_sha256": "e5723583c46829db39eef6fb7b9867a9fa53917b9fe2408cefc1187b26dbed5b",
+        "decision_sha256": "0058c3ce89831eb4ae12d23e2b22a3d3bccc04b769b0dca68f11130c3e320a14",
+        "permission_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "validation_state": "diagnosis_required",
+        "validation_disposition": "negative_U_retained_unchanged"
+      }
+    },
+    "proof": {
+      "protocol_sha256": "0e5a85000e75ac91c7282ff94bec2a4d44ff7793d51e2e4ba7ac31ee85bb3f3f",
+      "bound_evidence": {
+        "evidence/r1-calibration-2026-10-08/approval.json": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "evidence/r1-calibration-2026-10-08/manual-A3-20261007T210253930632Z/completed.json": "20b0d4a7c448105a26997aff533dae7097e48f3927576623a84125e6f689ec43",
+        "evidence/r1-validation-2026-10-08/manual-2023-20261007T211804852813Z/completed.json": "3b7d61eba28851129fc8712689c11cb94c20996be10ec64627d1676fb1f4159c",
+        "evidence/r1-validation-2026-10-08/completed-validation-review/audit.json": "1a87a56a6818af971c1e545077e63b5a4001afdbb768cf6763bb91f68cbc039e",
+        "evidence/r1-validation-2026-10-08/completed-validation-review/handoff.json": "8f3c07c335bf070d5c9b53f540b10f626d714c2cf6786e1d5319e1014135ecd4",
+        "outputs/2023-Validation-Review-and-Disposition-2026-10-08.md": "52d172c652f14dba8a6d885fce2be10d919244ad11b6aa28f33d1bb863fffc60",
+        "working/qc-monitor/r1-validation-protocol.json": "3f62e9179c3adef57570b6c1e1c68793673f08465dd82c9244ed221c70e4241b",
+        "reference/Chapters-1-to-3-Supervisor-Review-v2.pdf": "b759751cf3f59dac0622fb11ce9b03a178c6a98b78e4b7a20007a8ecaff674f2"
+      },
+      "pass_id": "alpha-002",
+      "settings_ids": {
+        "T": "scientific-settings:351371e6dd654519f35803f9e0e237fcd3f34035ef0db9a504d991e4a066db11",
+        "U": "scientific-settings:fa0f54818b18b5e082d519f4d11859cfbd6e3ae8d6640d79b2c6d1180e24c818"
+      },
+      "U_original_A2_eligible": false,
+      "U_exploratory": true,
+      "validation_original_state": "diagnosis_required",
+      "validation_disposition": "negative_U_retained_unchanged",
+      "scientific_freeze": false,
+      "final_execution_enabled": false
+    },
+    "bounds": {
+      "T": [
+        -40.0,
+        50.0
+      ],
+      "U": [
+        0.0,
+        100.0
+      ]
+    }
+  },
+  "T-range": {
+    "settings": {
+      "T": {
+        "variable": "T",
+        "kind": "P",
+        "coefficients": [
+          -0.5203030131877825,
+          0.3736701454474271,
+          0.08457483270385148,
+          -0.03684117712612795,
+          0.13714872320494773,
+          -0.3526945797364374,
+          -0.20074829942233735,
+          0.04018553762010735,
+          -0.060065361377373123,
+          -0.04673889615170355,
+          0.05352211291420226,
+          0.2583391863149144,
+          0.06745817689599226,
+          1.0363462079567853
+        ],
+        "centre": -2.0279668355563954e-14,
+        "scale": 1.0899190510080756,
+        "weight": 0.2,
+        "cutoff": 2.4816976238219928,
+        "alpha": 0.01,
+        "original_A2_eligible": true,
+        "exploratory": false,
+        "revision": "R1-approved-v1",
+        "model_sha256": "7523eac4b25b7615c3682dd9635135d43a744888953089f6072a793e259d1bd8",
+        "decision_sha256": "147fcde8dd6b7748648dd504863d4e2f14a27b3a94fe9537130420dad482b214",
+        "permission_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "validation_state": "diagnosis_required",
+        "validation_disposition": "negative_U_retained_unchanged"
+      },
+      "U": {
+        "variable": "U",
+        "kind": "P",
+        "coefficients": [
+          8.744146583616068,
+          -1.333677619871727,
+          1.0223692989134536,
+          0.30246531294541906,
+          0.2887544807103866,
+          1.543310591550443,
+          2.478360640398944,
+          -0.6365309936013656,
+          -0.3120441907080541,
+          0.7344908427792132,
+          0.14375504098215164,
+          -1.1355666075233581,
+          -1.5194491349016301,
+          0.8973770907283711
+        ],
+        "centre": 6.898429062890981e-14,
+        "scale": 5.8585834427051395,
+        "weight": 0.2,
+        "cutoff": 2.057779719375828,
+        "alpha": 0.01,
+        "original_A2_eligible": false,
+        "exploratory": true,
+        "revision": "R1-approved-v1",
+        "model_sha256": "e5723583c46829db39eef6fb7b9867a9fa53917b9fe2408cefc1187b26dbed5b",
+        "decision_sha256": "0058c3ce89831eb4ae12d23e2b22a3d3bccc04b769b0dca68f11130c3e320a14",
+        "permission_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "validation_state": "diagnosis_required",
+        "validation_disposition": "negative_U_retained_unchanged"
+      }
+    },
+    "proof": {
+      "protocol_sha256": "0e5a85000e75ac91c7282ff94bec2a4d44ff7793d51e2e4ba7ac31ee85bb3f3f",
+      "bound_evidence": {
+        "evidence/r1-calibration-2026-10-08/approval.json": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+        "evidence/r1-calibration-2026-10-08/manual-A3-20261007T210253930632Z/completed.json": "20b0d4a7c448105a26997aff533dae7097e48f3927576623a84125e6f689ec43",
+        "evidence/r1-validation-2026-10-08/manual-2023-20261007T211804852813Z/completed.json": "3b7d61eba28851129fc8712689c11cb94c20996be10ec64627d1676fb1f4159c",
+        "evidence/r1-validation-2026-10-08/completed-validation-review/audit.json": "1a87a56a6818af971c1e545077e63b5a4001afdbb768cf6763bb91f68cbc039e",
+        "evidence/r1-validation-2026-10-08/completed-validation-review/handoff.json": "8f3c07c335bf070d5c9b53f540b10f626d714c2cf6786e1d5319e1014135ecd4",
+        "outputs/2023-Validation-Review-and-Disposition-2026-10-08.md": "52d172c652f14dba8a6d885fce2be10d919244ad11b6aa28f33d1bb863fffc60",
+        "working/qc-monitor/r1-validation-protocol.json": "3f62e9179c3adef57570b6c1e1c68793673f08465dd82c9244ed221c70e4241b",
+        "reference/Chapters-1-to-3-Supervisor-Review-v2.pdf": "b759751cf3f59dac0622fb11ce9b03a178c6a98b78e4b7a20007a8ecaff674f2"
+      },
+      "pass_id": "T-range",
+      "settings_ids": {
+        "T": "scientific-settings:f114ffc63c2abe6ff39a2944d2f035a649a99bf055d40f31d48b60ae3508802f",
+        "U": "scientific-settings:ba02cf4f6a823fd15c76dce2dba8dfb2cfad08ebc934e905cac1c7970d350ac5"
+      },
+      "U_original_A2_eligible": false,
+      "U_exploratory": true,
+      "validation_original_state": "diagnosis_required",
+      "validation_disposition": "negative_U_retained_unchanged",
+      "scientific_freeze": false,
+      "final_execution_enabled": false
+    },
+    "bounds": {
+      "T": [
+        -30.0,
+        45.0
+      ],
+      "U": [
+        0.0,
+        100.0
+      ]
+    }
+  }
+}

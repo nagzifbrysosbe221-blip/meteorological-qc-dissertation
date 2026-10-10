@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Review the dissertation's 2021 model fitting: inputs, seasonal and reference models, practical workflow, saved fitting results, diagnostics and limits."><title>2021 — Fitting · Dissertation review</title><link rel="stylesheet" href="guide.css"><link rel="stylesheet" href="../assets/python-code.css"><script src="../assets/python-sources.js" defer></script><script src="../assets/python-code.js" defer></script></head>
+<body>
+<a class="skip-link" href="#main">Skip to the review</a>
+<header class="site-header"><a class="brand" href="../index.html">Meteorological quality control<span>Dissertation review companion</span></a><nav aria-label="Website"><a href="../index.html">Home</a></nav></header>
+<div class="layout">
+<aside class="sidebar"><p class="eyebrow">Study Design and Implementation</p><nav class="guide-chapters" aria-label="Study Design and Implementation"><a href="index.html">1. Data collection and preparation</a><a href="four-periods.html">2. Four study periods</a><a href="fitting-2021.html" aria-current="page">3. 2021 — Fitting</a><a href="selection-2022.html">4. 2022 — Selection</a><a href="validation-2023.html">5. 2023 — Validation</a><a href="evaluation-2024.html">6. 2024 — Final evaluation</a></nav><p class="eyebrow">Results and Evidence</p><nav class="guide-chapters" aria-label="Results and Evidence"><a href="../demo/index.html">1. Saved results explorer</a><a href="../demo/datasets.html">2. Complete datasets</a><a href="../demo/figures.html">3. Figures and timelines</a><a href="../demo/missed-example.html">4. Understanding a missed case</a><a href="../demo/verification.html">5. Validation and verification</a></nav><p class="eyebrow">Dissertation References</p><nav class="guide-chapters" aria-label="Dissertation References"><a href="../references/index.html">All 30 references</a></nav><p class="eyebrow">On this page</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#inputs">Purpose and inputs</a><a href="#models">The two candidate models</a><a href="#workflow">Practical fitting workflow</a><a href="#results">Recorded fitting results</a><a href="#diagnostics">What the diagnostics showed</a><a href="#carry-forward">What carried forward</a><a href="#evidence">Supporting evidence</a><a href="#python-code">Complete Python code</a></nav><div class="sidebar-note">Related dissertation sections<br><strong>3.2, 3.4 and Appendix A2</strong><p>Period 1 of 4: fitting the candidates before assessing their suitability on 2022 data.</p></div></aside>
+<main id="main">
+<div id="overview" class="page-intro"><p class="eyebrow">Period 1 of 4 / Model fitting</p><h1>2021 — Fitting</h1><p class="code-jump"><a href="#python-code">Read, copy or download the complete Python code ↓</a></p><p class="lead">The 2021 observations were used to estimate expected temperature and humidity at De Bilt. This stage produced the prediction models and the error summaries needed to interpret later differences between observed and expected readings.</p><p class="outcome"><strong>Recorded outcome.</strong> All four candidates fitted successfully: two for temperature and two for humidity. Each used 8,760 hourly records, with no fitting rows excluded. Their fitted coefficients, residual centres and residual scales were saved. Model suitability was assessed in the next period.</p><div class="review-links"><a href="#results">Review the fitting results</a><a href="fitting-2021-evidence.json">Open the evidence summary</a></div><p class="small">“2021” identifies the source observations. The fitting records were produced in October 2026. This page summarises those saved records; it does not run or refit a model.</p></div>
+
+<section id="inputs"><p class="section-label">1 / Purpose and inputs</p><h2>What the fitting stage needed to establish</h2><p>A warm afternoon or a cold winter day is not automatically a fault. The study therefore needed a model of expected behaviour before it could monitor persistent departures. Fitting estimated the numerical weights in that prediction formula from the 2021 observations.</p><p>The output was an expected value for the current observation. The reference-assisted model used Schiphol’s observation from the same hour, so its purpose was comparison with current weather conditions rather than forecasting future weather.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="2021 fitting inputs"><table><thead><tr><th scope="col">Input</th><th scope="col">How it was used</th></tr></thead><tbody>
+<tr><th scope="row">De Bilt, station 260</th><td>Temperature and relative humidity were fitted separately as the quantities to predict.</td></tr>
+<tr><th scope="row">Schiphol, station 240</th><td>The same variable at the same hour supplied an additional input to the reference-assisted candidate.</td></tr>
+<tr><th scope="row">2021 source dates</th><td>1 January–31 December, with 8,760 expected hourly records per variable. Original source-date membership was retained through the hour-24 timestamp conversion.</td></tr>
+<tr><th scope="row">Calendar information</th><td>Time of year and time of day represented recurring seasonal and daily patterns.</td></tr>
+<tr><th scope="row">Eligible records</th><td>Each fit required a unique, finite target value. The reference-assisted fit also required a unique, finite same-hour reference value. All 8,760 hours were usable for each of the four candidates.</td></tr>
+</tbody></table></div><p>The background readings were assumed normal. The study did not certify them as fault-free, fill missing readings, clip unusual values or remove observations because a fitted model disagreed with them.</p><p class="source-note">Sources: <a href="index.html#collection">collection and inventory</a>, <a href="fitting-2021-evidence.json">saved fitting counts and exclusions</a> and <a href="../source/qc-monitor/early-stage-protocol.json">early-stage protocol</a>.</p></section>
+
+<section id="models"><p class="section-label">2 / Candidate models</p><h2>Statistical modelling: estimating an expected reading</h2><p><strong>Why a prediction model is needed.</strong> Weather changes by season and time of day. A raw change is not automatically drift. The fitted model estimates the expected reading; the difference between the observed and predicted value is the residual. H monitors those residuals for sustained departures, alongside the same integrity rules used by R.</p><div class="table-scroll" tabindex="0" role="region" aria-label="Seasonal and reference model comparison"><table><thead><tr><th scope="col">Candidate</th><th scope="col">Information used</th><th scope="col">Purpose in the comparison</th></tr></thead><tbody>
+<tr><th scope="row">S — Seasonal model</th><td>13 calendar terms describing an overall level, annual patterns, daily patterns and how daily patterns vary with season.</td><td>Estimate De Bilt’s recurring behaviour from the calendar alone. This also provides a comparator for the model using a reference station.</td></tr>
+<tr><th scope="row">P — Reference-assisted model</th><td>The same 13 types of calendar term plus Schiphol’s same-hour reading: 14 fitted coefficients in total.</td><td>Use information about the weather occurring at the reference station as well as the calendar. Its calendar and reference coefficients were fitted together.</td></tr>
+</tbody></table></div><p>Temperature S, temperature P, humidity S and humidity P were four separate fits. In P, the system learned the relationship between the stations; it did not assume that De Bilt should equal Schiphol. The availability of a reference observation did not establish that it was accurate or representative.</p>
+<details><summary>Technical detail: what were the 13 calendar terms?</summary><div class="details-body"><p>There was one intercept, four annual sine/cosine terms, four daily sine/cosine terms, and four products combining the first annual and daily terms: <strong>1 + 4 + 4 + 4 = 13</strong>. P added one same-variable reference predictor.</p><p>The annual terms used elapsed UTC time as a fraction of the current calendar year; daily terms used fractional UTC hour. The two harmonics for each cycle and their interactions were specified in advance. Previous target readings were not used as predictors.</p></div></details><p class="source-note">Sources: dissertation Appendix A2; <a href="../source/qc-monitor/scientific_models.py">implemented feature definitions and fitting</a>. Exact feature names and coefficients are retained in the <a href="fitting-2021-evidence.json">fitting evidence summary</a>.</p></section>
+
+<section id="workflow"><p class="section-label">3 / Practical workflow</p><h2>How the observations became fitted models</h2><ol class="workflow">
+<li><strong>Restricted the input to the fitting period.</strong> The program checked the source-year role before using numerical observations. The 2022, 2023 and 2024 readings were not used to estimate these coefficients.</li>
+<li><strong>Prepared one fitting row per eligible hour.</strong> Each row contained the calendar inputs and the observed De Bilt value. For P, it also contained the matching Schiphol value. Original record identities were retained for traceability.</li>
+<li><strong>Estimated the coefficients.</strong> Ordinary least squares chose the weights that minimised the total squared differences between the observed and predicted values across the fitting rows. A stable numerical method checked that the required coefficients could be estimated.</li>
+<li><strong>Calculated the residuals.</strong> For every usable fitting hour, the residual was the observed De Bilt value minus the model’s prediction. A positive residual meant the reading was above the prediction; a negative residual meant it was below.</li>
+<li><strong>Saved the residual centre and scale.</strong> The centre was the mean residual. The scale was the sample standard deviation, describing the spread of the fitting errors. Later monitoring used these saved values to express new residuals relative to the 2021 error spread.</li>
+<li><strong>Recorded diagnostic summaries and preserved the outputs.</strong> The saved evidence included fitting counts, exclusions, coefficient values, numerical checks, hourly and monthly error summaries, extremes and residual dependence. These diagnostics did not remove fitting rows.</li>
+</ol>
+<details class="optional-example"><summary>Optional illustration: turning a prediction error into a comparable value</summary><div class="details-body"><p class="example-label"><strong>Invented observations for explanation only.</strong> Suppose a temperature reading is 15 °C and the prediction is 13 °C. The residual is +2 °C. Using the actual saved temperature P scale of approximately 1.0899 °C and its near-zero centre gives a standardised residual of about +1.835.</p><p>This means the reading is roughly 1.835 fitting-error standard deviations above the prediction. It is not a probability of a fault or an alarm by itself; the later monitoring stage accumulates residual information and applies its separately selected threshold.</p><p>Calculation: <strong>(residual − saved centre) ÷ saved scale</strong>.</p></div></details>
+<p class="source-note">Sources: <a href="../source/qc-monitor/scientific_models.py">fit, predict and standardised-residual implementation</a>; <a href="../source/qc-monitor/early-stage-protocol.json">frozen fitting procedure</a>. Dissertation: Section 3.4 and Appendix A2.</p></section>
+
+<section id="results"><p class="section-label">4 / Fitting results</p><h2>What the saved fits produced</h2><p>The table reports the <strong>sample standard deviation of the 2021 residuals</strong>, called the residual scale in the implementation. It is a measure of error spread on the fitting data, expressed in the variable’s original units.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Saved 2021 fitting results"><table><thead><tr><th scope="col">Candidate</th><th scope="col">Hours used</th><th scope="col">Fitted coefficients</th><th scope="col">Residual scale</th><th scope="col">Recorded status</th></tr></thead><tbody>
+<tr><th scope="row">Temperature S</th><td>8,760</td><td>13</td><td>3.5062 °C</td><td>Fitted</td></tr>
+<tr><th scope="row">Temperature P</th><td>8,760</td><td>14</td><td>1.0899 °C</td><td>Fitted</td></tr>
+<tr><th scope="row">Humidity S</th><td>8,760</td><td>13</td><td>10.2948 percentage points</td><td>Fitted</td></tr>
+<tr><th scope="row">Humidity P</th><td>8,760</td><td>14</td><td>5.8586 percentage points</td><td>Fitted</td></tr>
+</tbody></table></div><p>For both variables, the reference-assisted model had a narrower residual spread on the fitting data. This is an observed fitting result. P also had an additional predictor, so this result alone did not establish better performance in another year or satisfy the later model-selection rules.</p><p>All four mean residuals were approximately zero. With an intercept in the least-squares fit, a near-zero overall mean is expected; it does not mean every prediction was accurate or that errors disappeared in each month.</p>
+<details><summary>Numerical checks and precision</summary><div class="details-body"><p>The S fits had full rank <strong>13 of 13</strong> and the P fits <strong>14 of 14</strong>. Full rank means that the fitted inputs supplied the independent information needed to estimate the stated coefficients. It is a numerical check, not certification of the model’s scientific suitability.</p><p>All saved coefficients, centres and scales were finite, and every scale was positive. The sample standard deviation used denominator <strong>8,759 (n − 1)</strong>, as specified in Appendix A2. Displayed scales are rounded to four decimal places; the exact values remain in the evidence summary.</p></div></details>
+<p class="outcome"><strong>Fitting success and eligibility are different decisions.</strong> Humidity fitted successfully in 2021. Its later 2022 suitability checks failed. The original combined fitting-and-gates run therefore has the status <code>revision_required</code>; this does not mean that the four fitting calculations failed.</p><p class="source-note">Source: <a href="fitting-2021-evidence.json">four saved fits, numerical diagnostics and original combined-run status</a>. The overview explains the <a href="four-periods.html#year-2022">later selection outcome</a>.</p></section>
+
+<section id="diagnostics"><p class="section-label">5 / Descriptive diagnostics</p><h2>Exploratory analysis: what the fitting diagnostics showed</h2><p><strong>Purpose.</strong> Examine the shape and timing of model errors before interpreting later alarms. The recorded diagnostics describe residual ranges, summaries by UTC hour and source month, and correlations between errors separated by 1, 6, 24, 48 and 168 hours. They help reveal remaining patterns rather than certify that the background is healthy or independent.</p><p><strong>Reading the evidence.</strong> The early <a href="index.html#exploratory-ranges">coverage and range summaries</a> describe the observations; the diagnostics below describe how the fitted models represented them. No detector-led outlier removal was applied. The complete implementation is in <a href="#python-code">scientific_models.py</a>, including its diagnostics function.</p><p>The saved diagnostics examined error patterns by source month and UTC hour, prediction and residual extremes, and correlation between residuals separated by 1, 6, 24, 48 and 168 actual hours. The following values illustrate why fitting success was not treated as proof of fault-free or independent observations.</p>
+<div class="table-scroll wide-table" tabindex="0" role="region" aria-label="2021 fitting residual diagnostics"><table><thead><tr><th scope="col">Candidate</th><th scope="col">Smallest to largest residual</th><th scope="col">Correlation one hour apart</th><th scope="col">Correlation 24 hours apart</th></tr></thead><tbody>
+<tr><th scope="row">Temperature S</th><td>−13.1660 to +14.0373 °C</td><td>0.9747</td><td>0.6280</td></tr>
+<tr><th scope="row">Temperature P</th><td>−5.7128 to +6.1539 °C</td><td>0.6902</td><td>0.0930</td></tr>
+<tr><th scope="row">Humidity S</th><td>−40.6843 to +37.9752 percentage points</td><td>0.9102</td><td>0.3002</td></tr>
+<tr><th scope="row">Humidity P</th><td>−29.6214 to +39.0828 percentage points</td><td>0.6668</td><td>0.1123</td></tr>
+</tbody></table></div><p><strong>Residual dependence remained.</strong> Correlation measures how two sets of errors vary together, on a scale from −1 to +1. The positive one-hour values show that adjacent residuals were related. They should not be treated as independent draws simply because the overall mean was near zero.</p><p><strong>The humidity prediction was not constrained to 0–100%.</strong> Humidity P’s saved 2021 prediction range reached 101.3697%. This was a model prediction, not an observed humidity reading. Predictions were retained without clipping, allowing this limitation to remain visible.</p><p><strong>These checks described behaviour.</strong> The diagnostics recorded no cleaning and no unavailable hours for the four fitted series. They did not identify the physical cause of an error, certify the reference station, or justify deleting inconvenient observations.</p><p class="source-note">Source: <a href="fitting-2021-evidence.json">saved 2021 descriptive diagnostics</a>, including all hourly, monthly and lag summaries. Values above are rounded to four decimal places.</p></section>
+
+<section id="carry-forward"><p class="section-label">6 / Handover to selection</p><h2>What was fixed before moving to 2022</h2><div class="table-scroll" tabindex="0" role="region" aria-label="Outputs carried into the 2022 period"><table><thead><tr><th scope="col">Saved output</th><th scope="col">How it was used later</th></tr></thead><tbody>
+<tr><th scope="row">Four candidate formulas</th><td>The coefficient values were applied to 2022 observations to check whether S or P met the suitability requirements. The coefficients were not refitted on 2022 or 2023.</td></tr>
+<tr><th scope="row">Residual centres and scales</th><td>Provided the fixed 2021 basis for assessing systematic error and standardising later residuals. They were not replaced by the later year’s error summaries.</td></tr>
+<tr><th scope="row">Record identities and diagnostics</th><td>Allowed the fit to be traced to the accepted data and its numerical and descriptive checks.</td></tr>
+</tbody></table></div><p>At the end of fitting, there was no selected EWMA weight or statistical alarm threshold. Those decisions belonged to 2022. The complete scientific configuration was frozen later, before final evaluation.</p><p class="section-conclusion"><strong>Assessment of this stage.</strong> The saved records support four completed numerical fits with full data coverage and explicit error summaries. They provide candidates for the next period’s suitability checks. Their fitting results do not establish future detection performance, sensor health or operational acceptability.</p></section>
+
+<section id="evidence"><p class="section-label">7 / Supporting evidence</p><h2>Where the fitting account can be checked</h2><div class="table-scroll" tabindex="0" role="region" aria-label="Fitting evidence register"><table><thead><tr><th scope="col">Material</th><th scope="col">What it supports</th><th scope="col">Access</th></tr></thead><tbody>
+<tr><th scope="row">Selected fitting evidence</th><td>Exact coefficients, residual centres/scales, counts, exclusions, full-rank checks and saved descriptive summaries. Original file fingerprints were checked against the saved completion record.</td><td><a href="fitting-2021-evidence.json">Open summary</a></td></tr>
+<tr><th scope="row">Fitting procedure</th><td>Feature definitions, eligibility handling, stable least-squares solve and residual calculations. Code describes the procedure; the saved outputs record the run.</td><td><a href="../source/qc-monitor/scientific_models.py">Implementation</a><br><a href="../source/qc-monitor/early-stage-protocol.json">Protocol</a></td></tr>
+<tr><th scope="row">Data foundation</th><td>Source, station roles, preparation, unit interpretation and acceptance limits.</td><td><a href="index.html">Review data preparation</a></td></tr>
+<tr><th scope="row">Complete original fit records</th><td>Full lists of fitting-row identities and original execution records. The public summary does not replace these files.</td><td>Held in the separate research archive; see <a href="../demo/verification.html#full-study-reproduction">access scope</a>.</td></tr>
+</tbody></table></div><div class="review-links"><a href="four-periods.html">← Four-period overview</a><a href="selection-2022.html">Next: 2022 — Selection →</a></div></section>
+<!-- BEGIN GENERATED PYTHON VIEW -->
+<section id="python-code" class="python-section" data-python-view data-default-file="source/qc-monitor/scientific_models.py" data-preferred="[&quot;source/qc-monitor/scientific_models.py&quot;,&quot;source/qc-monitor/early_scientific.py&quot;,&quot;source/qc-monitor/scientific_stage.py&quot;]">
+<p class="section-label">Complete Python code</p><h2>Features, fitting and exploratory diagnostics</h2>
+<p class="code-intro">In scientific_models.py, calendar_features builds the predictors, fit estimates the model and diagnostics describes residual behaviour. Read the saved fitting and diagnostic tables above alongside this complete implementation.</p>
+<p class="small">The selected file is displayed in full below. Choose another file to read its complete code. Imports may require related files, configuration and saved inputs. <a href="../demo/verification.html#scientific-and-reporting-environments">Environment requirements</a> · <a href="../demo/verification.html#full-study-reproduction">Full-study prerequisites</a>.</p>
+<label class="code-picker" hidden for="python-file">Python file<select id="python-file"></select></label>
+<p class="code-file-description">Defines calendar features, fits the S and P regression models, predicts expected readings, checks model suitability and describes residual patterns. Requires NumPy and the original prepared series.</p>
+<p class="code-file-path">source/qc-monitor/scientific_models.py · 240 lines · Complete file</p>
+<div class="code-shell"><div class="code-toolbar"><button type="button" data-copy-code disabled>Copy code</button><a data-download-code href="../source/qc-monitor/scientific_models.py" download="scientific_models.py">Download .py</a><label class="code-wrap" hidden><input type="checkbox" data-wrap-code checked>Wrap long lines</label></div>
+<pre class="code-display" tabindex="0" role="region" aria-label="Complete Python code: source/qc-monitor/scientific_models.py"><code>&quot;&quot;&quot;Submitted A2: frozen calendar OLS and conditional same-variable reference OLS.&quot;&quot;&quot;
+from collections import Counter
+from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
+import math
+import numpy as np
+
+from early_scientific import require_role
+
+FEATURES = ('intercept', 'annual_sin1', 'annual_cos1', 'annual_sin2', 'annual_cos2',
+            'daily_sin1', 'daily_cos1', 'daily_sin2', 'daily_cos2',
+            'annual_sin1_daily_sin1', 'annual_sin1_daily_cos1',
+            'annual_cos1_daily_sin1', 'annual_cos1_daily_cos1')
+
+
+def calendar_features(stamp):
+    if stamp.tzinfo is None:
+        raise ValueError('UTC-aware timestamp required')
+    t = stamp.astimezone(timezone.utc)
+    start = datetime(t.year, 1, 1, tzinfo=timezone.utc)
+    end = datetime(t.year + 1, 1, 1, tzinfo=timezone.utc)
+    annual = 2 * math.pi * (t - start).total_seconds() / (end - start).total_seconds()
+    daily = 2 * math.pi * (t.hour + t.minute / 60 + (t.second + t.microsecond / 1e6) / 3600) / 24
+    a, b, c, d = math.sin(annual), math.cos(annual), math.sin(daily), math.cos(daily)
+    return (1., a, b, math.sin(2*annual), math.cos(2*annual), c, d,
+            math.sin(2*daily), math.cos(2*daily), a*c, a*d, b*c, b*d)
+
+
+def design(hour, kind):
+    if kind not in ('S', 'P'):
+        raise ValueError('Only submitted S/P candidates are supported')
+    x = calendar_features(hour.utc)
+    if kind == 'P':
+        if hour.reference.reason != 'finite' or hour.reference.value is None:
+            return None, 'reference_' + hour.reference.reason
+        if not math.isfinite(hour.reference.value):
+            return None, 'reference_nonfinite'
+        x += (hour.reference.value,)
+    return x, None
+
+
+def stable_ols(x, y):
+    &quot;&quot;&quot;Scale columns then solve by SVD; never form X'X or accept deficient rank.&quot;&quot;&quot;
+    x, y = np.asarray(x, dtype=np.float64), np.asarray(y, dtype=np.float64)
+    if x.ndim != 2 or y.shape != (len(x),) or len(x) &lt; 2:
+        raise ValueError('Invalid/insufficient fit dimensions')
+    if not np.isfinite(x).all() or not np.isfinite(y).all():
+        raise ValueError('Nonfinite fit input')
+    norms = np.linalg.norm(x, axis=0)
+    if not np.isfinite(norms).all() or np.any(norms == 0):
+        raise ValueError('Rank deficient or nonfinite column norm')
+    rcond = np.finfo(np.float64).eps * max(x.shape)
+    scaled_beta, _, rank, singular = np.linalg.lstsq(x / norms, y, rcond=rcond)
+    if rank != x.shape[1]:
+        raise ValueError(f'Full column rank required: {rank}/{x.shape[1]}')
+    beta = scaled_beta / norms
+    residual = y - x @ beta
+    centre = float(np.mean(residual))
+    scale = float(np.std(residual, ddof=1))  # A2 says n-1, NOT n-p.
+    if not np.isfinite(beta).all() or not math.isfinite(centre) or not math.isfinite(scale):
+        raise ValueError('Nonfinite fit output')
+    return tuple(float(b) for b in beta), centre, scale, {
+        'rank': int(rank), 'columns': x.shape[1], 'rcond': float(rcond),
+        'singular_values_scaled': singular.tolist(), 'column_norms': norms.tolist(),
+        'scaled_condition_number': float(singular[0] / singular[-1]),
+        'residual_scale_denominator': len(x)-1, 'solver': 'numpy.linalg.lstsq column-scaled SVD'}
+
+
+@dataclass(frozen=True)
+class Model:
+    kind: str
+    variable: str
+    coefficients: tuple[float, ...]
+    centre: float | None
+    scale: float | None
+    status: str
+    reason: str | None
+
+
+def fit(series, kind):
+    require_role(series, 'fit')  # Before looking at numeric inputs.
+    if kind not in ('S', 'P'):
+        raise ValueError('Unknown model')
+    x, y, ids, excluded = [], [], [], Counter()
+    for hour in series.hours:
+        if hour.target.reason != 'finite' or hour.target.value is None:
+            excluded['target_' + hour.target.reason] += 1
+            continue
+        if not math.isfinite(hour.target.value):
+            excluded['target_nonfinite'] += 1
+            continue
+        row, reason = design(hour, kind)
+        if reason:
+            excluded[reason] += 1
+            continue
+        x.append(row); y.append(hour.target.value)
+        ids.append({'source_date': hour.source_day.isoformat(), 'source_hour': hour.source_hour,
+                    'target': hour.target.record_ids,
+                    'reference': hour.reference.record_ids if kind == 'P' else ()})
+    record = {'kind': kind, 'variable': series.variable, 'source_year': 2021,
+              'acceptance_sha256': series.acceptance_sha256, 'raw_sha256': series.raw_sha256,
+              'features': FEATURES + (('schiphol_same_variable',) if kind == 'P' else ()),
+              'fit_rows': ids, 'n': len(y), 'exclusions': dict(excluded)}
+    try:
+        beta, centre, scale, diagnostics = stable_ols(x, y)
+    except (ValueError, np.linalg.LinAlgError, FloatingPointError) as exc:
+        return Model(kind, series.variable, (), None, None, 'fit_failed', str(exc)), record
+    record['diagnostics'] = diagnostics
+    status = 'fitted' if scale &gt; 0 else 'ineligible_scale'
+    return Model(kind, series.variable, beta, centre, scale, status,
+                 None if scale &gt; 0 else 'Residual sample standard deviation must be positive'), record
+
+
+def predict(model, hour):
+    if not model.coefficients:
+        return None, 'model_fit_failed'
+    x, reason = design(hour, model.kind)
+    if reason:
+        return None, reason
+    value = math.fsum(a*b for a, b in zip(x, model.coefficients, strict=True))
+    return (value, None) if math.isfinite(value) else (None, 'nonfinite_prediction')
+
+
+def standardised_residual(model, hour):
+    if model.status != 'fitted' or model.scale is None or model.scale &lt;= 0:
+        return None, 'model_ineligible'
+    if hour.target.reason != 'finite' or hour.target.value is None:
+        return None, 'target_' + hour.target.reason
+    value, reason = predict(model, hour)
+    if reason:
+        return None, reason
+    u = (hour.target.value - value - model.centre) / model.scale
+    return (u, None) if math.isfinite(u) else (None, 'nonfinite_residual')
+
+
+def _summary(errors, expected, scale):
+    n = len(errors)
+    mean = math.fsum(errors) / n if n else None
+    return {'usable': n, 'expected': expected, 'coverage': n/expected if expected else None,
+            'mean_error': mean, 'rmse': math.sqrt(math.fsum(e*e for e in errors)/n) if n else None,
+            'absolute_mean_over_frozen_scale': abs(mean)/scale if n and scale and scale &gt; 0 else None}
+
+
+def assess_gates(series, s, p):
+    &quot;&quot;&quot;2022 only; full independent schedule denominators, source-month grouping.&quot;&quot;&quot;
+    require_role(series, 'development')
+    if s.kind != 'S' or p.kind != 'P' or s.variable != series.variable or p.variable != series.variable:
+        raise ValueError('Wrong candidate or variable')
+    expected = Counter(h.source_day.month for h in series.hours)
+    # Partial fixtures are not mistaken for a scientifically complete 2022 gate year.
+    import calendar
+    if expected != Counter({m: calendar.monthrange(2022, m)[1]*24 for m in range(1,13)}):
+        raise ValueError('A2 gates require all expected 2022 source hours')
+    errors = {'S': {}, 'P': {}}
+    for i, h in enumerate(series.hours):
+        if h.target.reason != 'finite' or h.target.value is None or not math.isfinite(h.target.value):
+            continue
+        for model in (s, p):
+            value, reason = predict(model, h)
+            if reason is None:
+                errors[model.kind][i] = h.target.value - value
+    candidates = {}
+    for model in (s, p):
+        e = errors[model.kind]
+        annual = _summary(list(e.values()), len(series.hours), model.scale)
+        monthly = {str(m): _summary([v for i,v in e.items() if series.hours[i].source_day.month == m],
+                                     expected[m], model.scale) for m in range(1,13)}
+        passed = (model.status == 'fitted' and annual['coverage'] &gt;= .95 and
+                  all(v['coverage'] &gt;= .90 and v['absolute_mean_over_frozen_scale'] is not None and
+                      v['absolute_mean_over_frozen_scale'] &lt;= .5 for v in monthly.values()))
+        candidates[model.kind] = {'annual': annual, 'monthly': monthly, 'own_gates_pass': passed,
+                                  'fit_status': model.status}
+    common = sorted(errors['S'].keys() &amp; errors['P'].keys())
+    def comparison(indices):
+        a = _summary([errors['S'][i] for i in indices], len(indices), None)['rmse']
+        b = _summary([errors['P'][i] for i in indices], len(indices), None)['rmse']
+        return {'n': len(indices), 'S_rmse': a, 'P_rmse': b,
+                'ratio': b/a if a is not None and a &gt; 0 else None}
+    annual = comparison(common)
+    monthly = {str(m): comparison([i for i in common if series.hours[i].source_day.month == m])
+               for m in range(1,13)}
+    improvement = (annual['ratio'] is not None and annual['ratio'] &lt;= .90 and
+                   all(v['ratio'] is not None and v['ratio'] &lt;= 1.10 for v in monthly.values()))
+    # P cannot rescue failure to fit the full-rank S comparator.
+    if not s.coefficients:
+        selected, reason = None, 'full_rank_S_comparator_failed_revision_required'
+    elif candidates['P']['own_gates_pass'] and improvement:
+        selected, reason = 'P', 'all_P_gates_pass'
+    elif candidates['S']['own_gates_pass']:
+        selected, reason = 'S', 'P_ineligible_or_improvement_unestablished'
+    else:
+        selected, reason = None, 'no_eligible_candidate_revision_required'
+    return {'year': 2022, 'variable': series.variable, 'candidates': candidates,
+            'common_sample': {'annual': annual, 'monthly': monthly},
+            'P_comparative_gates_pass': improvement, 'selected': selected, 'reason': reason,
+            'calibration_complete': False, 'scientific_freeze': False}
+
+
+def diagnostics(series, model):
+    &quot;&quot;&quot;Descriptive A2 checks only: no diagnostic can remove a fitting row.&quot;&quot;&quot;
+    residuals, target, predicted = {}, [], []
+    hourly = {str(h): [] for h in range(24)}
+    monthly = {str(m): [] for m in range(1,13)}
+    expected_hourly = Counter(str(h.utc.hour) for h in series.hours)
+    expected_monthly = Counter(str(h.source_day.month) for h in series.hours)
+    unavailable = Counter()
+    for hour in series.hours:
+        if hour.target.reason != 'finite' or hour.target.value is None:
+            unavailable['target_' + hour.target.reason] += 1
+            continue
+        value, reason = predict(model, hour)
+        if reason:
+            unavailable[reason] += 1
+            continue
+        error = hour.target.value-value
+        residuals[hour.utc] = error
+        hourly[str(hour.utc.hour)].append(error)
+        monthly[str(hour.source_day.month)].append(error)
+        target.append(hour.target.value); predicted.append(value)
+    def extrema(values):
+        return {'min': min(values) if values else None, 'max': max(values) if values else None}
+    dependence = {}
+    for lag in (1,6,24,48,168):
+        pairs = [(residuals[t-timedelta(hours=lag)],v) for t,v in residuals.items()
+                 if t-timedelta(hours=lag) in residuals]
+        corr, reason = None, 'insufficient_pairs'
+        if len(pairs) &gt;= 2:
+            a,b = np.asarray(pairs,dtype=float).T
+            a,b = a-a.mean(), b-b.mean()
+            denominator = float(np.linalg.norm(a)*np.linalg.norm(b))
+            reason = 'zero_variance' if denominator == 0 else None
+            if denominator &gt; 0: corr = float(np.dot(a,b)/denominator)
+        dependence[str(lag)] = {'pairs':len(pairs),'correlation':corr,'reason':reason}
+    return {'source_year':series.source_year,'variable':series.variable,'model':model.kind,
+            'unavailable':dict(unavailable),'target_extrema':extrema(target),
+            'prediction_extrema':extrema(predicted),'residual_extrema':extrema(list(residuals.values())),
+            'hourly_UTC':{k:_summary(v,expected_hourly[k],model.scale) for k,v in hourly.items()},
+            'monthly_source_date':{k:_summary(v,expected_monthly[k],model.scale) for k,v in monthly.items()},
+            'actual_hour_lag_dependence':dependence,'cleaning_applied':False,
+            'limits':'Descriptive dependence/representativeness diagnostics; no health or independence certification'}
+</code></pre></div>
+<p class="code-status" role="status" aria-live="polite"></p>
+<noscript><p>The complete default file is shown above. File selection and automatic copying require JavaScript. Select the code manually or download a related file:</p><ul><li><a href="../source/qc-monitor/scientific_models.py" download="scientific_models.py">scientific_models.py</a></li><li><a href="../source/qc-monitor/early_scientific.py" download="early_scientific.py">early_scientific.py</a></li><li><a href="../source/qc-monitor/scientific_stage.py" download="scientific_stage.py">scientific_stage.py</a></li></ul></noscript>
+<p class="small">These complete public source files document the study. Additional inputs are needed to reproduce the full experiment. See the on-site requirements and source-copy scope. The website does not execute Python.</p>
+<div class="review-links"><a href="#python-code">Back to code controls ↑</a><a href="#main">Back to page overview ↑</a></div>
+</section>
+<!-- END GENERATED PYTHON VIEW -->
+<footer><p>Source: KNMI. KNMI did not participate in or necessarily endorse this derived work. Codex-assisted development and writing.</p><p><a href="../demo/verification.html#using-code">Using the Python files</a> · <a href="../references/index.html#attribution">Attribution and use</a></p></footer>
+</main></div></body></html>

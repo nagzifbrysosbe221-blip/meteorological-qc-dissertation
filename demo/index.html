@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Saved results explorer · Dissertation review</title><meta name="description" content="Inspect the recorded outcomes of the completed comparison, filter the saved records, and export the current selection."><link rel="stylesheet" href="../guide/guide.css"><link rel="stylesheet" href="results.css"><link rel="stylesheet" href="filter-help.css"><link rel="stylesheet" href="../assets/python-code.css"><script src="../assets/python-sources.js" defer></script><script src="../assets/python-code.js" defer></script></head>
+<body><a class="skip-link" href="#main">Skip to the review</a><header class="site-header"><a class="brand" href="../index.html">Meteorological quality control<span>Dissertation review companion</span></a><nav aria-label="Website"><a href="../index.html">Home</a></nav></header>
+<div class="layout"><aside class="sidebar"><p class="eyebrow">Study Design and Implementation</p><nav class="guide-chapters" aria-label="Study Design and Implementation"><a href="../guide/index.html">1. Data collection and preparation</a><a href="../guide/four-periods.html">2. Four study periods</a><a href="../guide/fitting-2021.html">3. 2021 — Fitting</a><a href="../guide/selection-2022.html">4. 2022 — Selection</a><a href="../guide/validation-2023.html">5. 2023 — Validation</a><a href="../guide/evaluation-2024.html">6. 2024 — Final evaluation</a></nav><p class="eyebrow">Results and Evidence</p><nav class="guide-chapters" aria-label="Results and Evidence"><a href="index.html" aria-current="page">1. Saved results explorer</a><a href="datasets.html">2. Complete datasets</a><a href="figures.html">3. Figures and timelines</a><a href="missed-example.html">4. Understanding a missed case</a><a href="verification.html">5. Validation and verification</a></nav><p class="eyebrow">Dissertation References</p><nav class="guide-chapters" aria-label="Dissertation References"><a href="../references/index.html">All 30 references</a></nav><p class="eyebrow">On this page</p><nav aria-label="On this page"><a href="#findings">Findings and scope</a><a href="#inspect">Inspect saved results</a><a href="#python-code">Complete Python code</a></nav><div class="sidebar-note">Saved study evidence<p>These pages display completed findings. Humidity remains exploratory, and the background is assumed normal.</p></div></aside>
+<main id="main"><div class="page-intro"><p class="eyebrow">Results and Evidence</p><h1>Saved results explorer</h1><p class="code-jump"><a href="#python-code">Read, copy or download the complete Python code ↓</a></p><p class="lead">Inspect the recorded outcomes of the completed comparison, filter the saved records, and export the current selection.</p></div>
+<section id="findings"><h2>Completed findings and their scope</h2><div class="research-brief"><h3>How to interpret the comparison</h3><p>B0 supplies the basic missing-data and range checks. R adds timestamp and duplicate-receipt integrity rules. H adds residual EWMA monitoring to R. Comparing H with B0 addresses the main research question; comparing R with B0 and H with R helps explain what each addition contributed.</p><p>For example, the primary temperature gradual-bias result of 95/216 means 95 detected roots out of 216 constructed cases, with 121 evaluated misses. The separate background result of 22/8,557 concerns false-positive value hours among eligible background negatives. These counts answer different questions and must not share a denominator.</p></div><p>Saved findings from a completed comparison of threshold checks (B0), added integrity rules (R) and residual monitoring (H). This compact assessment copy reads fixed results. It does not run a detector or accept live observations.</p>
+<p class="outcome"><strong>Scope and limitations.</strong> Temperature was originally A2-eligible. Humidity is exploratory under researcher-approved R1: its original eligibility failure and negative 2023 validation remain. Background is assumed normal, not certified healthy. Event construction is not detection; null means undefined or unavailable, not zero. Final-period exposure is complete.</p>
+<p>All 3,748 jobs completed: four backgrounds and 3,744 effective case constructions. H detected 95/216 primary T gradual-bias roots, retaining 121 evaluated misses; its background value false positives were 22/8,557. Exploratory U: 154/216 hits, 62 evaluated misses and 38/8,557 false positives. No operational acceptability threshold or independent human review is claimed.</p>
+<p class="small"><a href="verification.html#using-code">Using the Python files</a> · <a href="verification.html#full-study-reproduction">Reproduction scope</a> · <a href="../references/index.html#attribution">Attribution</a></p>
+</section><section id="inspect"><h2>Inspect saved results</h2>
+<p>Viewer scope: annual family, background and paired summaries for all passes; monthly gradual-bias descriptions; primary affected-task exact-variant points; and fixed-selected root, diagnostic and recovery examples. Every row shown is a complete canonical record. The twelve downloads on the <a href="datasets.html">Complete datasets page</a> contain every table row, including omitted viewer strata and unfavourable findings.</p>
+<p class="filter-instruction">Hover over a filter or an option to see what it means. Use arrow keys to explore and Enter to choose; Escape closes the help or list.</p>
+<div class="filter-controls"><label>Table <select id="table" aria-label="Table"></select></label><label>Pass <select id="pass" aria-label="Pass"></select></label><label>Variable <select id="variable" aria-label="Variable"></select></label><label>Family <select id="family" aria-label="Family"></select></label><label>Configuration <select id="configuration" aria-label="Configuration"></select></label></div>
+<p id="count" aria-live="polite"></p><p><button id="json">Export filtered JSON</button><button id="csv">Export filtered CSV</button></p>
+<p class="small" id="record-hint">Select a record ID in the first column to open its complete details.</p>
+<div class="table-scroll results-table" tabindex="0" role="region" aria-label="Filtered saved results" aria-describedby="record-hint"><table><caption class="visually-hidden">Complete saved records for the selected filters</caption><thead id="head"></thead><tbody id="body"></tbody></table></div><p id="limit"></p>
+<dialog id="record-dialog" class="record-dialog" aria-labelledby="record-title" aria-describedby="record-id"><div class="record-dialog-header"><div><h2 id="record-title">Complete record</h2><p id="record-id"></p></div><button type="button" id="record-close" autofocus>Close</button></div><div class="record-dialog-content" tabindex="0" role="region" aria-label="Complete record contents"><pre id="record"></pre></div></dialog>
+<noscript><p>The interactive table requires JavaScript. The <a href="datasets.html">complete datasets</a> and <a href="figures.html">figures</a> remain available on their own pages.</p></noscript></section><div class="review-links"><a href="datasets.html">Next: Complete datasets →</a></div><!-- BEGIN GENERATED PYTHON VIEW -->
+<section id="python-code" class="python-section" data-python-view data-default-file="source/result-analysis/metrics.py" data-preferred="[&quot;source/result-analysis/metrics.py&quot;,&quot;source/qc-monitor/evaluator.py&quot;,&quot;source/result-analysis/extract.py&quot;,&quot;source/result-analysis/analyze.py&quot;]">
+<p class="section-label">Complete Python code</p><h2>Evaluation and interpretation</h2>
+<p class="code-intro">The website filters saved results. The Python below shows how the original evaluation and subsequent analysis calculated the quantities being inspected.</p>
+<p class="small">The selected file is displayed in full below. Choose another file to read its complete code. Imports may require related files, configuration and saved inputs. <a href="../demo/verification.html#scientific-and-reporting-environments">Environment requirements</a> · <a href="../demo/verification.html#full-study-reproduction">Full-study prerequisites</a>.</p>
+<label class="code-picker" hidden for="python-file">Python file<select id="python-file"></select></label>
+<p class="code-file-description">Combines saved counts and computes ratios and paired descriptions for the specified cohorts. It does not refit or rerun a detector.</p>
+<p class="code-file-path">source/result-analysis/metrics.py · 145 lines · Complete file</p>
+<div class="code-shell"><div class="code-toolbar"><button type="button" data-copy-code disabled>Copy code</button><a data-download-code href="../source/result-analysis/metrics.py" download="metrics.py">Download .py</a><label class="code-wrap" hidden><input type="checkbox" data-wrap-code checked>Wrap long lines</label></div>
+<pre class="code-display" tabindex="0" role="region" aria-label="Complete Python code: source/result-analysis/metrics.py"><code>&quot;&quot;&quot;Transparent count aggregation only. No detector, label changes or significance tests.&quot;&quot;&quot;
+from collections import Counter, defaultdict
+from evidence import require, identity, MONTHS, CONFIGS
+
+
+def ratio(n, d, reason='zero_denominator'):
+    require(d &gt;= 0, 'Negative denominator')
+    return dict(numerator=n, denominator=d, value=n/d if d else None, reason=None if d else reason)
+
+
+def counts(c):
+    require(all(type(c[k]) is int and c[k] &gt;= 0 for k in ('TP','FP','FN','TN')), 'Invalid counts')
+    tp, fp, fn, tn = (c[k] for k in ('TP','FP','FN','TN'))
+    return dict(TP=tp, FP=fp, FN=fn, TN=tn, n=tp+fp+fn+tn,
+                precision=ratio(tp,tp+fp,'no_predicted_positives'), recall=ratio(tp,tp+fn,'no_truth_positives'),
+                fpr=ratio(fp,fp+tn,'no_truth_negatives'))
+
+
+def quantile(values, p):
+    a = sorted(v for v in values if v is not None)
+    if not a: return None
+    h = (len(a)-1)*p; lo = int(h)
+    return a[lo]+(h-lo)*(a[min(lo+1,len(a)-1)]-a[lo])
+
+
+def distribution(values):
+    a = [v for v in values if v is not None]
+    q1, q3 = quantile(a,.25), quantile(a,.75)
+    return dict(defined=len(a), undefined=len(values)-len(a), median=quantile(a,.5), q1=q1, q3=q3,
+                iqr=q3-q1 if a else None, minimum=min(a) if a else None, maximum=max(a) if a else None)
+
+
+def describe_months(rows):
+    require(len({r['month'] for r in rows}) == len(rows), 'Duplicate monthly contribution')
+    require(set(r['month'] for r in rows) &lt;= set(MONTHS), 'Unknown source month')
+    index = {r['month']: r for r in rows}
+    complete = [dict(month=m, numerator=index.get(m,{}).get('numerator',0),
+                     denominator=index.get(m,{}).get('denominator',0)) for m in MONTHS]
+    values = [ratio(r['numerator'],r['denominator'])['value'] for r in complete]
+    leave = [dict(omitted_month=m, **ratio(sum(r['numerator'] for r in complete if r['month']!=m),
+                        sum(r['denominator'] for r in complete if r['month']!=m),'no_remaining_denominator')) for m in MONTHS]
+    defined = [r['value'] for r in leave if r['value'] is not None]
+    return dict(monthly_contributions=complete, **distribution(values), leave_one_month_out=leave,
+                leave_out_range=[min(defined),max(defined)] if defined else None)
+
+
+def compact_points(points, source, root=None):
+    output=[]
+    for i,p in enumerate(points):
+        require(len(p['own_ids']) == len(set(p['own_ids'])) and len(p['common_ids']) == len(set(p['common_ids'])), 'Duplicate cohort ID')
+        require(set(p['common_ids']) &lt;= set(p['own_ids']), 'Common outside own cohort')
+        for cohort in ('own','common'):
+            c = counts(p[cohort]); require(c == p[cohort], 'Saved ratio/count mismatch')
+            require(c['n'] == len(p[cohort+'_ids']), 'Cohort length mismatch')
+            cov = p[cohort+'_coverage']; require(cov['numerator'] == c['n'], 'Coverage differs')
+            require(cov == ratio(cov['numerator'],cov['denominator'],'no_scored_subjects'), 'Coverage arithmetic mismatch')
+            excluded = Counter(); outside=Counter()
+            for reasons in p['exclusions'].values():
+                (outside if 'outside_point_scope' in reasons else excluded).update(reasons)
+            primary = True if root is None else (
+                p['task']=='value' and root['family'] in ('out_of_range','gradual_bias') and p['variable']==root['variable'] or
+                p['task']=='availability' and root['family'] in ('missing_cell','absent_row') and root.get('variable') in (None,p['variable']) or
+                p['task']=={'duplicate_receipt':'Q06','off_grid_timestamp':'Q05','invalid_timestamp':'Q04'}.get(root['family']))
+            output.append(dict(task=p['task'], variable=p['variable'], configuration=p['configuration'],
+                cohort=cohort,status=p['status'],primary_task=primary, **c, coverage=cov,
+                scored_subjects=cov['denominator'], excluded_scored=cov['denominator']-c['n'],
+                own_exclusion_reasons=dict(excluded), context_exclusion_reasons=dict(outside),
+                natural_structural_count=len(p['natural_structural']), cohort_ids_sha256=identity(p[cohort+'_ids']),
+                source_member=source, source_row=i))
+    for task,var in {(p['task'],p['variable']) for p in points}:
+        items=[p for p in points if (p['task'],p['variable'])==(task,var) and p['status']=='applicable']
+        require(len({identity(p['common_ids']) for p in items})==1, 'Unmatched common cohort')
+        require(set(items[0]['common_ids'])==set.intersection(*(set(p['own_ids']) for p in items)), 'Common cohort is not exact own intersection')
+    return output
+
+
+def pool_points(rows):
+    keys=('pass','family','scenario_variable','support','variant','side','task','variable','configuration','cohort','status','primary_task')
+    groups=defaultdict(list)
+    for r in rows: groups[tuple(r[k] for k in keys)].append(r)
+    result=[]
+    for key,items in sorted(groups.items(),key=str):
+        c=counts({k:sum(r[k] for r in items) for k in ('TP','FP','FN','TN')})
+        n=sum(r['scored_subjects'] for r in items)
+        result.append(dict(zip(keys,key)) | dict(period='annual', **c, coverage=ratio(c['n'],n,'no_scored_subjects'),
+            scored_subjects=n, excluded_scored=n-c['n'], contributions=[r['row_id'] for r in items],
+            source_months=sorted({r['month'] for r in items})))
+    return result
+
+
+def root_summary(items):
+    require(len({(r['pass'],r['family'],r['variable'],r['support']) for r in items})&lt;=1,'Cross-family/variable/support pooling')
+    paired=[r for r in items if r['paired']]; n=len(paired); effective=sum(r['construction']=='effective' for r in items)
+    result=[]
+    for cfg in CONFIGS:
+        cc=Counter(r['configurations'][cfg]['category'] for r in paired)
+        hit=cc['hit']; opportunity=hit+cc['evaluated_miss']
+        cfgs=[r['configurations'][cfg] for r in paired]
+        result.append(dict(configuration=cfg,planned=len(items),effective=effective,paired=n,
+            construction_counts={s:sum(r['construction']==s for r in items) for s in ('pending','blocked','generation_error','no_effect','effective')}, missing_or_failed_pairs=effective-n,
+            construction_coverage=ratio(effective,len(items)),completion=ratio(n,effective),
+            **{k:cc[k] for k in ('hit','evaluated_miss','unavailable_miss','absent_capability_miss')},
+            detection=ratio(hit,n,'no_valid_pairs'),opportunity_coverage=ratio(opportunity,n,'no_valid_pairs'),
+            conditional_detection=ratio(hit,opportunity,'no_evaluated_opportunities'),workflow_yield=ratio(hit,len(items)),
+            full_required_coverage=ratio(sum(c['full_required_coverage']['numerator'] for c in cfgs),
+                                        sum(c['full_required_coverage']['denominator'] for c in cfgs)),
+            statistical_opportunities=sum(c['statistical_opportunities'] for c in cfgs),
+            first_credit_routes=dict(Counter(c['first_credit_route'] for c in cfgs if c['category']=='hit')),
+            ongoing_hits=sum(c.get('ongoing_at_first_effect',False) for c in cfgs),
+            contributions=[r['job_id'] for r in items]))
+    return result
+
+
+def contrasts(items):
+    require(len({(r['pass'],r['family'],r['variable'],r['support']) for r in items})&lt;=1,'Unmatched contrast stratum')
+    paired=[r for r in items if r['paired']]; result=[]
+    for a,b in [('H','B0'),('R','B0'),('H','R')]:
+        both=[]; first=[]; second=[]; neither=[]
+        for r in paired:
+            x,y=r['configurations'][a],r['configurations'][b]
+            ah,bh=x['category']=='hit',y['category']=='hit'
+            if ah and bh:
+                require(x['delay_seconds'] is not None and y['delay_seconds'] is not None,'Missing hit delay')
+                both.append(dict(job_id=r['job_id'],case_id=r['case_id'], first_delay_seconds=x['delay_seconds'],
+                    second_delay_seconds=y['delay_seconds'], difference_seconds=x['delay_seconds']-y['delay_seconds']))
+            else: (first if ah else second if bh else neither).append(r['job_id'])
+        result.append(dict(comparison=a+'-'+b, primary=a+'-'+b=='H-B0', paired=len(paired),
+            detection_difference=ratio(len(first)-len(second),len(paired),'no_valid_pairs'),common_hits=both,
+            common_hit_delay=distribution([r['difference_seconds'] for r in both]),first_only=first,second_only=second,neither=neither,
+            contributions=[r['job_id'] for r in items]))
+    return result
+
+
+def select_timelines(roots):
+    selected=[]
+    for pass_id,family in sorted({(r['pass'],r['family']) for r in roots}):
+        items=sorted((r for r in roots if r['pass']==pass_id and r['family']==family and r['construction']=='effective'),key=lambda r:r['case_id'])
+        if not items:
+            selected.append(dict(**{'pass':pass_id},family=family,status='no_effective_case'));continue
+        missed=next((r for r in items if r['paired'] and any(c['category']!='hit' for c in r['configurations'].values())),None)
+        for r in items[:1]+([missed] if missed and missed!=items[0] else []):
+            selected.append(dict(**{'pass':pass_id},family=family,status='selected',job_id=r['job_id'],case_id=r['case_id'],
+                reason='first_effective_and_first_miss' if r==items[0] and r==missed else
+                       'first_effective' if r==items[0] else 'first_missed_by_any_configuration'))
+    return selected
+</code></pre></div>
+<p class="code-status" role="status" aria-live="polite"></p>
+<noscript><p>The complete default file is shown above. File selection and automatic copying require JavaScript. Select the code manually or download a related file:</p><ul><li><a href="../source/result-analysis/metrics.py" download="metrics.py">metrics.py</a></li><li><a href="../source/qc-monitor/evaluator.py" download="evaluator.py">evaluator.py</a></li><li><a href="../source/result-analysis/extract.py" download="extract.py">extract.py</a></li><li><a href="../source/result-analysis/analyze.py" download="analyze.py">analyze.py</a></li></ul></noscript>
+<p class="small">These complete public source files document the study. Additional inputs are needed to reproduce the full experiment. See the on-site requirements and source-copy scope. The website does not execute Python.</p>
+<div class="review-links"><a href="#python-code">Back to code controls ↑</a><a href="#main">Back to page overview ↑</a></div>
+</section>
+<!-- END GENERATED PYTHON VIEW -->
+<footer><p>Source: KNMI. KNMI did not participate in or necessarily endorse this derived work. Codex-assisted development and writing.</p><p><a href="../demo/verification.html#using-code">Using the Python files</a> · <a href="../references/index.html#attribution">Attribution and use</a></p></footer></main></div><script src="data.js"></script><script src="viewer.js"></script><script src="filter-help.js"></script></body></html>

@@ -1,0 +1,12 @@
+{
+  "protocol": "submitted-v2-data-foundation-1",
+  "submitted_sha256": "b759751cf3f59dac0622fb11ce9b03a178c6a98b78e4b7a20007a8ecaff674f2",
+  "target_station": 260,
+  "reference_station": 240,
+  "variables": ["T", "U"],
+  "early_years": {"fit": 2021, "development": 2022, "validation": 2023},
+  "final_source_start": "2024-01-02",
+  "final_source_end": "2024-12-31",
+  "final_access_enabled": false,
+  "source_url": "https://www.daggegevens.knmi.nl/klimatologie/uurgegevens"
+}

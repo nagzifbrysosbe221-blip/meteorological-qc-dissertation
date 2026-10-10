@@ -1,0 +1,22 @@
+.filter-controls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:22px -6px 12px;align-items:start}
+.filter-control{position:relative;min-width:0;padding:6px}
+.filter-label{display:block;font-size:14px;font-weight:650;color:#344857;margin:0 0 7px}
+.filter-button{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:46px;box-sizing:border-box;padding:10px 12px;border:1px solid #9daeb9;border-radius:7px;background:#fff;cursor:pointer;line-height:1.35;font-size:15px;color:#17212b}
+.filter-button>span:first-child{overflow-wrap:anywhere}
+.filter-button:hover{border-color:#135c87;background:#f4f9fc}
+.filter-button:focus-visible{outline:3px solid #2681b3;outline-offset:3px}
+.filter-button[aria-expanded=true]{border-color:#135c87;background:#f0f7fb}
+.filter-chevron{font-size:20px;color:#526e80;flex-shrink:0;line-height:1}
+.filter-menu{position:absolute;left:6px;right:6px;top:100%;z-index:30;max-height:290px;max-height:min(290px,45vh);overflow:auto;padding:5px;border:1px solid #9daeb9;border-radius:8px;background:#fff;box-shadow:0 10px 28px #162e4326}
+.filter-menu[hidden],.filter-tooltip[hidden],.filter-control select[hidden]{display:none!important}
+.filter-option{padding:10px 12px;border-radius:4px;font-size:15px;line-height:1.4;cursor:pointer;overflow-wrap:anywhere;border-left:3px solid transparent}
+.filter-option[aria-selected=true]{font-weight:650;border-left-color:#135c87}
+.filter-option.is-active{background:#e6f1f8;color:#123d57}
+.filter-tooltip{position:fixed;z-index:40;box-sizing:border-box;max-width:calc(100vw - 24px);padding:16px 18px;border:1px solid #b7cbd8;border-radius:9px;background:#f7fbfe;color:#183345;box-shadow:0 8px 26px #18334526;font-size:14px;line-height:1.6;overflow-wrap:anywhere;max-height:calc(100vh - 24px);overflow:auto}
+.filter-tooltip strong{display:block;font-size:15px;color:#102b3c}
+.filter-tooltip p{margin:6px 0 0}
+.filter-instruction{color:#52606b;font-size:14px;margin-bottom:4px}
+@media(max-width:960px){.filter-controls{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:640px){.filter-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.filter-controls .filter-control:first-child{grid-column:1/-1}.filter-tooltip{font-size:13px;padding:12px 14px}}
+@media(prefers-reduced-motion:reduce){.filter-controls *{scroll-behavior:auto}}
+@media(forced-colors:active){.filter-option.is-active{outline:2px solid Highlight}.filter-option[aria-selected=true]{border-left:3px solid Highlight}.filter-tooltip{border:1px solid CanvasText}}

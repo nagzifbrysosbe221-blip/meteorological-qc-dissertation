@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "scope": "Streaming table/export equality and figure-file inventory; not live browser QA",
+  "tables": [
+    {
+      "table": "construction",
+      "rows": 3744,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "background_points",
+      "rows": 2184,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "background_burden",
+      "rows": 1560,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "point_monthly",
+      "rows": 314496,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "point_annual",
+      "rows": 26208,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "roots",
+      "rows": 11232,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "root_summary",
+      "rows": 1560,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "contrasts",
+      "rows": 1560,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "diagnostics",
+      "rows": 11232,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "recovery",
+      "rows": 89856,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "monthly_description",
+      "rows": 9048,
+      "json_jsonl_csv_browser_equal": true
+    },
+    {
+      "table": "sensitivity",
+      "rows": 8424,
+      "json_jsonl_csv_browser_equal": true
+    }
+  ],
+  "figures": 52,
+  "display_groups": 6
+}

@@ -1,0 +1,51 @@
+{
+  "selection": {
+    "pass": "alpha-0005",
+    "family": "duplicate_receipt",
+    "status": "selected",
+    "job_id": "alpha-0005-final-2024-01-0e30a042c32120259ee1af0c",
+    "case_id": "final-2024-01-0e30a042c32120259ee1af0c",
+    "reason": "first_effective_and_first_miss"
+  },
+  "root": {
+    "family": "duplicate_receipt",
+    "length_hours": 1,
+    "copies": 1,
+    "variable": null,
+    "variant": "{\"copies\":1,\"family\":\"duplicate_receipt\",\"length_hours\":1}",
+    "case_id": "final-2024-01-0e30a042c32120259ee1af0c",
+    "source_month": "2024-01",
+    "planned_onset": "2024-01-08T01:00:00+00:00",
+    "root_id": "root:final-2024-01-0e30a042c32120259ee1af0c",
+    "construction": "effective",
+    "N": 1,
+    "C": 1,
+    "Z": 0,
+    "U": 0,
+    "support": "full",
+    "reason": null,
+    "accounting_assessed": true,
+    "unassessed_units": 0,
+    "planned_end": "2024-01-08T01:00:00+00:00",
+    "restoration_at": "2024-01-08T02:00:00+00:00",
+    "first_effect": "2024-01-08T01:00:00+00:00",
+    "last_effect": "2024-01-08T01:00:00+00:00",
+    "members": [
+      [
+        "Q06",
+        "82ae46bbde0b27370587e41d"
+      ]
+    ],
+    "actual_change_mask": [
+      "2024-01-08T01:00:00+00:00"
+    ],
+    "added_identities": [
+      "82ae46bbde0b27370587e41d"
+    ],
+    "deleted_identities": [],
+    "consequences": [],
+    "range_crossing": false
+  },
+  "sources": "timelines/alpha-0005-final-2024-01-0e30a042c32120259ee1af0c",
+  "all_configurations_same_case": true
+}

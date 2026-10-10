@@ -1,0 +1,37 @@
+{
+  "scope": "Scientific summary for the website; not the complete execution freeze.",
+  "original_freeze_sha256": "25b9671a335b1f006e82c179024b5058457c1da7eca34be033a978aa874d2558",
+  "version": "final-scientific-freeze-v1",
+  "state": "frozen",
+  "actual_scientific_freeze": true,
+  "recorded_utc": "2026-10-08T08:17:13.074195+00:00",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "numpy": "2.3.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1"
+    }
+  },
+  "labels": {
+    "T_original_A2_eligible": true,
+    "U_original_A2_eligible": false,
+    "U_exploratory": true,
+    "revision": "R1-approved-v1",
+    "validation_original_state": "diagnosis_required",
+    "validation_disposition": "negative_U_retained_unchanged",
+    "normal_truth": "assumed_normal_not_certified",
+    "independent_human_review": false,
+    "newly_untouched_holdout": false
+  },
+  "final_observation_performance_opened": false,
+  "limitations": [
+    "incomplete station histories",
+    "assumed normal, not certified healthy",
+    "prior public-summary exposure"
+  ],
+  "manual_processing_only": true,
+  "design_sha256": "78d549da9512a51953030f885875517a9565e4d230979c7bc1d5e8e4c0830ba6",
+  "settings_sha256": "8d0f09b55586b96c20e2516c09a087b2de453150df13a65b4270a99287411c19"
+}

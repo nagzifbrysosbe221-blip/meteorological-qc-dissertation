@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Review the dissertation's 2023 validation: unchanged settings, annual and monthly flag rates, humidity diagnosis and the negative finding retained for final evaluation."><title>2023 — Validation · Dissertation review</title><link rel="stylesheet" href="guide.css"><link rel="stylesheet" href="../assets/python-code.css"><script src="../assets/python-sources.js" defer></script><script src="../assets/python-code.js" defer></script></head>
+<body>
+<a class="skip-link" href="#main">Skip to the review</a>
+<header class="site-header"><a class="brand" href="../index.html">Meteorological quality control<span>Dissertation review companion</span></a><nav aria-label="Website"><a href="../index.html">Home</a></nav></header>
+<div class="layout">
+<aside class="sidebar"><p class="eyebrow">Study Design and Implementation</p><nav class="guide-chapters" aria-label="Study Design and Implementation"><a href="index.html">1. Data collection and preparation</a><a href="four-periods.html">2. Four study periods</a><a href="fitting-2021.html">3. 2021 — Fitting</a><a href="selection-2022.html">4. 2022 — Selection</a><a href="validation-2023.html" aria-current="page">5. 2023 — Validation</a><a href="evaluation-2024.html">6. 2024 — Final evaluation</a></nav><p class="eyebrow">Results and Evidence</p><nav class="guide-chapters" aria-label="Results and Evidence"><a href="../demo/index.html">1. Saved results explorer</a><a href="../demo/datasets.html">2. Complete datasets</a><a href="../demo/figures.html">3. Figures and timelines</a><a href="../demo/missed-example.html">4. Understanding a missed case</a><a href="../demo/verification.html">5. Validation and verification</a></nav><p class="eyebrow">Dissertation References</p><nav class="guide-chapters" aria-label="Dissertation References"><a href="../references/index.html">All 30 references</a></nav><p class="eyebrow">On this page</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#workflow">Practical sequence</a><a href="#settings">Settings and starting context</a><a href="#checks">What validation measured</a><a href="#results">Annual and monthly results</a><a href="#diagnosis">Understanding the humidity result</a><a href="#carry-forward">Decision and handover</a><a href="#evidence">Supporting evidence</a><a href="#python-code">Complete Python code</a></nav><div class="sidebar-note">Related dissertation sections<br><strong>3.4, 4.2, Appendix A3 and E1</strong><p>Period 3 of 4: examine how the selected settings behaved on another year.</p></div></aside>
+<main id="main">
+<div id="overview" class="page-intro"><p class="eyebrow">Period 3 of 4 / Validation of unchanged settings</p><h1>2023 — Validation</h1><p class="code-jump"><a href="#python-code">Read, copy or download the complete Python code ↓</a></p><p class="lead">The selected models and monitoring settings were applied to the 2023 observations. This period checked how often the statistical monitor raised a flag on the assumed-normal background, both across the year and within each month.</p><p class="outcome"><strong>Recorded outcome.</strong> Temperature stayed within the declared diagnostic limits: <strong>28 flagged hours out of 8,760 (0.3196%)</strong>. Humidity exceeded the annual limit with <strong>107 out of 8,760 (1.2215%)</strong>, and the June limit with <strong>31 out of 720 (4.3056%)</strong>. The humidity finding was investigated, disclosed and retained for final testing with unchanged settings.</p><div class="review-links"><a href="#results">Review the full results</a><a href="#diagnosis">Understand the humidity finding</a><a href="validation-2023-evidence.json">Open the evidence summary</a></div><p class="small">The 2023 observations had already been examined. This was validation on previously exposed data, not an untouched holdout. The saved run and review are dated October 2026.</p></div>
+
+<section id="workflow"><p class="section-label">1 / Practical sequence</p><h2>What happened during this period</h2><ol class="workflow">
+<li><strong>Loaded the saved decisions.</strong> The 2021 P prediction models, their residual centres and scales, and the 2022-selected weights and thresholds were retained. Humidity kept its exploratory R1 status.</li>
+<li><strong>Initialised the monitor using earlier observations.</strong> Fourteen source days from December 2022 supplied starting context before the 2023 observations were counted.</li>
+<li><strong>Replayed 2023 in time order.</strong> At each hour, the model predicted De Bilt using calendar information and the same-hour Schiphol reading. The observed-minus-predicted error was standardised using the saved 2021 centre and scale, then fed into the running statistical monitor.</li>
+<li><strong>Counted ready hours and flags.</strong> Annual and monthly rates were calculated from the hours when the statistical check could be evaluated. No artificial faults were introduced in this validation replay.</li>
+<li><strong>Reviewed the elevated humidity rates.</strong> A saved-state audit checked the calculations. A descriptive investigation examined the direction, persistence and seasonal concentration of the flags.</li>
+<li><strong>Recorded the decision for final testing.</strong> The negative humidity finding was kept under the existing method provision. No new model, weight or threshold was selected in response to 2023.</li>
+</ol><p class="source-note">Sources: <a href="../source/qc-monitor/r1-validation-protocol.json">validation protocol</a>, <a href="../source/qc-monitor/r1_validation.py">preserved implementation</a> and <a href="validation-2023-evidence.json">saved results and review summary</a>. Dissertation: Section 3.4 and Appendix A3.</p></section>
+
+<section id="settings"><p class="section-label">2 / Inputs and fixed settings</p><h2>What was brought forward from 2022</h2><div class="table-scroll" tabindex="0" role="region" aria-label="Settings used for 2023 validation"><table><thead><tr><th scope="col">Component</th><th scope="col">Temperature</th><th scope="col">Humidity</th></tr></thead><tbody>
+<tr><th scope="row">Prediction model</th><td>Unchanged 2021 P model</td><td>Unchanged 2021 P model</td></tr>
+<tr><th scope="row">Original model eligibility</th><td>Passed in 2022</td><td>Failed in 2022; exploratory under R1</td></tr>
+<tr><th scope="row">Monitoring weight</th><td>0.20</td><td>0.20</td></tr>
+<tr><th scope="row">Primary statistical threshold</th><td>2.4816976238219928</td><td>2.057779719375828</td></tr>
+<tr><th scope="row">2021 error centre and scale</th><td>Retained unchanged</td><td>Retained unchanged</td></tr>
+</tbody></table></div><p>The prediction model provided an expected value; the running monitor tracked departures from it. New observations updated that running value. They did not relearn the prediction formula or alarm threshold.</p>
+<h3>Starting context and counted observations</h3><p>Source dates <strong>18–31 December 2022 supplied 336 unscored hours</strong>, beginning with the monitoring state at zero. Source dates <strong>1 January–31 December 2023 supplied 8,760 counted hours</strong> per variable. Each saved history therefore contained 9,096 hourly updates.</p><details><summary>Readiness, gaps and year boundaries</summary><div class="details-body"><p>The first ready state required 228 valid updates. The earlier context allowed the monitor to be ready at the start of 2023. All expected 2023 hours were ready, with no unavailable inputs in the counted period.</p><p>The declared rule held the state through six unavailable hours and reset it on the seventh. There was no monthly reset or switch to S when a reference was unavailable. These rules describe the procedure; they do not imply that such gaps occurred in this replay.</p><p>Year and month membership followed the original source date. A record labelled 31 December 2023, hour 24, stayed in the 2023 count even though its displayed UTC timestamp was 1 January 2024 at midnight. It was not a source-year 2024 validation observation.</p></div></details><p class="source-note">Sources: <a href="selection-2022.html#carry-forward">2022 selected settings</a>, <a href="../source/qc-monitor/r1-validation-protocol.json">context and state rules</a> and <a href="validation-2023-evidence.json">saved audit counts</a>.</p></section>
+
+<section id="checks"><p class="section-label">3 / Measurement and decision rules</p><h2>What counted as a validation flag?</h2><p><strong>Validation question.</strong> Do the transferred settings produce the expected background behaviour in another year? A recorded excess is evidence to interpret, not a reason to erase flags or silently change the settings. This stage examines the statistical monitor; the final comparison later evaluates the full configurations and their task-specific scoring rules.</p><p>A statistical flag occurred when the magnitude of the ready running monitoring value was <strong>strictly greater than its saved threshold</strong>. Equality did not flag. The validation rate was:</p><p class="outcome"><strong>Flagged ready hours ÷ all ready, eligible assumed-normal hours × 100.</strong><br>Each hour was counted separately. Consecutive flagged hours were not collapsed into a single incident.</p><p>The method then compared these rates with two diagnostic limits:</p><div class="table-scroll" tabindex="0" role="region" aria-label="2023 diagnostic limits"><table><thead><tr><th scope="col">Check</th><th scope="col">When investigation was required</th><th scope="col">Practical meaning</th></tr></thead><tbody>
+<tr><th scope="row">Annual rate</th><td>Strictly above 1%</td><td>Too many statistical flags over the whole year under the declared diagnostic rule.</td></tr>
+<tr><th scope="row">Monthly rate</th><td>Strictly above 3% in any month</td><td>A seasonal concentration of flags could require investigation even if the annual rate was low.</td></tr>
+<tr><th scope="row">Missing exposure</th><td>No ready hours for an annual or monthly rate</td><td>The rate would be unavailable, not zero, and would require explicit diagnosis. This did not occur.</td></tr>
+</tbody></table></div><p>The limits applied separately to each variable; equality with 1% or 3% did not trigger diagnosis. These percentages are limits on the <em>frequency of flags</em>. They are different from the numerical thresholds on the running monitoring value in the settings table.</p><p><strong>Scope of the result.</strong> The saved records call this the statistical-stream false-positive rate (S01). The background was assumed normal, rather than certified healthy. The counts therefore describe flags under that assumption. They are not confirmed physical sensor faults, the combined hybrid H rate, or final-period detection performance.</p><p class="source-note">Sources: <a href="../source/qc-monitor/r1-validation-protocol.json">declared diagnosis rule</a> and <a href="../source/qc-monitor/r1_validation.py">rate and diagnosis implementation</a>. Dissertation: Appendix A3.</p></section>
+
+<section id="results"><p class="section-label">4 / Recorded validation results</p><h2>Annual and monthly results</h2><div class="table-scroll" tabindex="0" role="region" aria-label="Annual 2023 validation outcomes"><table><thead><tr><th scope="col">Variable</th><th scope="col">Flagged / ready hours</th><th scope="col">Annual rate</th><th scope="col">Recorded outcome</th></tr></thead><tbody>
+<tr><th scope="row">Temperature</th><td>28 / 8,760</td><td>0.3196%</td><td>Within the annual 1% limit and every monthly 3% limit.</td></tr>
+<tr><th scope="row">Humidity<br><span class="cell-note">Exploratory</span></th><td>107 / 8,760</td><td>1.2215%</td><td>Above the annual limit; June also exceeded the monthly limit. Diagnosis required.</td></tr>
+</tbody></table></div><p>Both variables had <strong>100% annual and monthly readiness</strong>. The humidity rate was not inflated by missing ready hours or a reduced denominator.</p><h3>All twelve months</h3><div class="table-scroll wide-table" tabindex="0" role="region" aria-label="Monthly 2023 validation results"><table><thead><tr><th scope="col">Source month</th><th scope="col">Ready hours<br>per variable</th><th scope="col">T flagged hours</th><th scope="col">T rate</th><th scope="col">Humidity flagged hours</th><th scope="col">Humidity rate<br>(exploratory)</th><th scope="col">Monthly check</th></tr></thead><tbody>
+<tr><th scope="row">January</th><td>744</td><td>0</td><td>0.0000%</td><td>3</td><td>0.4032%</td><td>Both within 3%</td></tr>
+<tr><th scope="row">February</th><td>672</td><td>4</td><td>0.5952%</td><td>16</td><td>2.3810%</td><td>Both within 3%</td></tr>
+<tr><th scope="row">March</th><td>744</td><td>0</td><td>0.0000%</td><td>16</td><td>2.1505%</td><td>Both within 3%</td></tr>
+<tr><th scope="row">April</th><td>720</td><td>0</td><td>0.0000%</td><td>8</td><td>1.1111%</td><td>Both within 3%</td></tr>
+<tr><th scope="row">May</th><td>744</td><td>2</td><td>0.2688%</td><td>12</td><td>1.6129%</td><td>Both within 3%</td></tr>
+<tr><th scope="row">June</th><td>720</td><td>8</td><td>1.1111%</td><td>31</td><td>4.3056%</td><td>Above 3%: humidity</td></tr>
+<tr><th scope="row">July</th><td>744</td><td>0</td><td>0.0000%</td><td>10</td><td>1.3441%</td><td>Both within 3%</td></tr>
+<tr><th scope="row">August</th><td>744</td><td>0</td><td>0.0000%</td><td>3</td><td>0.4032%</td><td>Both within 3%</td></tr>
+<tr><th scope="row">September</th><td>720</td><td>14</td><td>1.9444%</td><td>2</td><td>0.2778%</td><td>Both within 3%</td></tr>
+<tr><th scope="row">October</th><td>744</td><td>0</td><td>0.0000%</td><td>3</td><td>0.4032%</td><td>Both within 3%</td></tr>
+<tr><th scope="row">November</th><td>720</td><td>0</td><td>0.0000%</td><td>3</td><td>0.4167%</td><td>Both within 3%</td></tr>
+<tr><th scope="row">December</th><td>744</td><td>0</td><td>0.0000%</td><td>0</td><td>0.0000%</td><td>Both within 3%</td></tr>
+</tbody></table></div><p><strong>June humidity:</strong> 31 ÷ 720 × 100 = <strong>4.3056%</strong>, above 3%. Temperature’s highest monthly rate was September’s <strong>14 ÷ 720 = 1.9444%</strong>, still within the monthly limit. The 1% limit applied to the full year, so a monthly temperature rate above 1% did not by itself fail the monthly check.</p><p class="small">Rates are rounded to four decimal places. T denotes temperature. The exact counts and unrounded rates are retained in the original validation records.</p><p class="source-note">Sources: original <a href="../provenance/validation/T-validation.json">temperature</a> and <a href="../provenance/validation/U-validation.json">humidity</a> validation records. Dissertation: Section 4.2 and Appendix E1.</p></section>
+
+<section id="diagnosis"><p class="section-label">5 / Diagnosis of the negative finding</p><h2>What the humidity investigation showed</h2><p>The review first checked that the saved monitoring calculations, ready counts and diagnosis triggers were consistent. Within that audit’s scope, no implementation discrepancy was found. It then compared the saved humidity traces with the earlier calibration year.</p><h3>June had a stronger downward departure</h3><p>With residual defined as observed minus predicted, a negative residual means the De Bilt observation was below the model prediction. In June 2023 the mean standardised residual was <strong>−0.6437</strong>, compared with <strong>+0.0081</strong> in June 2022. These values use the same frozen 2021 error scale; they are not humidity percentage points.</p><div class="table-scroll" tabindex="0" role="region" aria-label="Saved June humidity comparison"><table><thead><tr><th scope="col">Descriptive measure</th><th scope="col">June 2022</th><th scope="col">June 2023</th></tr></thead><tbody>
+<tr><th scope="row">Hours</th><td>720</td><td>720</td></tr>
+<tr><th scope="row">Mean standardised residual</th><td>+0.0081</td><td>−0.6437</td></tr>
+<tr><th scope="row">Spread of standardised residuals<br><span class="cell-note">Sample standard deviation</span></th><td>1.2189</td><td>1.2674</td></tr>
+<tr><th scope="row">Negative / positive flagged hours</th><td>3 / 7</td><td>24 / 7</td></tr>
+<tr><th scope="row">Total flagged hours</th><td>10</td><td>31</td></tr>
+</tbody></table></div><p>The comparison used the same selected weight and threshold. It describes an observed change in the saved traces; it was not another setting-selection experiment.</p><details><summary>Persistence and the limits of the diagnosis</summary><div class="details-body"><p>Across all of 2023, <strong>86 of the 107 humidity flags were negative</strong> and 21 were positive. The residuals also showed dependence over time: the saved correlation was 0.6907 at a one-hour separation and 0.1720 at a 24-hour separation. Nearby prediction errors therefore did not behave as independent observations.</p><p>The review counted 22 simple consecutive runs of humidity flags, with a longest run of 15 hours. These are descriptive runs, not the event or episode outcomes used in final scoring.</p><p>The downward June shift and time dependence help describe why a threshold calibrated using 2022 did not guarantee a 1% rate in 2023. They do not establish a physical cause. Station differences, reference representativeness and sensor condition could not be resolved from these residuals alone; station-history coverage remained incomplete.</p></div></details><p class="outcome"><strong>Two different humidity findings remain.</strong> In 2022, the prediction model failed the original monthly-bias requirement. In 2023, the unchanged statistical monitor exceeded the annual and June flag-rate limits. The second finding did not replace or remove the first.</p><p class="source-note">Source: <a href="validation-2023-evidence.json">selected historical audit summaries and review fingerprint</a>. The full saved-state audit and validation review remain in the research archive.</p></section>
+
+<section id="carry-forward"><p class="section-label">6 / Decision and handover</p><h2>Why the study continued with the negative result</h2><p>Appendix A3 already allowed an elevated validation rate to be investigated, disclosed and retained as a negative finding in unchanged final testing. That provision was used here. It did not require changing the threshold until humidity obtained a pass.</p><div class="table-scroll" tabindex="0" role="region" aria-label="Validation decisions carried forward"><table><thead><tr><th scope="col">Item</th><th scope="col">Recorded decision</th><th scope="col">Consequence for final evaluation</th></tr></thead><tbody>
+<tr><th scope="row">Temperature</th><td>Validation checks within thresholds.</td><td>Retain the original eligible P model and selected settings.</td></tr>
+<tr><th scope="row">Humidity</th><td>Retain the negative validation finding; remain exploratory under R1.</td><td>Use the same model and settings while keeping both the original eligibility failure and the validation limitation explicit.</td></tr>
+<tr><th scope="row">Observations and exclusions</th><td>No detector-led relabelling or exclusions.</td><td>Suspicious background readings do not become confirmed faults merely because the monitor flagged them.</td></tr>
+<tr><th scope="row">Original run status</th><td>Keep <code>diagnosis_required</code>.</td><td>The later disposition <code>negative_U_retained_unchanged</code> records the review outcome without rewriting the original result.</td></tr>
+</tbody></table></div><p>The validation execution completed; the negative scientific finding was not an execution failure. The original record also says <code>scientific_freeze: false</code> because the final scientific freeze happened later, after the intervening final-data preparation and review steps. Final evaluation has since completed.</p><p>No refitting or retuning followed this diagnosis. R1 remained a researcher-approved exploratory permission; no supervisor approval is recorded. Temperature’s within-limit result did not establish a healthy reference, operational acceptability or guaranteed final performance.</p><p class="section-conclusion"><strong>Assessment of this stage.</strong> Validation showed that the selected temperature monitor stayed within the declared rate limits on 2023, while humidity did not. The contribution of this stage is the documented transfer check and retained limitation. Humidity’s later results must be interpreted with that limitation in view.</p><p class="source-note">Sources: <a href="../provenance/validation/U-validation.json">original diagnosis state</a>, <a href="validation-2023-evidence.json">historical review disposition</a>, <a href="../provenance/freeze-v2/settings.json">unchanged final settings</a> and <a href="../provenance/freeze-v2/freeze-summary.json">later freeze and retained labels</a>. Dissertation: Appendix A3 and E1.</p></section>
+
+<section id="evidence"><p class="section-label">7 / Supporting evidence</p><h2>Where the validation account can be checked</h2><div class="table-scroll" tabindex="0" role="region" aria-label="2023 validation evidence register"><table><thead><tr><th scope="col">Material</th><th scope="col">What it supports</th><th scope="col">Access</th></tr></thead><tbody>
+<tr><th scope="row">Original validation results</th><td>All annual and monthly counts, readiness, transferred settings and diagnosis reasons.</td><td><a href="../provenance/validation/T-validation.json">Temperature</a><br><a href="../provenance/validation/U-validation.json">Humidity</a></td></tr>
+<tr><th scope="row">Preserved procedure</th><td>Earlier context, continuous replay, strict flag and diagnosis rules, and no automatic retuning.</td><td><a href="../source/qc-monitor/r1-validation-protocol.json">Protocol</a><br><a href="../source/qc-monitor/r1_validation.py">Implementation</a></td></tr>
+<tr><th scope="row">Selected diagnostic evidence</th><td>Saved June comparison, flag directions, dependence, descriptive runs, audit scope and original fingerprints.</td><td><a href="validation-2023-evidence.json">Open summary</a></td></tr>
+<tr><th scope="row">Later retained settings and labels</th><td>Unchanged primary settings and the negative humidity result carried into final work.</td><td><a href="../provenance/freeze-v2/settings.json">Settings</a><br><a href="../provenance/freeze-v2/freeze-summary.json">Freeze record</a></td></tr>
+</tbody></table></div><p>The historical audit verified eight validation output files and 32 earlier selection output files. It checked 9,096 saved state updates per variable, including the 336 unscored context hours, and recounted the rates and diagnosis triggers.</p><p class="small">That audit started from saved standardised residuals. It was not an independent raw-to-prediction reconstruction or independent human review. This page reports that completed audit; it does not rerun it. Full state histories and execution records remain in the separate archive. See <a href="../demo/verification.html#full-study-reproduction">evidence access and reproduction scope</a>.</p><div class="review-links"><a href="selection-2022.html">← 2022 — Selection</a><a href="evaluation-2024.html">Next: 2024 — Final evaluation →</a></div></section>
+<!-- BEGIN GENERATED PYTHON VIEW -->
+<section id="python-code" class="python-section" data-python-view data-default-file="source/qc-monitor/r1_validation.py" data-preferred="[&quot;source/qc-monitor/r1_validation.py&quot;,&quot;source/qc-monitor/ewma.py&quot;,&quot;source/qc-monitor/scientific_models.py&quot;]">
+<p class="section-label">Complete Python code</p><h2>Validation with fixed settings</h2>
+<p class="code-intro">The validation code applies the transferred settings and reports annual and monthly behaviour. Read it alongside the retained temperature and humidity findings above.</p>
+<p class="small">The selected file is displayed in full below. Choose another file to read its complete code. Imports may require related files, configuration and saved inputs. <a href="../demo/verification.html#scientific-and-reporting-environments">Environment requirements</a> · <a href="../demo/verification.html#full-study-reproduction">Full-study prerequisites</a>.</p>
+<label class="code-picker" hidden for="python-file">Python file<select id="python-file"></select></label>
+<p class="code-file-description">Replays the unchanged monitoring settings and calculates annual and monthly validation diagnostics, retaining negative findings.</p>
+<p class="code-file-path">source/qc-monitor/r1_validation.py · 157 lines · Complete file</p>
+<div class="code-shell"><div class="code-toolbar"><button type="button" data-copy-code disabled>Copy code</button><a data-download-code href="../source/qc-monitor/r1_validation.py" download="r1_validation.py">Download .py</a><label class="code-wrap" hidden><input type="checkbox" data-wrap-code checked>Wrap long lines</label></div>
+<pre class="code-display" tabindex="0" role="region" aria-label="Complete Python code: source/qc-monitor/r1_validation.py"><code>&quot;&quot;&quot;Frozen transfer to previously exposed 2023; diagnosis only, never retuning.&quot;&quot;&quot;
+import argparse
+from collections import Counter
+from datetime import date,datetime,timedelta,timezone
+import gzip
+import json
+import os
+os.environ['OPENBLAS_NUM_THREADS']='1'
+os.environ['OMP_NUM_THREADS']='1'
+from pathlib import Path
+import sys
+import time
+import traceback
+import zipfile
+from early_scientific import load_series,require_role,verified_manifest
+from scientific_models import standardised_residual
+from r1_calibration import approved_models,State
+from records import ROOT,PROJECT,sha256,save_json,code_identity,utc_now
+from lossless_storage import within_work
+from measure_storage import resources
+from demo import process_peak_bytes
+
+A3=ROOT/'evidence/r1-calibration-2026-10-08/manual-A3-20261007T210253930632Z'
+BINDING=PROJECT/'r1-validation-protocol.json'
+EVIDENCE=ROOT/'evidence/r1-validation-2026-10-08'
+
+
+def frozen_decisions():
+    protocol=json.loads(BINDING.read_text())
+    if sha256(A3/'completed.json')!=protocol['A3_completed_sha256']:raise ValueError('A3 completion changed')
+    completed=json.loads((A3/'completed.json').read_text())
+    if completed['state']!='awaiting_validation':raise ValueError('A3 not eligible for validation')
+    for name,identity in completed['files'].items():
+        if sha256(A3/name)!=identity['sha256']:raise ValueError('A3 output changed: '+name)
+    decisions={v:json.loads((A3/f'{v}-decision.json').read_text()) for v in ('T','U')}
+    for v,d in decisions.items():
+        if d['selected_lambda'] is None or d['cutoff'] is None or d['original_A2_eligible']!=(v=='T') or d['exploratory']!=(v=='U'):
+            raise ValueError('Invalid frozen decision or lost exploratory label')
+    return decisions
+
+
+def rate(flags,ready,expected):
+    return {'flags':flags,'eligible_assumed_normal_ready_hours':ready,'expected_hours':expected,
+            'ready_coverage':ready/expected if expected else None,
+            'statistical_stream_FPR':flags/ready if ready else None,
+            'reason':None if ready else 'no_ready_assumed_normal_exposure'}
+
+
+def diagnosis(annual,monthly):
+    reasons=[]
+    if annual['statistical_stream_FPR'] is None:reasons.append('annual_FPR_unavailable')
+    elif annual['statistical_stream_FPR']&gt;.01:reasons.append('annual_FPR_above_.01')
+    for month,row in monthly.items():
+        if row['statistical_stream_FPR'] is None:reasons.append(f'month_{month}_FPR_unavailable')
+        elif row['statistical_stream_FPR']&gt;.03:reasons.append(f'month_{month}_FPR_above_.03')
+    return reasons
+
+
+def validate(context,series,model,decision,emit=lambda row:None):
+    require_role(context,'development');require_role(series,'validation')
+    if context.variable!=series.variable or model.variable!=series.variable or decision['variable']!=series.variable:
+        raise ValueError('Variable mismatch')
+    if decision['model']!=model.kind:raise ValueError('Model mismatch')
+    hours=[h for h in context.hours if h.source_day&gt;=date(2022,12,18)]+list(series.hours)
+    if len(hours)!=336+8760:raise ValueError('Need 14 earlier days and complete 2023 schedule')
+    if hours[0].source_day!=date(2022,12,18) or hours[-1].source_day!=date(2023,12,31):
+        raise ValueError('Wrong validation endpoints')
+    state=State(decision['selected_lambda']);flags=Counter();ready=Counter();expected=Counter();unavailable=Counter()
+    for i,h in enumerate(hours):
+        if i and h.utc-hours[i-1].utc!=timedelta(hours=1):raise ValueError('Noncontiguous validation schedule')
+        u,reason=standardised_residual(model,h);s=state.step(u,decision['cutoff']);iscontext=h.source_day.year==2022
+        if not iscontext:
+            m=h.source_day.month;expected[m]+=1
+            ready[m]+=int(s['ready']);flags[m]+=int(s['flag'] is True)
+            if not s['ready']:unavailable[reason or s['reason']]+=1
+        emit({'utc':h.utc.isoformat(),'source_date':h.source_day.isoformat(),'source_hour':h.source_hour,
+              'context':iscontext,'u':u,'input_reason':reason,**s})
+    monthly={str(m):rate(flags[m],ready[m],expected[m]) for m in range(1,13)}
+    annual=rate(sum(flags.values()),sum(ready.values()),sum(expected.values()))
+    reasons=diagnosis(annual,monthly)
+    return {'variable':series.variable,'source_year':2023,'previously_exposed':True,
+      'annual':annual,'monthly':monthly,'unavailable_reasons':dict(unavailable),'diagnosis_reasons':reasons,
+      'state':'diagnosis_required' if reasons else 'validation_checks_within_thresholds',
+      'settings_transferred_unchanged':decision,'automatic_retuning':False,'scientific_freeze':False,
+      'truth':'assumed normal, not certified','scope':'S01 statistical stream only; not combined-H FPR or final performance'}
+
+
+def run(folder):
+    folder=within_work(folder);folder.mkdir(parents=True,exist_ok=False);start=time.perf_counter()
+    save_json(folder/'started.json',{'utc':utc_now(),'code':code_identity(),'protocol_sha256':sha256(BINDING),
+      'resources':resources(),'command':sys.argv,'scope':'previously exposed 2023, frozen transfer, no retuning'})
+    try:
+        r=resources()
+        if r['memory_available_bytes'] is None or r['memory_available_bytes']&lt;256*1024**2 or r['disk_free_bytes']&lt;1024**3:
+            raise ValueError('Insufficient early-stage resource allowance (256 MiB RAM / 1 GiB disk)')
+        decisions=frozen_decisions();models,permission=approved_models()
+        save_json(folder/'settings.json',{'decisions':decisions,'permission':permission})
+        with zipfile.ZipFile(folder/'source.zip','x',zipfile.ZIP_DEFLATED) as z:
+            for p in sorted(PROJECT.glob('*.py')):z.write(p,p.name)
+            z.write(BINDING,BINDING.name)
+        results={}
+        for v in ('T','U'):
+            print(f'VALIDATING {v}: exposed 2023; lambda/cutoff unchanged',flush=True)
+            context=load_series(2022,'development',v);series=load_series(2023,'validation',v)
+            with gzip.open(folder/f'{v}-states.jsonl.gz','xt',encoding='utf-8') as stream:
+                def emit(row):stream.write(json.dumps(row,allow_nan=False)+'\n')
+                result=validate(context,series,models[v],decisions[v],emit)
+            save_json(folder/f'{v}-validation.json',result);results[v]=result
+            print(f'RESULT {v}: {result[&quot;state&quot;]}; annual FPR={result[&quot;annual&quot;][&quot;statistical_stream_FPR&quot;]}; {result[&quot;diagnosis_reasons&quot;]}',flush=True)
+            del context,series
+        state='diagnosis_required' if any(r['diagnosis_reasons'] for r in results.values()) else 'validation_checks_within_thresholds'
+        save_json(folder/'summary.json',{'state':state,'automatic_retuning':False,'scientific_freeze':False,
+           'U_original_A2_eligible':False,'U_exploratory':True,'next':'Review diagnostics before final protocol/intake; high rates may be retained as disclosed negative findings, never automatic retuning'})
+        before=json.loads((folder/'started.json').read_text())
+        if before['code']!=code_identity() or before['protocol_sha256']!=sha256(BINDING):raise ValueError('Code/protocol changed')
+        frozen_decisions();approved_models();verified_manifest()
+        files={p.name:{'sha256':sha256(p),'bytes':p.stat().st_size} for p in folder.iterdir() if p.is_file()}
+        save_json(folder/'completed.json',{'state':state,'files':files,'elapsed_seconds':time.perf_counter()-start,
+          'peak_process_bytes':process_peak_bytes(),'resources_after':resources(),'scientific_freeze':False})
+        print(f'{state.upper()}: {folder}',flush=True);return 3 if state=='diagnosis_required' else 0
+    except BaseException as exc:
+        save_json(folder/'failed.json',{'error':repr(exc),'traceback':traceback.format_exc(),'interrupted':isinstance(exc,KeyboardInterrupt)})
+        print(f'FAILED: {folder}: {exc}',flush=True);return 2 if isinstance(exc,KeyboardInterrupt) else 1
+
+
+def inspect(folder):
+    folder=within_work(folder);done=json.loads((folder/'completed.json').read_text())
+    required={'started.json','source.zip','settings.json','summary.json','T-states.jsonl.gz','U-states.jsonl.gz','T-validation.json','U-validation.json'}
+    if set(done['files'])!=required or (folder/'failed.json').exists():raise ValueError('Incomplete/conflicting output')
+    for name,identity in done['files'].items():
+        if sha256(folder/name)!=identity['sha256'] or (folder/name).stat().st_size!=identity['bytes']:raise ValueError('Output changed: '+name)
+    for v in ('T','U'):
+        counts=Counter();expected=Counter();flags=Counter();context=0
+        with gzip.open(folder/f'{v}-states.jsonl.gz','rt') as stream:
+            for line in stream:
+                row=json.loads(line)
+                if row['context']:context+=1;continue
+                m=int(row['source_date'][5:7]);expected[m]+=1;counts[m]+=int(row['ready']);flags[m]+=int(row['flag'] is True)
+        r=json.loads((folder/f'{v}-validation.json').read_text())
+        if context!=336 or sum(expected.values())!=8760:raise ValueError('Incomplete validation ledger')
+        if r['annual']!=rate(sum(flags.values()),sum(counts.values()),8760):raise ValueError('Annual readback mismatch')
+        if r['monthly']!={str(m):rate(flags[m],counts[m],expected[m]) for m in range(1,13)}:raise ValueError('Monthly readback mismatch')
+        if r['diagnosis_reasons']!=diagnosis(r['annual'],r['monthly']):raise ValueError('Diagnosis changed')
+    print(json.dumps({'verified':True,'state':done['state'],'files':8,'scientific_freeze':False}));return done
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=('run','status'));p.add_argument('--out',type=Path)
+    a=p.parse_args()
+    if a.action=='status':
+        if a.out is None:p.error('status requires --out')
+        inspect(a.out);return 0
+    folder=a.out or EVIDENCE/('manual-2023-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
+    print('OUTPUT: '+str(folder),flush=True);return run(folder)
+
+
+if __name__=='__main__':raise SystemExit(main())
+</code></pre></div>
+<p class="code-status" role="status" aria-live="polite"></p>
+<noscript><p>The complete default file is shown above. File selection and automatic copying require JavaScript. Select the code manually or download a related file:</p><ul><li><a href="../source/qc-monitor/r1_validation.py" download="r1_validation.py">r1_validation.py</a></li><li><a href="../source/qc-monitor/ewma.py" download="ewma.py">ewma.py</a></li><li><a href="../source/qc-monitor/scientific_models.py" download="scientific_models.py">scientific_models.py</a></li></ul></noscript>
+<p class="small">These complete public source files document the study. Additional inputs are needed to reproduce the full experiment. See the on-site requirements and source-copy scope. The website does not execute Python.</p>
+<div class="review-links"><a href="#python-code">Back to code controls ↑</a><a href="#main">Back to page overview ↑</a></div>
+</section>
+<!-- END GENERATED PYTHON VIEW -->
+<footer><p>Source: KNMI. KNMI did not participate in or necessarily endorse this derived work. Codex-assisted development and writing.</p><p><a href="../demo/verification.html#using-code">Using the Python files</a> · <a href="../references/index.html#attribution">Attribution and use</a></p></footer>
+</main></div></body></html>

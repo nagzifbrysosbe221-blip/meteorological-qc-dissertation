@@ -1,0 +1,226 @@
+[
+  {
+    "pass": "T-range",
+    "family": "absent_row",
+    "status": "selected",
+    "job_id": "T-range-final-2024-01-1c5f1968db65ce21c0a7428c",
+    "case_id": "final-2024-01-1c5f1968db65ce21c0a7428c",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "T-range",
+    "family": "duplicate_receipt",
+    "status": "selected",
+    "job_id": "T-range-final-2024-01-0e30a042c32120259ee1af0c",
+    "case_id": "final-2024-01-0e30a042c32120259ee1af0c",
+    "reason": "first_effective_and_first_miss"
+  },
+  {
+    "pass": "T-range",
+    "family": "gradual_bias",
+    "status": "selected",
+    "job_id": "T-range-final-2024-01-01692280756fe41dc07ebf5f",
+    "case_id": "final-2024-01-01692280756fe41dc07ebf5f",
+    "reason": "first_effective_and_first_miss"
+  },
+  {
+    "pass": "T-range",
+    "family": "invalid_timestamp",
+    "status": "selected",
+    "job_id": "T-range-final-2024-01-0394c4011678490b38b0d687",
+    "case_id": "final-2024-01-0394c4011678490b38b0d687",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "T-range",
+    "family": "missing_cell",
+    "status": "selected",
+    "job_id": "T-range-final-2024-01-3636d9f99ba6309541e91e3c",
+    "case_id": "final-2024-01-3636d9f99ba6309541e91e3c",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "T-range",
+    "family": "off_grid_timestamp",
+    "status": "selected",
+    "job_id": "T-range-final-2024-01-2f6fce0172503d3ddabb18b0",
+    "case_id": "final-2024-01-2f6fce0172503d3ddabb18b0",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "T-range",
+    "family": "out_of_range",
+    "status": "selected",
+    "job_id": "T-range-final-2024-01-16ca4599ecae5277560c05be",
+    "case_id": "final-2024-01-16ca4599ecae5277560c05be",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "alpha-0005",
+    "family": "absent_row",
+    "status": "selected",
+    "job_id": "alpha-0005-final-2024-01-1c5f1968db65ce21c0a7428c",
+    "case_id": "final-2024-01-1c5f1968db65ce21c0a7428c",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "alpha-0005",
+    "family": "duplicate_receipt",
+    "status": "selected",
+    "job_id": "alpha-0005-final-2024-01-0e30a042c32120259ee1af0c",
+    "case_id": "final-2024-01-0e30a042c32120259ee1af0c",
+    "reason": "first_effective_and_first_miss"
+  },
+  {
+    "pass": "alpha-0005",
+    "family": "gradual_bias",
+    "status": "selected",
+    "job_id": "alpha-0005-final-2024-01-01692280756fe41dc07ebf5f",
+    "case_id": "final-2024-01-01692280756fe41dc07ebf5f",
+    "reason": "first_effective_and_first_miss"
+  },
+  {
+    "pass": "alpha-0005",
+    "family": "invalid_timestamp",
+    "status": "selected",
+    "job_id": "alpha-0005-final-2024-01-0394c4011678490b38b0d687",
+    "case_id": "final-2024-01-0394c4011678490b38b0d687",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "alpha-0005",
+    "family": "missing_cell",
+    "status": "selected",
+    "job_id": "alpha-0005-final-2024-01-3636d9f99ba6309541e91e3c",
+    "case_id": "final-2024-01-3636d9f99ba6309541e91e3c",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "alpha-0005",
+    "family": "off_grid_timestamp",
+    "status": "selected",
+    "job_id": "alpha-0005-final-2024-01-2f6fce0172503d3ddabb18b0",
+    "case_id": "final-2024-01-2f6fce0172503d3ddabb18b0",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "alpha-0005",
+    "family": "out_of_range",
+    "status": "selected",
+    "job_id": "alpha-0005-final-2024-01-16ca4599ecae5277560c05be",
+    "case_id": "final-2024-01-16ca4599ecae5277560c05be",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "alpha-002",
+    "family": "absent_row",
+    "status": "selected",
+    "job_id": "alpha-002-final-2024-01-1c5f1968db65ce21c0a7428c",
+    "case_id": "final-2024-01-1c5f1968db65ce21c0a7428c",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "alpha-002",
+    "family": "duplicate_receipt",
+    "status": "selected",
+    "job_id": "alpha-002-final-2024-01-0e30a042c32120259ee1af0c",
+    "case_id": "final-2024-01-0e30a042c32120259ee1af0c",
+    "reason": "first_effective_and_first_miss"
+  },
+  {
+    "pass": "alpha-002",
+    "family": "gradual_bias",
+    "status": "selected",
+    "job_id": "alpha-002-final-2024-01-01692280756fe41dc07ebf5f",
+    "case_id": "final-2024-01-01692280756fe41dc07ebf5f",
+    "reason": "first_effective_and_first_miss"
+  },
+  {
+    "pass": "alpha-002",
+    "family": "invalid_timestamp",
+    "status": "selected",
+    "job_id": "alpha-002-final-2024-01-0394c4011678490b38b0d687",
+    "case_id": "final-2024-01-0394c4011678490b38b0d687",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "alpha-002",
+    "family": "missing_cell",
+    "status": "selected",
+    "job_id": "alpha-002-final-2024-01-3636d9f99ba6309541e91e3c",
+    "case_id": "final-2024-01-3636d9f99ba6309541e91e3c",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "alpha-002",
+    "family": "off_grid_timestamp",
+    "status": "selected",
+    "job_id": "alpha-002-final-2024-01-2f6fce0172503d3ddabb18b0",
+    "case_id": "final-2024-01-2f6fce0172503d3ddabb18b0",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "alpha-002",
+    "family": "out_of_range",
+    "status": "selected",
+    "job_id": "alpha-002-final-2024-01-16ca4599ecae5277560c05be",
+    "case_id": "final-2024-01-16ca4599ecae5277560c05be",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "primary",
+    "family": "absent_row",
+    "status": "selected",
+    "job_id": "primary-final-2024-01-1c5f1968db65ce21c0a7428c",
+    "case_id": "final-2024-01-1c5f1968db65ce21c0a7428c",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "primary",
+    "family": "duplicate_receipt",
+    "status": "selected",
+    "job_id": "primary-final-2024-01-0e30a042c32120259ee1af0c",
+    "case_id": "final-2024-01-0e30a042c32120259ee1af0c",
+    "reason": "first_effective_and_first_miss"
+  },
+  {
+    "pass": "primary",
+    "family": "gradual_bias",
+    "status": "selected",
+    "job_id": "primary-final-2024-01-01692280756fe41dc07ebf5f",
+    "case_id": "final-2024-01-01692280756fe41dc07ebf5f",
+    "reason": "first_effective_and_first_miss"
+  },
+  {
+    "pass": "primary",
+    "family": "invalid_timestamp",
+    "status": "selected",
+    "job_id": "primary-final-2024-01-0394c4011678490b38b0d687",
+    "case_id": "final-2024-01-0394c4011678490b38b0d687",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "primary",
+    "family": "missing_cell",
+    "status": "selected",
+    "job_id": "primary-final-2024-01-3636d9f99ba6309541e91e3c",
+    "case_id": "final-2024-01-3636d9f99ba6309541e91e3c",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "primary",
+    "family": "off_grid_timestamp",
+    "status": "selected",
+    "job_id": "primary-final-2024-01-2f6fce0172503d3ddabb18b0",
+    "case_id": "final-2024-01-2f6fce0172503d3ddabb18b0",
+    "reason": "first_effective"
+  },
+  {
+    "pass": "primary",
+    "family": "out_of_range",
+    "status": "selected",
+    "job_id": "primary-final-2024-01-16ca4599ecae5277560c05be",
+    "case_id": "final-2024-01-16ca4599ecae5277560c05be",
+    "reason": "first_effective"
+  }
+]

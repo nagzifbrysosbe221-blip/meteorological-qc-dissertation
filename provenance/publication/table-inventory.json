@@ -1,0 +1,157 @@
+[
+  {
+    "name": "construction",
+    "rows": 3744,
+    "passes": [
+      "primary",
+      "alpha-0005",
+      "alpha-002",
+      "T-range"
+    ],
+    "json": "construction.json",
+    "jsonl": "construction.jsonl",
+    "csv": "construction.csv"
+  },
+  {
+    "name": "background_points",
+    "rows": 2184,
+    "passes": [
+      "primary",
+      "alpha-0005",
+      "alpha-002",
+      "T-range"
+    ],
+    "json": "background_points.json",
+    "jsonl": "background_points.jsonl",
+    "csv": "background_points.csv"
+  },
+  {
+    "name": "background_burden",
+    "rows": 1560,
+    "passes": [
+      "primary",
+      "alpha-0005",
+      "alpha-002",
+      "T-range"
+    ],
+    "json": "background_burden.json",
+    "jsonl": "background_burden.jsonl",
+    "csv": "background_burden.csv"
+  },
+  {
+    "name": "point_monthly",
+    "rows": 314496,
+    "passes": [
+      "primary",
+      "alpha-0005",
+      "alpha-002",
+      "T-range"
+    ],
+    "json": "point_monthly.json",
+    "jsonl": "point_monthly.jsonl",
+    "csv": "point_monthly.csv"
+  },
+  {
+    "name": "point_annual",
+    "rows": 26208,
+    "passes": [
+      "T-range",
+      "alpha-0005",
+      "alpha-002",
+      "primary"
+    ],
+    "json": "point_annual.json",
+    "jsonl": "point_annual.jsonl",
+    "csv": "point_annual.csv"
+  },
+  {
+    "name": "roots",
+    "rows": 11232,
+    "passes": [
+      "primary",
+      "alpha-0005",
+      "alpha-002",
+      "T-range"
+    ],
+    "json": "roots.json",
+    "jsonl": "roots.jsonl",
+    "csv": "roots.csv"
+  },
+  {
+    "name": "root_summary",
+    "rows": 1560,
+    "passes": [
+      "T-range",
+      "alpha-0005",
+      "alpha-002",
+      "primary"
+    ],
+    "json": "root_summary.json",
+    "jsonl": "root_summary.jsonl",
+    "csv": "root_summary.csv"
+  },
+  {
+    "name": "contrasts",
+    "rows": 1560,
+    "passes": [
+      "T-range",
+      "alpha-0005",
+      "alpha-002",
+      "primary"
+    ],
+    "json": "contrasts.json",
+    "jsonl": "contrasts.jsonl",
+    "csv": "contrasts.csv"
+  },
+  {
+    "name": "diagnostics",
+    "rows": 11232,
+    "passes": [
+      "primary",
+      "alpha-0005",
+      "alpha-002",
+      "T-range"
+    ],
+    "json": "diagnostics.json",
+    "jsonl": "diagnostics.jsonl",
+    "csv": "diagnostics.csv"
+  },
+  {
+    "name": "recovery",
+    "rows": 89856,
+    "passes": [
+      "primary",
+      "alpha-0005",
+      "alpha-002",
+      "T-range"
+    ],
+    "json": "recovery.json",
+    "jsonl": "recovery.jsonl",
+    "csv": "recovery.csv"
+  },
+  {
+    "name": "monthly_description",
+    "rows": 9048,
+    "passes": [
+      "T-range",
+      "alpha-0005",
+      "alpha-002",
+      "primary"
+    ],
+    "json": "monthly_description.json",
+    "jsonl": "monthly_description.jsonl",
+    "csv": "monthly_description.csv"
+  },
+  {
+    "name": "sensitivity",
+    "rows": 8424,
+    "passes": [
+      "alpha-0005",
+      "alpha-002",
+      "T-range"
+    ],
+    "json": "sensitivity.json",
+    "jsonl": "sensitivity.jsonl",
+    "csv": "sensitivity.csv"
+  }
+]

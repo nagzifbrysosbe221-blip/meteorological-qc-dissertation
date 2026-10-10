@@ -1,0 +1,27 @@
+/* Complete source files, with controls kept in reach while reading. */
+.python-section{min-width:0}
+.code-jump{font-size:13px;margin:-4px 0 22px}
+.python-section .code-intro{max-width:78ch}
+.code-picker{display:block;font-size:14px;font-weight:650;margin:24px 0 10px}
+.code-picker select{display:block;width:100%;max-width:100%;margin-top:8px;font-size:14px}
+.code-file-description{font-size:14px;color:var(--muted);margin:12px 0}
+.code-file-path{overflow-wrap:anywhere;font:12px/1.6 ui-monospace,Consolas,monospace;color:var(--muted);margin:12px 0}
+.code-shell{border:1px solid var(--line);border-radius:6px;background:#f7f9fb;min-width:0}
+.code-toolbar{position:sticky;top:0;z-index:2;display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;padding:12px 14px;background:#edf4f8;border-bottom:1px solid var(--line);border-radius:6px 6px 0 0}
+.code-toolbar button,.code-toolbar a{font:600 13px/1.5 system-ui,sans-serif;padding:8px 12px;border:1px solid #9eafbb;border-radius:4px;color:var(--blue);background:white;text-decoration:none;margin:0;min-height:38px}
+.code-toolbar button:hover,.code-toolbar a:hover{background:#e1edf5}
+.code-toolbar button:disabled{color:var(--muted);cursor:default}
+.code-wrap{font-size:12px;margin-left:auto;display:flex;align-items:center;gap:6px;cursor:pointer}
+.code-wrap input{width:16px;height:16px;accent-color:var(--blue)}
+.code-shell .code-display{max-width:100%;margin:0;padding:20px;white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:auto;background:transparent;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4;border:0;border-radius:0}
+.code-shell .code-display code{padding:0;background:none;border-radius:0;font:inherit;color:#20323f}
+.code-shell .code-display.no-wrap{white-space:pre;overflow-wrap:normal}
+.code-display:focus-visible{outline-offset:-4px}
+.py-comment{color:#52685a;font-style:italic}.py-string{color:#8a3c10}.py-keyword{color:#6838a1;font-weight:600}.py-number{color:#175e88}
+.code-status{min-height:1.7em;font-size:13px;color:var(--muted);margin:10px 0}
+.research-brief{padding:20px 22px;background:var(--wash);border-left:3px solid var(--blue);margin:24px 0}
+.research-brief h3{margin:0 0 10px;font-size:18px}
+.research-brief p:last-child{margin-bottom:0}
+.python-section [hidden]{display:none!important}
+@media(max-width:760px){.code-toolbar{gap:8px;padding:10px}.code-toolbar button,.code-toolbar a{font-size:12px;padding:8px 10px}.code-wrap{margin-left:0;width:100%}.code-shell .code-display{padding:14px;font-size:12px}.code-file-path{font-size:11px}}
+@media print{.code-toolbar{position:static}.code-toolbar button,.code-wrap,.code-picker{display:none}.code-shell .code-display,.code-shell .code-display.no-wrap{white-space:pre-wrap;overflow-wrap:anywhere;font-size:8pt}.code-shell{border:0}.code-status{display:none}}

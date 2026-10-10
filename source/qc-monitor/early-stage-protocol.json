@@ -1,0 +1,21 @@
+{
+  "version": "early-S-P-component-v1",
+  "local_date": "2026-10-08",
+  "authority": "Submitted v2 A1-A4 and D2; bounded acceptance v1",
+  "scope": "Verify inputs; manual 2021 fitting and 2022 A2 gates only. This is not a final scientific freeze or complete A3 protocol.",
+  "roles": {"2021": "fit", "2022": "model gates then later calibration/development", "2023": "exposed validation later, no automatic retuning"},
+  "acceptance_sha256": "0aa1d2efe87a36b32e416f6ffb89410e2957a1abeb5bbab7cd0e36b1108307cd",
+  "calendar": "UTC elapsed seconds/current UTC year length; fractional UTC hour/24; 13 features in scientific_models.FEATURES order. Source-date roles/months precede HH24 conversion.",
+  "solver": "NumPy 2.3.5 float64 column-normalised SVD lstsq; rank cutoff eps*max(n,p); transform coefficients back; no normal equations, regularisation or refit",
+  "residual": "y-prediction; frozen 2021 arithmetic mean and sample SD with n-1; finite strictly positive SD required, no added scientific epsilon threshold",
+  "eligibility": "Unique finite target; P additionally same-time same-variable unique finite Schiphol; explicit unavailable reasons. Empty reviewed early numeric exclusion mask, assumed-normal not certified.",
+  "gates": {"annual_coverage_min": 0.95, "monthly_coverage_min": 0.90, "monthly_abs_mean_over_scale_max": 0.5, "P_annual_common_RMSE_ratio_max": 0.90, "P_monthly_common_RMSE_ratio_max": 1.10},
+  "undefined_common_ratio": "Zero S RMSE or no common rows cannot establish the required comparative gate; retain S only if eligible. No tolerance changes gate decisions.",
+  "failure": "Full-rank S comparator failure or neither eligible => revision_required, no calibration/default settings",
+  "A3_pending": {"weights": [0.02,0.05,0.10,0.20], "alpha": 0.01, "monthly_ready_coverage_min": 0.90, "cutoff": "one-based ceil((1-alpha)*n), n>0, finite c>0; strict exceedance", "development_cases_per_variable": 216, "ranking": "maximum paired detected fraction; minimum mean normalised delay with unavailable/miss penalty 1; larger lambda exact tie; all-zero fails", "context_gate": "Specify and verify strictly earlier context for continuous calibration before executing A3. Starting cold on 1 January loses 227 updates and cannot meet January's 90% ready coverage; do not bypass or reset monthly.", "state": "first ready update 228; hold through 6 unavailable hours; reset at 7; P gaps never switch to S", "validation": "2023 unchanged transfer; annual FPR >.01 or monthly >.03 prompts diagnosis/disclosure, not automatic retuning"},
+  "preserved_design": "B0/R/H; all seven families, 78 monthly variants, 936 annual cases; primary plus alpha .005/.02 and T range [-30,45] sensitivities",
+  "numeric_verification": "Hand fixture coefficient tolerance 1e-10; no tolerance for gate/threshold decisions. Same-environment repeats must match scientific JSON values exactly; no cross-platform equality claimed.",
+  "resources": "Sequential, numerical thread limits 1; stage preflight 256 MiB available RAM and 1 GiB free disk are operational allowances, not full-batch capacity guarantees",
+  "launch": "Researcher launches lengthy work. fit-gates is a bounded early-stage command, prepared but not run on real observations in this increment.",
+  "limitations": "No healthy-reference certification, no scientific freeze, no final intake, no complete calibration/ranking, no detector integration. Assistance: Codex."
+}

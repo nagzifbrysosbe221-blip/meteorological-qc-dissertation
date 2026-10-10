@@ -1,0 +1,28 @@
+{
+  "purpose": "Independent hand arithmetic, written before running evaluator tests; synthetic correctness only",
+  "C6_01": {"unchanged_predictions": true, "range_root_H_hit": true, "H_value_points": 0},
+  "C6_02": {
+    "B0_own": {"TP": 1, "FP": 0, "FN": 1, "TN": 2, "n": 4},
+    "H_own": {"TP": 0, "FP": 1, "FN": 1, "TN": 0, "n": 2},
+    "B0_common": {"TP": 0, "FP": 0, "FN": 1, "TN": 1, "n": 2},
+    "common_subjects": ["b", "c"]
+  },
+  "C6_03": {"empty_precision": null, "empty_recall": null, "empty_fpr": null, "negative_only_precision": null, "negative_only_recall": null, "negative_only_fpr": 0},
+  "C6_04": {"tiny_roots": 6, "B0_hits": 5, "R_hits": 6, "H_hits": 6, "B0_duplicate_category": "absent_capability_miss"},
+  "C6_05": {"start_boundary_seconds": 0, "end_boundary_seconds": 3900, "after_horizon_category": "unavailable_miss", "recovery_credit": false},
+  "C6_06": {"planned": 9, "effective": 5, "paired": 4, "missing_or_failed_pairs": 1, "B0_counts": {"hit": 1, "evaluated_miss": 1, "unavailable_miss": 1, "absent_capability_miss": 1}, "H_counts": {"hit": 2, "evaluated_miss": 1, "unavailable_miss": 1}},
+  "C6_07": {"raw_episodes": 3, "raw_positive_units": 6, "eligible_negative_slots": 6, "false_segments": 4, "hourly_burden": 480, "timestamp_union_positive_records": 2, "timestamp_false_segments": 2, "timestamp_exposure": 3, "timestamp_burden": 666.6666666666666},
+  "C6_08": {"counterpart_opportunities": 2, "counterpart_hit_slots": 1, "no_opportunity_diagnostic_hit": false},
+  "C6_09": {"same_inputs": true, "recomputed_common_subjects": ["b", "c"]},
+  "tiny_replay": {
+    "slots": 9, "target_receipts": 9,
+    "availability_T": {"TP": 4, "FP": 0, "FN": 0, "TN": 5, "n": 9},
+    "availability_U": {"TP": 3, "FP": 0, "FN": 0, "TN": 6, "n": 9},
+    "value_T_B0_own": {"TP": 1, "FP": 0, "FN": 0, "TN": 3, "n": 4},
+    "value_U_B0_own": {"TP": 0, "FP": 0, "FN": 0, "TN": 5, "n": 5},
+    "Q04": {"TP": 1, "FP": 0, "FN": 0, "TN": 8, "n": 9},
+    "Q05": {"TP": 1, "FP": 0, "FN": 0, "TN": 7, "n": 8},
+    "Q06": {"TP": 1, "FP": 0, "FN": 0, "TN": 7, "n": 8}
+  },
+  "descriptive": {"median": 0.5, "q1": 0.25, "q3": 0.75, "iqr": 0.5, "defined_months": 3, "undefined_months": 1, "leave_out_range": [0.25, 0.75]}
+}

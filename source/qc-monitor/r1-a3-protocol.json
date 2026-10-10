@@ -1,0 +1,22 @@
+{
+  "version": "R1-A3-v1",
+  "scope": "2022 statistical calibration and paired development only; U exploratory following failed original A2",
+  "approval_sha256": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+  "models": "Exact frozen 2021 T-P and U-P from approved bound original run; no refit",
+  "continuous_calibration_context": "Source 18-31 December 2021, 336 scheduled hours, unscored; source 1 January-31 December 2022 scored for ready coverage/order statistic; HH24 retains source-month ownership",
+  "development_context": "Full source month; January begins day 2 as C1. Exactly 14 strictly earlier source days of unscored context, including accepted late-2021 context where required. Each pair starts at zero at context start; no month/intervention resets inside the window.",
+  "lambdas": [0.02, 0.05, 0.10, 0.20],
+  "alpha": 0.01,
+  "ready_coverage_each_month_min": 0.90,
+  "warmup_updates": 228,
+  "gap_rule": "Hold through six unavailable scheduled hours; reset count/state on seventh; no P-to-S substitution",
+  "cutoff": "One-based ceil((1-alpha)*n) of absolute ready 2022 states only. Decimal alpha evaluated as exact fraction for index. n>0, finite cutoff>0; strict exceedance.",
+  "development": "216 cases per variable per eligible lambda: 12 months, signs -1/+1, amplitudes .5/1/2 frozen scales, ramps 24/72/168 plus equal hold. Day 8 HH01 start; missing hours never compressed. Full month/context both replays; save every intervention state and support count. Reference and context unchanged.",
+  "selection": "Max hits/216, then minimum exact-rational mean j/(2d+1) with unavailable/miss penalty 1, then larger lambda. No eligible calibration lambda or all-zero development detection => revision_required, no defaults. Failed calibration candidates retain all 216 planned blocked cases via roster and count.",
+  "sensitivity": "Precompute .005/.02 cutoffs from the same ready calibration states; later retain selected model/lambda. No sensitivity performance or best-variant selection here.",
+  "preserved_final_design": "B0/R/H, 7 families, 78 monthly variants, 936 cases, prescribed alpha and T range sensitivities remain required. This stage is statistical A3 tuning only, not final C4/C6 evaluation or integration into B0/R/H replay.",
+  "validation": "Not executed here; next transfer unchanged to exposed 2023. Above .01 annual or .03 monthly FPR prompts diagnosis/disclosure, not automatic retuning.",
+  "completion": "All candidate ledgers, rosters and decisions retained. Awaiting_validation is not scientific_freeze. No final intake or batch execution enabled.",
+  "recovery": "Fresh directory per attempt; preserve failures, no partial resume for this bounded early stage. Researcher manually launches processing.",
+  "resources": "Sequential variables/lambdas/pairs; 256 MiB available RAM and 1 GiB disk preflight are allowances, not guaranteed capacity. Scientific full-batch pilot remains pending."
+}

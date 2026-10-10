@@ -1,0 +1,724 @@
+{
+  "title": "2023 validation: selected saved evidence",
+  "prepared_date": "2026-10-10",
+  "scope": "Examiner review of saved results and the historical diagnosis. No fitting, calibration, validation replay or final evaluation was rerun. Full state histories and execution records remain in the separate research archive.",
+  "validation_results": {
+    "T": {
+      "variable": "T",
+      "source_year": 2023,
+      "previously_exposed": true,
+      "annual": {
+        "flags": 28,
+        "eligible_assumed_normal_ready_hours": 8760,
+        "expected_hours": 8760,
+        "ready_coverage": 1.0,
+        "statistical_stream_FPR": 0.0031963470319634705,
+        "reason": null
+      },
+      "monthly": {
+        "1": {
+          "flags": 0,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.0,
+          "reason": null
+        },
+        "2": {
+          "flags": 4,
+          "eligible_assumed_normal_ready_hours": 672,
+          "expected_hours": 672,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.005952380952380952,
+          "reason": null
+        },
+        "3": {
+          "flags": 0,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.0,
+          "reason": null
+        },
+        "4": {
+          "flags": 0,
+          "eligible_assumed_normal_ready_hours": 720,
+          "expected_hours": 720,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.0,
+          "reason": null
+        },
+        "5": {
+          "flags": 2,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.002688172043010753,
+          "reason": null
+        },
+        "6": {
+          "flags": 8,
+          "eligible_assumed_normal_ready_hours": 720,
+          "expected_hours": 720,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.011111111111111112,
+          "reason": null
+        },
+        "7": {
+          "flags": 0,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.0,
+          "reason": null
+        },
+        "8": {
+          "flags": 0,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.0,
+          "reason": null
+        },
+        "9": {
+          "flags": 14,
+          "eligible_assumed_normal_ready_hours": 720,
+          "expected_hours": 720,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.019444444444444445,
+          "reason": null
+        },
+        "10": {
+          "flags": 0,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.0,
+          "reason": null
+        },
+        "11": {
+          "flags": 0,
+          "eligible_assumed_normal_ready_hours": 720,
+          "expected_hours": 720,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.0,
+          "reason": null
+        },
+        "12": {
+          "flags": 0,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.0,
+          "reason": null
+        }
+      },
+      "unavailable_reasons": {},
+      "diagnosis_reasons": [],
+      "state": "validation_checks_within_thresholds",
+      "settings_transferred_unchanged": {
+        "selected_lambda": 0.2,
+        "hits": 102,
+        "denominator": 216,
+        "detected_fraction": 0.4722222222222222,
+        "mean_normalised_delay": 0.7874177715471513,
+        "delay_exact": "407242361/517187160",
+        "reason": "A3_paired_ranking",
+        "variable": "T",
+        "original_A2_eligible": true,
+        "exploratory": false,
+        "revision": "R1-approved-v1",
+        "model": "P",
+        "cutoff": 2.4816976238219928,
+        "alpha_sensitivity_cutoffs": {
+          "0.005": 2.7603226941864003,
+          "0.02": 2.1323005759800266
+        }
+      },
+      "automatic_retuning": false,
+      "scientific_freeze": false,
+      "truth": "assumed normal, not certified",
+      "scope": "S01 statistical stream only; not combined-H FPR or final performance"
+    },
+    "U": {
+      "variable": "U",
+      "source_year": 2023,
+      "previously_exposed": true,
+      "annual": {
+        "flags": 107,
+        "eligible_assumed_normal_ready_hours": 8760,
+        "expected_hours": 8760,
+        "ready_coverage": 1.0,
+        "statistical_stream_FPR": 0.01221461187214612,
+        "reason": null
+      },
+      "monthly": {
+        "1": {
+          "flags": 3,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.004032258064516129,
+          "reason": null
+        },
+        "2": {
+          "flags": 16,
+          "eligible_assumed_normal_ready_hours": 672,
+          "expected_hours": 672,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.023809523809523808,
+          "reason": null
+        },
+        "3": {
+          "flags": 16,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.021505376344086023,
+          "reason": null
+        },
+        "4": {
+          "flags": 8,
+          "eligible_assumed_normal_ready_hours": 720,
+          "expected_hours": 720,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.011111111111111112,
+          "reason": null
+        },
+        "5": {
+          "flags": 12,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.016129032258064516,
+          "reason": null
+        },
+        "6": {
+          "flags": 31,
+          "eligible_assumed_normal_ready_hours": 720,
+          "expected_hours": 720,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.043055555555555555,
+          "reason": null
+        },
+        "7": {
+          "flags": 10,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.013440860215053764,
+          "reason": null
+        },
+        "8": {
+          "flags": 3,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.004032258064516129,
+          "reason": null
+        },
+        "9": {
+          "flags": 2,
+          "eligible_assumed_normal_ready_hours": 720,
+          "expected_hours": 720,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.002777777777777778,
+          "reason": null
+        },
+        "10": {
+          "flags": 3,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.004032258064516129,
+          "reason": null
+        },
+        "11": {
+          "flags": 3,
+          "eligible_assumed_normal_ready_hours": 720,
+          "expected_hours": 720,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.004166666666666667,
+          "reason": null
+        },
+        "12": {
+          "flags": 0,
+          "eligible_assumed_normal_ready_hours": 744,
+          "expected_hours": 744,
+          "ready_coverage": 1.0,
+          "statistical_stream_FPR": 0.0,
+          "reason": null
+        }
+      },
+      "unavailable_reasons": {},
+      "diagnosis_reasons": [
+        "annual_FPR_above_.01",
+        "month_6_FPR_above_.03"
+      ],
+      "state": "diagnosis_required",
+      "settings_transferred_unchanged": {
+        "selected_lambda": 0.2,
+        "hits": 126,
+        "denominator": 216,
+        "detected_fraction": 0.5833333333333334,
+        "mean_normalised_delay": 0.7030588172374581,
+        "delay_exact": "121204331/172395720",
+        "reason": "A3_paired_ranking",
+        "variable": "U",
+        "original_A2_eligible": false,
+        "exploratory": true,
+        "revision": "R1-approved-v1",
+        "model": "P",
+        "cutoff": 2.057779719375828,
+        "alpha_sensitivity_cutoffs": {
+          "0.005": 2.2975750425842403,
+          "0.02": 1.7916906157638017
+        }
+      },
+      "automatic_retuning": false,
+      "scientific_freeze": false,
+      "truth": "assumed normal, not certified",
+      "scope": "S01 statistical stream only; not combined-H FPR or final performance"
+    }
+  },
+  "protocol": {
+    "version": "R1-2023-validation-v1",
+    "A3_completed_sha256": "20b0d4a7c448105a26997aff533dae7097e48f3927576623a84125e6f689ec43",
+    "scope": "Frozen transfer to previously exposed 2023; U exploratory under approved R1; statistical stream only",
+    "settings": "Exact saved 2021 models and selected 2022 A3 decisions; no fitting, calibration, candidate selection or automatic retuning",
+    "context": "Source 18-31 December 2022, 336 unscored hours, state zero at context start. Source 1 January-31 December 2023 scored; HH24 retains original source-date ownership.",
+    "FPR": "Strict S01 positives / ready eligible assumed-normal source-2023 hours, annual and source month; unavailable excluded with reasons, zero denominator null. Not whole-H FPR or final-year evaluation.",
+    "diagnosis": "Annual statistical FPR strictly above .01 or any monthly FPR strictly above .03 prompts diagnosis/disclosure. Equality does not trigger. Missing exposure is explicit diagnosis_required. Adverse findings may be retained with unchanged settings under A3; never automatically retune.",
+    "state": "First ready update 228; hold through six unavailable hours then reset at seventh; continuous without monthly resets; no reference fallback",
+    "failure": "Permission/hash/input/resource errors preserve failed attempt. Elevated FPR is a scientific diagnosis result, not execution failure. Fresh folder on rerun; no partial resume.",
+    "later": "Review validation, then scientific integration/prospective final protocol, controlled structural intake/independent labels, actual freeze and measured pilot. No final intake or final batch authorised by this stage."
+  },
+  "completed_run": {
+    "state": "diagnosis_required",
+    "scientific_freeze": false,
+    "completed_sha256": "3b7d61eba28851129fc8712689c11cb94c20996be10ec64627d1676fb1f4159c"
+  },
+  "historical_saved_state_audit": {
+    "review_utc": "2026-10-07T21:20:44.705230+00:00",
+    "verified_validation_files": 8,
+    "verified_A3_files": 32,
+    "limitations": [
+      "Audits saved residual inputs, not another raw-to-prediction calculation.",
+      "Post hoc descriptive diagnosis; no causal sensor or weather attribution.",
+      "Assumed-normal background is not certified healthy.",
+      "Codex-assisted audit, not independent human review.",
+      "Descriptive consecutive flags are not final event/episode scoring."
+    ],
+    "verified": true,
+    "settings_changed": false,
+    "disposition": "Preserve negative U validation and unchanged exploratory R1 settings under A3; no scientific freeze.",
+    "scope": "The historical audit checked saved residual inputs and monitoring recurrence, source-time ownership, ready counts, flags, rates and diagnosis thresholds. It did not independently reconstruct raw-to-prediction calculations or provide independent human review."
+  },
+  "diagnostic_summaries": {
+    "T": {
+      "recurrence_rows_checked": 9096,
+      "context_rows_excluded": 336,
+      "annual": {
+        "hours": 8760,
+        "flags": 28,
+        "positive_flags": 3,
+        "negative_flags": 25,
+        "mean_standardised_residual": -0.10089389340989453,
+        "sample_sd_standardised_residual": 0.9557105023900153,
+        "min_standardised_residual": -5.521793025634363,
+        "max_standardised_residual": 6.478020883904819,
+        "mean_state": -0.10066854426791173
+      },
+      "monthly": {
+        "1": {
+          "hours": 744,
+          "flags": 0,
+          "positive_flags": 0,
+          "negative_flags": 0,
+          "mean_standardised_residual": -0.205004440132113,
+          "sample_sd_standardised_residual": 0.7694707571445127,
+          "min_standardised_residual": -4.209739499101102,
+          "max_standardised_residual": 3.8864043636124403,
+          "mean_state": -0.19753932061395973
+        },
+        "2": {
+          "hours": 672,
+          "flags": 4,
+          "positive_flags": 0,
+          "negative_flags": 4,
+          "mean_standardised_residual": -0.39849008216285753,
+          "sample_sd_standardised_residual": 0.9977677452598451,
+          "min_standardised_residual": -3.9463851305530793,
+          "max_standardised_residual": 2.4052940537832015,
+          "mean_state": -0.38986647650830714
+        },
+        "3": {
+          "hours": 744,
+          "flags": 0,
+          "positive_flags": 0,
+          "negative_flags": 0,
+          "mean_standardised_residual": 0.018893768915172044,
+          "sample_sd_standardised_residual": 0.75531185203354,
+          "min_standardised_residual": -3.330738855517272,
+          "max_standardised_residual": 3.405363155790381,
+          "mean_state": 0.007574324397244144
+        },
+        "4": {
+          "hours": 720,
+          "flags": 0,
+          "positive_flags": 0,
+          "negative_flags": 0,
+          "mean_standardised_residual": -0.2076936895863989,
+          "sample_sd_standardised_residual": 0.8895364997011908,
+          "min_standardised_residual": -3.7520951770298114,
+          "max_standardised_residual": 3.4409357727901826,
+          "mean_state": -0.19837927372817765
+        },
+        "5": {
+          "hours": 744,
+          "flags": 2,
+          "positive_flags": 0,
+          "negative_flags": 2,
+          "mean_standardised_residual": -0.07831226264368563,
+          "sample_sd_standardised_residual": 1.0396508739173345,
+          "min_standardised_residual": -5.521793025634363,
+          "max_standardised_residual": 3.3312450691722773,
+          "mean_state": -0.08780831104221004
+        },
+        "6": {
+          "hours": 720,
+          "flags": 8,
+          "positive_flags": 0,
+          "negative_flags": 8,
+          "mean_standardised_residual": -0.21513021197646634,
+          "sample_sd_standardised_residual": 1.1357467186806065,
+          "min_standardised_residual": -4.457690498825244,
+          "max_standardised_residual": 2.9056305238287687,
+          "mean_state": -0.2160934717606606
+        },
+        "7": {
+          "hours": 744,
+          "flags": 0,
+          "positive_flags": 0,
+          "negative_flags": 0,
+          "mean_standardised_residual": -0.14161060816246615,
+          "sample_sd_standardised_residual": 1.009280747792923,
+          "min_standardised_residual": -3.8078210333918863,
+          "max_standardised_residual": 6.478020883904819,
+          "mean_state": -0.13431331550949765
+        },
+        "8": {
+          "hours": 744,
+          "flags": 0,
+          "positive_flags": 0,
+          "negative_flags": 0,
+          "mean_standardised_residual": 0.010348293793087633,
+          "sample_sd_standardised_residual": 1.005558094489976,
+          "min_standardised_residual": -4.270634795491723,
+          "max_standardised_residual": 3.2349552064488614,
+          "mean_state": 0.006904702021149522
+        },
+        "9": {
+          "hours": 720,
+          "flags": 14,
+          "positive_flags": 3,
+          "negative_flags": 11,
+          "mean_standardised_residual": -0.31455203290849,
+          "sample_sd_standardised_residual": 1.2349821517273942,
+          "min_standardised_residual": -4.523026128681857,
+          "max_standardised_residual": 5.553020747207262,
+          "mean_state": -0.3134245531157792
+        },
+        "10": {
+          "hours": 744,
+          "flags": 0,
+          "positive_flags": 0,
+          "negative_flags": 0,
+          "mean_standardised_residual": 0.23037133269247703,
+          "sample_sd_standardised_residual": 0.7872927562824293,
+          "min_standardised_residual": -2.93196715525141,
+          "max_standardised_residual": 2.986813054917864,
+          "mean_state": 0.22485616356779825
+        },
+        "11": {
+          "hours": 720,
+          "flags": 0,
+          "positive_flags": 0,
+          "negative_flags": 0,
+          "mean_standardised_residual": -0.014888186796098976,
+          "sample_sd_standardised_residual": 0.8900637075684071,
+          "min_standardised_residual": -3.570346206560429,
+          "max_standardised_residual": 3.766059928591474,
+          "mean_state": -0.011056095940585502
+        },
+        "12": {
+          "hours": 744,
+          "flags": 0,
+          "positive_flags": 0,
+          "negative_flags": 0,
+          "mean_standardised_residual": 0.06529374921404844,
+          "sample_sd_standardised_residual": 0.6216129245214925,
+          "min_standardised_residual": -2.6087133103851037,
+          "max_standardised_residual": 2.8094175720473062,
+          "mean_state": 0.062288483656924104
+        }
+      },
+      "diagnosis_reasons": [],
+      "residual_actual_hour_lag_correlations": {
+        "1": 0.6980005965320892,
+        "6": 0.18926331154413417,
+        "24": 0.2276050033457217,
+        "48": 0.14784421721294067,
+        "168": 0.1037307948905048
+      },
+      "comparison_2022_selected_lambda_annual": {
+        "hours": 8760,
+        "flags": 87,
+        "positive_flags": 0,
+        "negative_flags": 87,
+        "mean_standardised_residual": -0.1808708549205575,
+        "sample_sd_standardised_residual": 1.0725353544520304,
+        "min_standardised_residual": -5.9503902176952606,
+        "max_standardised_residual": 4.248243363500195,
+        "mean_state": -0.1811956861148278
+      },
+      "comparison_2022_selected_lambda_june": {
+        "hours": 720,
+        "flags": 0,
+        "positive_flags": 0,
+        "negative_flags": 0,
+        "mean_standardised_residual": -0.21464914944358005,
+        "sample_sd_standardised_residual": 1.0288812059749006,
+        "min_standardised_residual": -3.4346841886565738,
+        "max_standardised_residual": 3.0008911082258276,
+        "mean_state": -0.21990160425988248
+      },
+      "descriptive_consecutive_flags": {
+        "run_count": 11,
+        "longest_run_hours": 5,
+        "scope": "Descriptive consecutive flagged hours; not Appendix C event or episode scoring."
+      }
+    },
+    "U": {
+      "recurrence_rows_checked": 9096,
+      "context_rows_excluded": 336,
+      "annual": {
+        "hours": 8760,
+        "flags": 107,
+        "positive_flags": 21,
+        "negative_flags": 86,
+        "mean_standardised_residual": -0.23522611075708794,
+        "sample_sd_standardised_residual": 1.064780382348676,
+        "min_standardised_residual": -5.708205463131118,
+        "max_standardised_residual": 6.866209911776892,
+        "mean_state": -0.23548426138956619
+      },
+      "monthly": {
+        "1": {
+          "hours": 744,
+          "flags": 3,
+          "positive_flags": 0,
+          "negative_flags": 3,
+          "mean_standardised_residual": -0.5308960156642937,
+          "sample_sd_standardised_residual": 0.7662083422694081,
+          "min_standardised_residual": -3.073571778301559,
+          "max_standardised_residual": 2.4353654585545397,
+          "mean_state": -0.5374778120258996
+        },
+        "2": {
+          "hours": 672,
+          "flags": 16,
+          "positive_flags": 0,
+          "negative_flags": 16,
+          "mean_standardised_residual": -0.45788835532849775,
+          "sample_sd_standardised_residual": 0.9513537028038885,
+          "min_standardised_residual": -4.99091817306445,
+          "max_standardised_residual": 3.384316397031574,
+          "mean_state": -0.45808498190586194
+        },
+        "3": {
+          "hours": 744,
+          "flags": 16,
+          "positive_flags": 0,
+          "negative_flags": 16,
+          "mean_standardised_residual": -0.3789446610887876,
+          "sample_sd_standardised_residual": 1.0780204991572913,
+          "min_standardised_residual": -4.897657734714955,
+          "max_standardised_residual": 3.7613770364047627,
+          "mean_state": -0.3818427974713495
+        },
+        "4": {
+          "hours": 720,
+          "flags": 8,
+          "positive_flags": 2,
+          "negative_flags": 6,
+          "mean_standardised_residual": -0.18948386827863092,
+          "sample_sd_standardised_residual": 1.0210157811609641,
+          "min_standardised_residual": -3.5826991949894924,
+          "max_standardised_residual": 4.153873597354029,
+          "mean_state": -0.19303357815035577
+        },
+        "5": {
+          "hours": 744,
+          "flags": 12,
+          "positive_flags": 2,
+          "negative_flags": 10,
+          "mean_standardised_residual": -0.31451220621160914,
+          "sample_sd_standardised_residual": 1.096990166182546,
+          "min_standardised_residual": -3.664206353929123,
+          "max_standardised_residual": 6.866209911776892,
+          "mean_state": -0.3096834627933678
+        },
+        "6": {
+          "hours": 720,
+          "flags": 31,
+          "positive_flags": 7,
+          "negative_flags": 24,
+          "mean_standardised_residual": -0.643709206073269,
+          "sample_sd_standardised_residual": 1.2673820751526934,
+          "min_standardised_residual": -5.708205463131118,
+          "max_standardised_residual": 5.640820462835745,
+          "mean_state": -0.6346573576697121
+        },
+        "7": {
+          "hours": 744,
+          "flags": 10,
+          "positive_flags": 4,
+          "negative_flags": 6,
+          "mean_standardised_residual": -0.05003807692363191,
+          "sample_sd_standardised_residual": 1.3840001022637434,
+          "min_standardised_residual": -5.708201672469782,
+          "max_standardised_residual": 5.355320929291971,
+          "mean_state": -0.06819846682928722
+        },
+        "8": {
+          "hours": 744,
+          "flags": 3,
+          "positive_flags": 3,
+          "negative_flags": 0,
+          "mean_standardised_residual": 0.10271441210925239,
+          "sample_sd_standardised_residual": 1.1117055439302195,
+          "min_standardised_residual": -4.437861281277317,
+          "max_standardised_residual": 4.665811251203034,
+          "mean_state": 0.1049132394196185
+        },
+        "9": {
+          "hours": 720,
+          "flags": 2,
+          "positive_flags": 0,
+          "negative_flags": 2,
+          "mean_standardised_residual": 0.09819799877876613,
+          "sample_sd_standardised_residual": 1.1270920822445967,
+          "min_standardised_residual": -4.5790256135372225,
+          "max_standardised_residual": 3.928428362662449,
+          "mean_state": 0.09886535023973225
+        },
+        "10": {
+          "hours": 744,
+          "flags": 3,
+          "positive_flags": 0,
+          "negative_flags": 3,
+          "mean_standardised_residual": -0.043919569257170464,
+          "sample_sd_standardised_residual": 0.8728914173875331,
+          "min_standardised_residual": -4.762370225872107,
+          "max_standardised_residual": 3.0774324426106032,
+          "mean_state": -0.04068960863517091
+        },
+        "11": {
+          "hours": 720,
+          "flags": 3,
+          "positive_flags": 3,
+          "negative_flags": 0,
+          "mean_standardised_residual": -0.10686043763891018,
+          "sample_sd_standardised_residual": 0.8552431518531135,
+          "min_standardised_residual": -2.944414796280427,
+          "max_standardised_residual": 3.946526461856819,
+          "mean_state": -0.10799336838546875
+        },
+        "12": {
+          "hours": 744,
+          "flags": 0,
+          "positive_flags": 0,
+          "negative_flags": 0,
+          "mean_standardised_residual": -0.32572617589207703,
+          "sample_sd_standardised_residual": 0.7359768090428931,
+          "min_standardised_residual": -3.432511358582439,
+          "max_standardised_residual": 2.3543372121127795,
+          "mean_state": -0.3160793914985239
+        }
+      },
+      "diagnosis_reasons": [
+        "annual_FPR_above_.01",
+        "month_6_FPR_above_.03"
+      ],
+      "residual_actual_hour_lag_correlations": {
+        "1": 0.690666898682822,
+        "6": 0.18461924454968848,
+        "24": 0.17204019263850745,
+        "48": 0.13550595559071488,
+        "168": 0.05888584202698439
+      },
+      "comparison_2022_selected_lambda_annual": {
+        "hours": 8760,
+        "flags": 87,
+        "positive_flags": 54,
+        "negative_flags": 33,
+        "mean_standardised_residual": -0.17018311591934707,
+        "sample_sd_standardised_residual": 1.0922277208791633,
+        "min_standardised_residual": -5.982424471875381,
+        "max_standardised_residual": 5.573086156164558,
+        "mean_state": -0.16920501092877338
+      },
+      "comparison_2022_selected_lambda_june": {
+        "hours": 720,
+        "flags": 10,
+        "positive_flags": 7,
+        "negative_flags": 3,
+        "mean_standardised_residual": 0.008131573680480153,
+        "sample_sd_standardised_residual": 1.2189346251479132,
+        "min_standardised_residual": -5.101243693422992,
+        "max_standardised_residual": 4.903675730440858,
+        "mean_state": 0.013664008438341549
+      },
+      "descriptive_consecutive_flags": {
+        "run_count": 22,
+        "longest_run_hours": 15,
+        "scope": "Descriptive consecutive flagged hours; not Appendix C event or episode scoring."
+      }
+    }
+  },
+  "records": {
+    "T-validation.json": {
+      "sha256": "81b11f1cb69b0947e2799802310e72d559545e88b38756aceb50a2c231922cde",
+      "source": "evidence/r1-validation-2026-10-08/manual-2023-20261007T211804852813Z/T-validation.json"
+    },
+    "U-validation.json": {
+      "sha256": "cd62dd71e77d401bff4b58820a6b21f4dc1b2bf6d378326f2f5bd6f162666c2c",
+      "source": "evidence/r1-validation-2026-10-08/manual-2023-20261007T211804852813Z/U-validation.json"
+    },
+    "completed.json": {
+      "sha256": "3b7d61eba28851129fc8712689c11cb94c20996be10ec64627d1676fb1f4159c",
+      "source": "evidence/r1-validation-2026-10-08/manual-2023-20261007T211804852813Z/completed.json"
+    },
+    "audit.json": {
+      "sha256": "1a87a56a6818af971c1e545077e63b5a4001afdbb768cf6763bb91f68cbc039e",
+      "source": "evidence/r1-validation-2026-10-08/completed-validation-review/audit.json"
+    },
+    "2023-Validation-Review-and-Disposition-2026-10-08.md": {
+      "sha256": "52d172c652f14dba8a6d885fce2be10d919244ad11b6aa28f33d1bb863fffc60",
+      "source": "outputs/2023-Validation-Review-and-Disposition-2026-10-08.md"
+    }
+  },
+  "later_retained_labels": {
+    "validation_original_state": "diagnosis_required",
+    "validation_disposition": "negative_U_retained_unchanged"
+  },
+  "limitations": [
+    "2023 was previously exposed; not an untouched holdout.",
+    "Background is assumed normal, not certified healthy.",
+    "Rates concern S01 statistical monitoring only, not combined H or final performance.",
+    "Humidity remains originally A2-ineligible and exploratory under R1.",
+    "The diagnosis describes a residual shift and dependence; it does not identify a physical cause.",
+    "Original diagnosis_required and the later negative_U_retained_unchanged disposition are both preserved."
+  ]
+}

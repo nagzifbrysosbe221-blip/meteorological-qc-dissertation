@@ -1,0 +1,11 @@
+{
+  "basis": "Independent hand arithmetic recorded before executing tests; fabricated examples only",
+  "monthly_counts": {"missing_cell": 8, "absent_row": 4, "duplicate_receipt": 6, "off_grid_timestamp": 6, "invalid_timestamp": 6, "out_of_range": 12, "gradual_bias": 36},
+  "annual_counts": {"missing_cell": 96, "absent_row": 48, "duplicate_receipt": 72, "off_grid_timestamp": 72, "invalid_timestamp": 72, "out_of_range": 144, "gradual_bias": 432},
+  "six_hour_missing": {"N": 6, "C": 3, "Z": 1, "U": 2},
+  "six_hour_two_copy_duplicate": {"C": 6, "added": 12, "B0": "absent_capability_miss", "R_delay": 0},
+  "half_scale_T_24_ramp": {"first": 10.041666666666666, "second": 10.083333333333334, "ramp_end": 11.0, "hold_end": 11.0, "restored": 10.0},
+  "one_missing_in_three_hours": {"availability_TP": 1, "availability_TN": 2, "B0_value_n": 2, "H_value_n": 0},
+  "calendar": {"January_scored": 720, "January_context": 24, "February_scored": 696, "March_scored": 744, "March_context": 336, "December_scored": 744},
+  "one_invalid_in_three_hours": {"Q04_R_n": 3, "Q05_R_n": 2, "Q06_R_n": 2, "availability_TP_each_variable": 1, "R_delay": 0, "B0_delay": 300}
+}

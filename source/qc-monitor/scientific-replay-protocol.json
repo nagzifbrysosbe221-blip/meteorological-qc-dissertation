@@ -1,0 +1,36 @@
+{
+  "version": "scientific-replay-integration-v1",
+  "final_execution_enabled": false,
+  "scope": "Frozen scientific B0/R/H kernel integration on bounded fabricated observations only",
+  "bound_evidence": {
+    "evidence/r1-calibration-2026-10-08/approval.json": "4ae391e34d463b3719a7397e1daf51cd9b177625083b16ce32ff24d182e6f8e4",
+    "evidence/r1-calibration-2026-10-08/manual-A3-20261007T210253930632Z/completed.json": "20b0d4a7c448105a26997aff533dae7097e48f3927576623a84125e6f689ec43",
+    "evidence/r1-validation-2026-10-08/manual-2023-20261007T211804852813Z/completed.json": "3b7d61eba28851129fc8712689c11cb94c20996be10ec64627d1676fb1f4159c",
+    "evidence/r1-validation-2026-10-08/completed-validation-review/audit.json": "1a87a56a6818af971c1e545077e63b5a4001afdbb768cf6763bb91f68cbc039e",
+    "evidence/r1-validation-2026-10-08/completed-validation-review/handoff.json": "8f3c07c335bf070d5c9b53f540b10f626d714c2cf6786e1d5319e1014135ecd4",
+    "outputs/2023-Validation-Review-and-Disposition-2026-10-08.md": "52d172c652f14dba8a6d885fce2be10d919244ad11b6aa28f33d1bb863fffc60",
+    "working/qc-monitor/r1-validation-protocol.json": "3f62e9179c3adef57570b6c1e1c68793673f08465dd82c9244ed221c70e4241b",
+    "reference/Chapters-1-to-3-Supervisor-Review-v2.pdf": "b759751cf3f59dac0622fb11ce9b03a178c6a98b78e4b7a20007a8ecaff674f2"
+  },
+  "retained": [
+    "T",
+    "U",
+    "B0",
+    "R",
+    "H",
+    "936 cases per pass",
+    "primary",
+    "alpha-0005",
+    "alpha-002",
+    "T-range"
+  ],
+  "future_gates": [
+    "prospective protocol recorded",
+    "restricted final structural intake",
+    "independent label review",
+    "actual scientific freeze",
+    "measured pilot",
+    "manual launch"
+  ],
+  "failures": "Missing/changed evidence, lost labels, invalid settings and final dates stop execution; no defaults, retuning or P-to-S fallback."
+}

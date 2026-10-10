@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="An examiner-facing overview of the dissertation's four data periods: 2021 fitting, 2022 selection, 2023 validation and 2024 final evaluation."><title>Overview of the Four Study Periods · Dissertation review</title><link rel="stylesheet" href="guide.css"><link rel="stylesheet" href="../assets/python-code.css"><script src="../assets/python-sources.js" defer></script><script src="../assets/python-code.js" defer></script></head>
+<body>
+<a class="skip-link" href="#main">Skip to the review</a>
+<header class="site-header"><a class="brand" href="../index.html">Meteorological quality control<span>Dissertation review companion</span></a><nav aria-label="Website"><a href="../index.html">Home</a></nav></header>
+<div class="layout">
+<aside class="sidebar"><p class="eyebrow">Study Design and Implementation</p><nav class="guide-chapters" aria-label="Study Design and Implementation"><a href="index.html">1. Data collection and preparation</a><a href="four-periods.html" aria-current="page">2. Four study periods</a><a href="fitting-2021.html">3. 2021 — Fitting</a><a href="selection-2022.html">4. 2022 — Selection</a><a href="validation-2023.html">5. 2023 — Validation</a><a href="evaluation-2024.html">6. 2024 — Final evaluation</a></nav><p class="eyebrow">Results and Evidence</p><nav class="guide-chapters" aria-label="Results and Evidence"><a href="../demo/index.html">1. Saved results explorer</a><a href="../demo/datasets.html">2. Complete datasets</a><a href="../demo/figures.html">3. Figures and timelines</a><a href="../demo/missed-example.html">4. Understanding a missed case</a><a href="../demo/verification.html">5. Validation and verification</a></nav><p class="eyebrow">Dissertation References</p><nav class="guide-chapters" aria-label="Dissertation References"><a href="../references/index.html">All 30 references</a></nav><p class="eyebrow">On this page</p><nav aria-label="On this page"><a href="#overview">Overview</a><a href="#roles">Practical use and outcomes</a><a href="#separation">Why the periods were separated</a><a href="#configuration">What changed and stayed fixed</a><a href="#interpretation">How to interpret the sequence</a><a href="#evidence">Supporting evidence</a><a href="#python-code">Complete Python code</a></nav><div class="sidebar-note">Related dissertation sections<br><strong>3.2, 3.4, 3.5 and Appendix A2–A4</strong><p>An overview of the completed workflow and the decisions carried from one period to the next.</p></div></aside>
+<main id="main">
+<div id="overview" class="page-intro"><p class="eyebrow">Study Design and Implementation / Study design</p><h1>Overview of the Four Study Periods</h1><p class="code-jump"><a href="#python-code">Read, copy or download the complete Python code ↓</a></p><p class="lead">The study assigned four consecutive years of observations to four different jobs: fit prediction models, select monitoring settings, check their transfer to another year, and evaluate the fixed configurations.</p>
+<ol class="period-timeline" aria-label="Chronological study sequence">
+<li><a href="#year-2021"><span>2021</span><strong>Fitting</strong><small>Learn expected behaviour</small></a></li>
+<li><a href="#year-2022"><span>2022</span><strong>Selection</strong><small>Choose models and settings</small></a></li>
+<li><a href="#year-2023"><span>2023</span><strong>Validation</strong><small>Check unchanged settings</small></a></li>
+<li><a href="#year-2024"><span>2024</span><strong>Final evaluation</strong><small>Measure detections and misses</small></a></li>
+</ol>
+<p class="small">These are the years represented by the weather observations. The saved execution records are dated October 2026. The 2023 data had already been examined; final-period exposure is now complete.</p></div>
+
+<section id="roles"><p class="section-label">1 / Practical use and outcomes</p><h2>What each period contributed</h2><p>De Bilt supplied the monitored temperature and humidity readings. Schiphol supplied candidate reference readings for the same variable and hour. A prediction model estimated the expected De Bilt value; the difference between the observed and predicted value is called a <strong>residual</strong>.</p>
+<p>The study fitted a seasonal model (<strong>S</strong>) and a model combining seasonal patterns with Schiphol readings (<strong>P</strong>). P is the “reference model” referred to in the dissertation. It provides an expected value for comparison, with uncertainty about both stations retained.</p>
+<div class="table-scroll wide-table" tabindex="0" role="region" aria-label="Four-period workflow and outcomes"><table><thead><tr><th scope="col">Period and purpose</th><th scope="col">How the data were used in practice</th><th scope="col">Recorded outcome and what carried forward</th></tr></thead><tbody>
+<tr id="year-2021"><th scope="row"><a href="fitting-2021.html">2021 — Fitting</a><br><span class="cell-note">Estimate expected behaviour</span></th><td>Fitted S and P separately for temperature and humidity, using 8,760 hourly records for each candidate. Calculated the typical size of the prediction errors for later comparison.</td><td>Four fitted candidate models were saved. Their coefficients and error summaries were fixed for later use. Fitting alone did not establish which model was suitable.</td></tr>
+<tr id="year-2022"><th scope="row"><a href="selection-2022.html">2022 — Selection</a><br><span class="cell-note">Choose a suitable model and monitoring settings</span></th><td>Applied the saved models to 2022 and checked coverage, systematic prediction error and prediction accuracy. Calibrated alarm thresholds on the background data, then compared four monitoring weights using 216 controlled gradual-bias cases per variable for each eligible weight.</td><td>Temperature P met the original model requirements. Both humidity candidates failed; the unchanged humidity P model continued as exploratory work under the researcher-approved R1 revision. Both variables selected a monitoring weight of 0.20. Those choices carried forward.</td></tr>
+<tr id="year-2023"><th scope="row"><a href="validation-2023.html">2023 — Validation</a><br><span class="cell-note">Check transfer with the selected settings</span></th><td>Replayed the previously examined 2023 background using the saved 2021 models and 2022 settings. Counted statistical-monitor flags annually and monthly, without introducing new faults or retuning the settings.</td><td>Temperature flagged 28 of 8,760 eligible hours (0.3196%) and stayed within the annual 1% and monthly 3% diagnostic limits. Humidity flagged 107 of 8,760 (1.2215%); June reached 31 of 720 (4.3056%). The negative humidity finding was diagnosed, disclosed and carried forward unchanged.</td></tr>
+<tr id="year-2024"><th scope="row"><a href="evaluation-2024.html">2024 — Final evaluation</a><br><span class="cell-note">Measure the comparison</span></th><td>Compared the three fixed monitoring configurations on controlled faults and a continuous background. Scoring used source dates 2 January–31 December; 1 January supplied unscored context. The primary pass and three prescribed sensitivity passes each covered 936 fault cases.</td><td>All four passes completed. In the primary comparison, hybrid monitoring (integrity rules plus residual monitoring) detected 95 of 216 temperature gradual-bias cases and missed 121; the two simpler configurations detected none. Humidity results retained exploratory status. Detections, misses, unavailable checks and false alarms were preserved.</td></tr>
+</tbody></table></div>
+<p class="source-note">Recorded values: <a href="four-periods-evidence.json">selected evidence summary</a>, <a href="../provenance/validation/T-validation.json">temperature validation</a>, <a href="../provenance/validation/U-validation.json">humidity validation</a> and <a href="../results/root_summary.jsonl.gz">complete final detection table</a>. Dissertation: Sections 3.2, 3.4–3.5 and Appendix A2–A4.</p></section>
+
+<section id="separation"><p class="section-label">2 / Reason for the design</p><h2>Why the study used separate periods</h2><p>Each period answered a different question. Separating their roles reduced the opportunity to adjust a model or alarm threshold to the same observations later used to judge its performance.</p>
+<ol class="workflow"><li><strong>Fitting established the prediction formula.</strong> The 2021 observations were used to estimate expected behaviour. Evaluating only on those observations would say little about transfer to another year.</li><li><strong>Selection made the development choices.</strong> The 2022 observations supported the model checks and choice of monitoring settings. Because those choices used 2022 outcomes, the development results were not treated as the final evaluation.</li><li><strong>Validation exposed transfer problems.</strong> The 2023 replay checked how the selected settings behaved in another year. Its elevated humidity flag rate was retained as evidence of a limitation.</li><li><strong>Final evaluation measured the fixed comparison.</strong> The 2024 replay assessed the declared configurations, fault cases and sensitivity settings while retaining their earlier decisions and qualifications.</li></ol>
+<p>This was the separation chosen for this dissertation. Four calendar years are not a universal requirement for quality-control studies. Here, a full year for each early role also retained seasonal variation within that role.</p>
+<p class="outcome"><strong>Limit on the interpretation.</strong> Temporal separation does not by itself establish an unseen test. The 2023 data were previously exposed, and the final evidence records prior public-summary exposure. The dissertation therefore does not describe the final period as a newly untouched holdout.</p></section>
+
+<section id="configuration"><p class="section-label">3 / Configuration across periods</p><h2>What changed and what stayed fixed</h2><p>The prediction models and the monitoring settings were established at different stages. Once selected, they were transferred to later data without refitting or retuning in response to the later results.</p>
+<div class="table-scroll wide-table" tabindex="0" role="region" aria-label="Configuration changes across four periods"><table><thead><tr><th scope="col">Component</th><th scope="col">2021</th><th scope="col">2022</th><th scope="col">2023</th><th scope="col">2024</th></tr></thead><tbody>
+<tr><th scope="row">Prediction models</th><td>Fit S and P; save coefficients and error summaries.</td><td>Check suitability and select the model; coefficients remain unchanged.</td><td>Use the selected model unchanged.</td><td>Use the selected model unchanged.</td></tr>
+<tr><th scope="row">Statistical alarm settings</th><td>Not yet selected.</td><td>Compare weights 0.02, 0.05, 0.10 and 0.20; calibrate thresholds. Select 0.20 for both variables.</td><td>Use the saved weight and threshold; diagnose excess flags.</td><td>Use the fixed primary settings and separately prescribed sensitivity settings.</td></tr>
+<tr><th scope="row">Artificial faults</th><td>No injected faults used to fit the models.</td><td>Controlled gradual-bias cases support setting selection.</td><td>Background replay for annual and monthly flag rates.</td><td>Seven fault families plus a separate continuous background.</td></tr>
+<tr><th scope="row">Humidity status</th><td>Two candidates fitted; suitability not yet decided.</td><td>Original model requirements failed; R1 permits exploratory use of unchanged P.</td><td>Exploratory; negative validation finding retained.</td><td>Exploratory; the earlier failures remain part of the interpretation.</td></tr>
+</tbody></table></div>
+<details><summary>What does “fixed settings” mean in practical terms?</summary><div class="details-body"><p>The system still received each new reading and updated its running monitoring value. Its prediction formula, error scale, selected weight and alarm threshold were not relearned from the validation or final results. Earlier observations supplied the prescribed starting context for each replay.</p><p>The primary statistical thresholds were approximately <strong>2.4817 for temperature</strong> and <strong>2.0578 for humidity</strong>. These are thresholds on the standardised monitoring statistic, not limits in °C or humidity percent. The weight of <strong>0.20</strong> controls how strongly each new residual affects the running value.</p><p>In the final comparison, <strong>B0</strong> used basic missing-data and range checks; <strong>R</strong> added integrity rules; <strong>H</strong> combined R with residual monitoring. Model and weight selection concern the statistical component used by H.</p></div></details>
+<p class="source-note">Sources: <a href="../source/qc-monitor/r1-a3-protocol.json">2022 protocol</a>, <a href="../source/qc-monitor/r1-validation-protocol.json">2023 transfer protocol</a>, <a href="../provenance/freeze-v2/settings.json">saved final settings</a> and <a href="../provenance/freeze-v2/freeze-summary.json">final freeze record</a>.</p></section>
+
+<section id="interpretation"><p class="section-label">4 / Interpretation</p><h2>Distinctions to retain when reviewing the results</h2><ul class="limitations">
+<li><strong>Four periods and four passes describe different things.</strong> The periods are the data roles across 2021–2024. The four final passes all use the 2024 evaluation period: the primary pass, two alternative statistical-threshold settings and one alternative temperature-range setting.</li>
+<li><strong>Humidity had two separate negative findings.</strong> In 2022 its prediction models failed the original suitability checks. In 2023 its statistical-monitor flag rate exceeded the declared diagnostic limits. Later detections do not remove either finding. R1 records researcher approval of exploratory use; no supervisor approval is recorded.</li>
+<li><strong>Validation flags and final false alarms have different scopes.</strong> The 2023 counts concern the statistical monitor on 8,760 ready background hours. The final primary H temperature result includes 22 false-positive value hours among 8,557 eligible background negatives, with 203 scored hours excluded. These rates should not be compared as if they had identical checks or denominators.</li>
+<li><strong>Background truth remains an assumption.</strong> Readings without artificial faults were treated as assumed normal. A flag identifies suspicious behaviour; it does not by itself diagnose a physical sensor fault.</li>
+<li><strong>Starting context and scoring data have different jobs.</strong> Earlier observations initialise the monitor before a scored window. They do not change the original source-year role or become extra scored observations. Source-date assignment also remains unchanged when hour 24 is displayed at next-day midnight.</li>
+</ul><p class="source-note">Sources: <a href="four-periods-evidence.json">period evidence summary</a>, <a href="../results/background_points.jsonl.gz">complete background point table</a>, <a href="../provenance/freeze-v2/freeze-summary.json">recorded exposure and scientific labels</a>. Data boundaries: <a href="index.html#record">source-record interpretation</a>.</p></section>
+
+<section id="evidence"><p class="section-label">5 / Supporting evidence</p><h2>Where the overview can be checked</h2><div class="table-scroll" tabindex="0" role="region" aria-label="Four-period evidence register"><table><thead><tr><th scope="col">Evidence</th><th scope="col">What it supports</th><th scope="col">Access</th></tr></thead><tbody>
+<tr><th scope="row">Selected period records</th><td>Fitting counts, original model decisions, later 2022 selections, validation counts and selected final outcomes. Early records are summarised with original file fingerprints; their complete files remain in the separate research archive.</td><td><a href="four-periods-evidence.json">Open structured summary</a></td></tr>
+<tr><th scope="row">2023 validation</th><td>Annual and monthly statistical flag rates, including the negative humidity result.</td><td><a href="../provenance/validation/T-validation.json">Temperature</a><br><a href="../provenance/validation/U-validation.json">Humidity</a></td></tr>
+<tr><th scope="row">Final settings and freeze</th><td>Preserved configuration identities, sensitivity variants and retained scientific qualifications.</td><td><a href="../provenance/freeze-v2/settings.json">Settings</a><br><a href="../provenance/freeze-v2/freeze-summary.json">Freeze</a></td></tr>
+<tr><th scope="row">Final saved results</th><td>Completed cases, detections, misses, false alarms and other reported outcomes. The viewer provides access to the complete downloadable tables.</td><td><a href="../demo/index.html">Results explorer</a></td></tr>
+</tbody></table></div><p class="section-conclusion"><strong>What the sequence establishes.</strong> The saved evidence separates model fitting, development choices, validation findings and final comparison. Its conclusions remain conditional on the reference information, assumed-normal background, prior exposure and exploratory humidity status.</p><div class="review-links"><a href="index.html">← Data collection and preparation</a><a href="fitting-2021.html">Next: 2021 — Fitting →</a></div></section>
+<!-- BEGIN GENERATED PYTHON VIEW -->
+<section id="python-code" class="python-section" data-python-view data-default-file="source/qc-monitor/scientific_stage.py" data-preferred="[&quot;source/qc-monitor/scientific_stage.py&quot;,&quot;source/qc-monitor/r1_stage.py&quot;,&quot;source/qc-monitor/r1_validation.py&quot;,&quot;source/qc-monitor/final_controller.py&quot;]">
+<p class="section-label">Complete Python code</p><h2>The four-period implementation</h2>
+<p class="code-intro">Follow the stage coordinators in chronological order. Each period consumes the records and decisions described above; a later stage is not a new opportunity to fit on the scored data.</p>
+<p class="small">The selected file is displayed in full below. Choose another file to read its complete code. Imports may require related files, configuration and saved inputs. <a href="../demo/verification.html#scientific-and-reporting-environments">Environment requirements</a> · <a href="../demo/verification.html#full-study-reproduction">Full-study prerequisites</a>.</p>
+<label class="code-picker" hidden for="python-file">Python file<select id="python-file"></select></label>
+<p class="code-file-description">Runs the early fitting, gate and diagnostic steps and records their outputs. Its historical paths and prerequisite records belong to the original research environment.</p>
+<p class="code-file-path">source/qc-monitor/scientific_stage.py · 150 lines · Complete file</p>
+<div class="code-shell"><div class="code-toolbar"><button type="button" data-copy-code disabled>Copy code</button><a data-download-code href="../source/qc-monitor/scientific_stage.py" download="scientific_stage.py">Download .py</a><label class="code-wrap" hidden><input type="checkbox" data-wrap-code checked>Wrap long lines</label></div>
+<pre class="code-display" tabindex="0" role="region" aria-label="Complete Python code: source/qc-monitor/scientific_stage.py"><code>&quot;&quot;&quot;Short manual early stage. No A3 tuning, final intake or research batch launch.&quot;&quot;&quot;
+import argparse
+from dataclasses import asdict
+from datetime import datetime, timezone
+import json
+import os
+os.environ['OPENBLAS_NUM_THREADS']='1'
+os.environ['OMP_NUM_THREADS']='1'
+from pathlib import Path
+import platform
+import sys
+import time
+import traceback
+import zipfile
+import numpy as np
+
+from early_scientific import load_series, verified_manifest, ACCEPTANCE, ACCEPTANCE_SHA256
+from scientific_models import fit, assess_gates, diagnostics
+from records import ROOT, PROJECT, code_identity, save_json, sha256, utc_now
+from lossless_storage import within_work
+from measure_storage import resources
+from demo import process_peak_bytes
+
+EVIDENCE=ROOT/'evidence/scientific-models-2026-10-08'
+PROTOCOL=PROJECT/'early-stage-protocol.json'
+
+
+def execute(action, folder, *, loader=load_series):
+    if action not in ('verify-inputs','fit-gates'):
+        raise ValueError('Unsupported stage')
+    folder=within_work(folder)
+    folder.mkdir(parents=True,exist_ok=False)
+    start=time.perf_counter()
+    protocol=json.loads(PROTOCOL.read_text(encoding='utf-8'))
+    before=resources()
+    save_json(folder/'started.json',{'action':action,'started_utc':utc_now(),'code':code_identity(),
+      'acceptance_sha256':ACCEPTANCE_SHA256,'protocol':protocol,'protocol_sha256':sha256(PROTOCOL),
+      'numpy':np.__version__,'python':sys.version,'platform':platform.platform(),
+      'resources':before,'seed':None,'seed_reason':'deterministic; not applicable',
+      'command':sys.argv,'scope':'early inputs and A2 only; no calibration or scientific freeze'})
+    with zipfile.ZipFile(folder/'source.zip','x',zipfile.ZIP_DEFLATED) as z:
+        for p in sorted(PROJECT.glob('*.py')): z.write(p,p.name)
+        for name in ('requirements.txt','early-stage-protocol.json'): z.write(PROJECT/name,name)
+    try:
+        if np.__version__ != '2.3.5': raise ValueError('Pinned NumPy 2.3.5 required')
+        if before['disk_free_bytes'] &lt; 1024**3:
+            raise ValueError('Need 1 GiB free allowance for this early stage; not research batch capacity')
+        if before['memory_available_bytes'] is None or before['memory_available_bytes'] &lt; 256*1024**2:
+            raise ValueError('Need at least 256 MiB currently available RAM for this bounded stage')
+        print('VERIFYING acceptance and exact raw/view hashes',flush=True)
+        if action == 'verify-inputs':
+            counts=[]
+            for year,role in ((2021,'fit'),(2022,'development'),(2023,'validation')):
+                for variable in ('T','U'):
+                    s=loader(year,role,variable)
+                    counts.append({'year':year,'role':role,'variable':variable,'hours':len(s.hours),
+                      'finite_target':sum(h.target.reason=='finite' for h in s.hours),
+                      'finite_reference':sum(h.reference.reason=='finite' for h in s.hours),
+                      'boundary_rows_excluded_per_snapshot':s.boundary_rows_excluded,
+                      'last_source_date':s.hours[-1].source_day.isoformat(),
+                      'last_utc':s.hours[-1].utc.isoformat()})
+                    del s
+                    print(f'VERIFIED {year} {variable}; no fitting',flush=True)
+            save_json(folder/'inputs.json',{'counts':counts,'real_fitting':False,
+              'note':'Boundary count is repeated per variable; do not sum to 288.'})
+            state='inputs_verified'
+        else:
+            selections={}
+            for variable in ('T','U'):
+                training=loader(2021,'fit',variable)
+                models={}
+                for kind in ('S','P'):
+                    print(f'FITTING {variable} {kind} on source year 2021',flush=True)
+                    model,record=fit(training,kind); models[kind]=model
+                    save_json(folder/f'{variable}-{kind}-fit.json',record|{'model':asdict(model)})
+                    save_json(folder/f'{variable}-{kind}-2021-diagnostics.json',diagnostics(training,model))
+                del training
+                development=loader(2022,'development',variable)
+                result=assess_gates(development,models['S'],models['P'])
+                save_json(folder/f'{variable}-2022-gates.json',result)
+                for kind,model in models.items():
+                    save_json(folder/f'{variable}-{kind}-2022-diagnostics.json',diagnostics(development,model))
+                selections[variable]=result['selected']
+                print(f'GATES {variable}: {result[&quot;selected&quot;] or &quot;REVISION_REQUIRED&quot;}; {result[&quot;reason&quot;]}',flush=True)
+                del development
+            save_json(folder/'selection.json',{'models':selections,'calibration_complete':False,
+              'lambda':None,'cutoffs':None,'development_ranking':None,'validation':None,
+              'next':'Implement and verify A3 continuous calibration/context and 216-case paired ranking per variable; no defaults'})
+            state='awaiting_calibration' if all(selections.values()) else 'revision_required'
+        # Detect code/input/protocol changes during execution before publishing completion.
+        started=json.loads((folder/'started.json').read_text())
+        if started['code'] != code_identity() or started['protocol_sha256'] != sha256(PROTOCOL):
+            raise ValueError('Code/protocol changed during stage')
+        if loader is load_series and sha256(ACCEPTANCE) != ACCEPTANCE_SHA256:
+            raise ValueError('Acceptance changed during stage')
+        if loader is load_series: verified_manifest()
+        files={p.name:{'sha256':sha256(p),'bytes':p.stat().st_size} for p in sorted(folder.iterdir()) if p.is_file()}
+        save_json(folder/'completed.json',{'state':state,'action':action,'files':files,
+          'elapsed_seconds':time.perf_counter()-start,'process_peak_bytes':process_peak_bytes(),
+          'resources_after':resources(),'calibration_complete':False,'scientific_freeze':False,
+          'real_fitting':action=='fit-gates' and loader is load_series,'full_batch_run':False})
+        print(f'{state.upper()}: {folder}',flush=True)
+        return 3 if state=='revision_required' else 0
+    except BaseException as exc:
+        save_json(folder/'failed.json',{'error':repr(exc),'traceback':traceback.format_exc(),
+          'state':'interrupted' if isinstance(exc,KeyboardInterrupt) else 'failed',
+          'elapsed_seconds':time.perf_counter()-start,'code':code_identity(),
+          'scientific_freeze':False,'resume':'Keep this folder; correct the cause, then rerun to a fresh folder'})
+        print(f'FAILED: {folder}: {exc}',flush=True)
+        return 2 if isinstance(exc,KeyboardInterrupt) else 1
+
+
+def inspect(folder):
+    folder=within_work(folder)
+    done=json.loads((folder/'completed.json').read_text(encoding='utf-8'))
+    required={'started.json','source.zip'}
+    if done['action']=='verify-inputs': required.add('inputs.json')
+    elif done['action']=='fit-gates':
+        required.add('selection.json')
+        for v in ('T','U'):
+            required.add(f'{v}-2022-gates.json')
+            for k in ('S','P'):
+                required.update((f'{v}-{k}-fit.json',f'{v}-{k}-2021-diagnostics.json',f'{v}-{k}-2022-diagnostics.json'))
+    else: raise ValueError('Unknown completed action')
+    if set(done['files']) != required:
+        raise ValueError('Completed stage has missing/extra canonical outputs')
+    if (folder/'failed.json').exists(): raise ValueError('Conflicting failure record')
+    for name,identity in done['files'].items():
+        p=folder/name
+        if sha256(p)!=identity['sha256'] or p.stat().st_size!=identity['bytes']:
+            raise ValueError(f'Completed output changed: {name}')
+    print(json.dumps({'verified':True,'state':done['state'],'files':len(required),
+                      'calibration_complete':False,'scientific_freeze':False}),flush=True)
+    return done
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('action',choices=('verify-inputs','fit-gates','status'))
+    parser.add_argument('--out',type=Path)
+    args=parser.parse_args()
+    if args.action=='status':
+        if args.out is None: parser.error('status needs --out with the saved folder')
+        inspect(args.out); return 0
+    folder=args.out or EVIDENCE/(args.action+'-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
+    print(f'OUTPUT: {folder}',flush=True)
+    return execute(args.action,folder)
+
+
+if __name__=='__main__': raise SystemExit(main())
+</code></pre></div>
+<p class="code-status" role="status" aria-live="polite"></p>
+<noscript><p>The complete default file is shown above. File selection and automatic copying require JavaScript. Select the code manually or download a related file:</p><ul><li><a href="../source/qc-monitor/scientific_stage.py" download="scientific_stage.py">scientific_stage.py</a></li><li><a href="../source/qc-monitor/r1_stage.py" download="r1_stage.py">r1_stage.py</a></li><li><a href="../source/qc-monitor/r1_validation.py" download="r1_validation.py">r1_validation.py</a></li><li><a href="../source/qc-monitor/final_controller.py" download="final_controller.py">final_controller.py</a></li></ul></noscript>
+<p class="small">These complete public source files document the study. Additional inputs are needed to reproduce the full experiment. See the on-site requirements and source-copy scope. The website does not execute Python.</p>
+<div class="review-links"><a href="#python-code">Back to code controls ↑</a><a href="#main">Back to page overview ↑</a></div>
+</section>
+<!-- END GENERATED PYTHON VIEW -->
+<footer><p>Source: KNMI. KNMI did not participate in or necessarily endorse this derived work. Codex-assisted development and writing.</p><p><a href="../demo/verification.html#using-code">Using the Python files</a> · <a href="../references/index.html#attribution">Attribution and use</a></p></footer>
+</main></div></body></html>

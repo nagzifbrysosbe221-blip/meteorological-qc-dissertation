@@ -1,0 +1,54 @@
+{
+  "selection": {
+    "pass": "alpha-002",
+    "family": "out_of_range",
+    "status": "selected",
+    "job_id": "alpha-002-final-2024-01-16ca4599ecae5277560c05be",
+    "case_id": "final-2024-01-16ca4599ecae5277560c05be",
+    "reason": "first_effective"
+  },
+  "root": {
+    "family": "out_of_range",
+    "variable": "T",
+    "replacement": 51,
+    "side": "upper",
+    "length_hours": 1,
+    "variant": "{\"family\":\"out_of_range\",\"length_hours\":1,\"replacement\":51,\"side\":\"upper\",\"variable\":\"T\"}",
+    "case_id": "final-2024-01-16ca4599ecae5277560c05be",
+    "source_month": "2024-01",
+    "planned_onset": "2024-01-08T01:00:00+00:00",
+    "root_id": "root:final-2024-01-16ca4599ecae5277560c05be",
+    "construction": "effective",
+    "N": 1,
+    "C": 1,
+    "Z": 0,
+    "U": 0,
+    "support": "full",
+    "reason": null,
+    "accounting_assessed": true,
+    "unassessed_units": 0,
+    "planned_end": "2024-01-08T01:00:00+00:00",
+    "restoration_at": "2024-01-08T02:00:00+00:00",
+    "first_effect": "2024-01-08T01:00:00+00:00",
+    "last_effect": "2024-01-08T01:00:00+00:00",
+    "members": [
+      [
+        "Q03",
+        "82a30d7092dc11c8946012a80765f0620e647bd20e79dd8810d3c4eca5b72126:8942:T"
+      ],
+      [
+        "S01",
+        "82a30d7092dc11c8946012a80765f0620e647bd20e79dd8810d3c4eca5b72126:8942:T"
+      ]
+    ],
+    "actual_change_mask": [
+      "2024-01-08T01:00:00+00:00"
+    ],
+    "added_identities": [],
+    "deleted_identities": [],
+    "consequences": [],
+    "range_crossing": false
+  },
+  "sources": "timelines/alpha-002-final-2024-01-16ca4599ecae5277560c05be",
+  "all_configurations_same_case": true
+}

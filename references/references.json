@@ -1,0 +1,157 @@
+{
+  "source_document": "Integrated-Dissertation-v4.docx",
+  "source_sha256": "476b6b788f7356ff1b697410adf9e35e0636533980e854a9f4e8895d7a863376",
+  "reference_count": 30,
+  "references": [
+    {
+      "id": "reference-01",
+      "citation": "Båserud, L., Lussana, C., Nipen, T.N., Seierstad, I.A., Oram, L. and Aspelien, T. (2020) 'TITAN automatic spatial quality control of meteorological in-situ observations', Advances in Science and Research, 17, pp. 153-163. Available at: https://doi.org/10.5194/asr-17-153-2020.",
+      "url": "https://doi.org/10.5194/asr-17-153-2020"
+    },
+    {
+      "id": "reference-02",
+      "citation": "Beele, E., Reyniers, M., Aerts, R. and Somers, B. (2022) 'Quality control and correction method for air temperature data from a citizen science weather station network in Leuven, Belgium', Earth System Science Data, 14(10), pp. 4681-4717. Available at: https://doi.org/10.5194/essd-14-4681-2022.",
+      "url": "https://doi.org/10.5194/essd-14-4681-2022"
+    },
+    {
+      "id": "reference-03",
+      "citation": "Brown, C.W., Schadee, M., de Haij, M. and Brandsma, T. (2026) 'Performance and longevity of compact all-in-one weather stations - the good, the bad and the ugly', Atmospheric Measurement Techniques, 19(9), pp. 3001-3018. Available at: https://doi.org/10.5194/amt-19-3001-2026.",
+      "url": "https://doi.org/10.5194/amt-19-3001-2026"
+    },
+    {
+      "id": "reference-04",
+      "citation": "Creative Commons (no date) Attribution 4.0 International. Available at: https://creativecommons.org/licenses/by/4.0/ (Accessed: 18 September 2026).",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "id": "reference-05",
+      "citation": "Dabrowski, J.J., Rahman, A., Li, M., Shao, Q., Bakar, S., Powell, A. and Henderson, B. (2023) 'Quality control in weather monitoring with dynamic linear models', The 2nd AAAI Workshop on AI for Agriculture and Food Systems. Workshop manuscript, arXiv:2211.04528v2. Available at: https://arxiv.org/abs/2211.04528v2 (Accessed: 17 September 2026).",
+      "url": "https://arxiv.org/abs/2211.04528v2"
+    },
+    {
+      "id": "reference-06",
+      "citation": "Dandrifosse, S., Jago, A., Huart, J.P., Michaud, V., Planchon, V. and Rosillon, D. (2024) 'Automatic quality control of weather data for timely decisions in agriculture', Smart Agricultural Technology, 8, article 100445. Available at: https://doi.org/10.1016/j.atech.2024.100445.",
+      "url": "https://doi.org/10.1016/j.atech.2024.100445"
+    },
+    {
+      "id": "reference-07",
+      "citation": "Durre, I., Menne, M.J. and Vose, R.S. (2008) 'Strategies for evaluating quality assurance procedures', Journal of Applied Meteorology and Climatology, 47(6), pp. 1785–1791. Available at: https://doi.org/10.1175/2007JAMC1706.1.",
+      "url": "https://doi.org/10.1175/2007JAMC1706.1"
+    },
+    {
+      "id": "reference-08",
+      "citation": "Durre, I., Menne, M.J., Gleason, B.E., Houston, T.G. and Vose, R.S. (2010) 'Comprehensive automated quality assurance of daily surface observations', Journal of Applied Meteorology and Climatology, 49(8), pp. 1615-1633. Available at: https://doi.org/10.1175/2010JAMC2375.1.",
+      "url": "https://doi.org/10.1175/2010JAMC2375.1"
+    },
+    {
+      "id": "reference-09",
+      "citation": "Hubbard, K.G., Goddard, S., Sorensen, W.D., Wells, N. and Osugi, T.T. (2005) 'Performance of quality assurance procedures for an applied climate information system', Journal of Atmospheric and Oceanic Technology, 22(1), pp. 105–112. Available at: https://doi.org/10.1175/JTECH-1657.1.",
+      "url": "https://doi.org/10.1175/JTECH-1657.1"
+    },
+    {
+      "id": "reference-10",
+      "citation": "Kim, S., Choi, K., Choi, H.-S., Lee, B. and Yoon, S. (2022) 'Towards a rigorous evaluation of time-series anomaly detection', arXiv [Preprint], 2109.05257v2. Available at: https://arxiv.org/abs/2109.05257v2 (Accessed: 17 September 2026).",
+      "url": "https://arxiv.org/abs/2109.05257v2"
+    },
+    {
+      "id": "reference-11",
+      "citation": "KNMI (2025) Hourly, validated and automated in-situ ground-based meteorological observations in the Netherlands. Version 1.0. Available at: https://dataplatform.knmi.nl/dataset/hourly-in-situ-meteorological-observations-validated-1-0 (Accessed: 18 September 2026).",
+      "url": "https://dataplatform.knmi.nl/dataset/hourly-in-situ-meteorological-observations-validated-1-0"
+    },
+    {
+      "id": "reference-12",
+      "citation": "KNMI (no date a) Copyright. Available at: https://www.knmi.nl/copyright (Accessed: 18 September 2026).",
+      "url": "https://www.knmi.nl/copyright"
+    },
+    {
+      "id": "reference-13",
+      "citation": "KNMI (no date b) Data ophalen vanuit een script. Available at: https://www.knmi.nl/kennis-en-datacentrum/achtergrond/data-ophalen-vanuit-een-script (Accessed: 18 September 2026).",
+      "url": "https://www.knmi.nl/kennis-en-datacentrum/achtergrond/data-ophalen-vanuit-een-script"
+    },
+    {
+      "id": "reference-14",
+      "citation": "KNMI (no date c) Uurgegevens van het weer in Nederland. Available at: https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens (Accessed: 18 September 2026).",
+      "url": "https://www.knmi.nl/nederland-nu/klimatologie/uurgegevens"
+    },
+    {
+      "id": "reference-15",
+      "citation": "KNMI (no date d) Uurwaarden van weerstations. Available at: https://www.daggegevens.knmi.nl/klimatologie/uurgegevens (Accessed: 18 September 2026).",
+      "url": "https://www.daggegevens.knmi.nl/klimatologie/uurgegevens"
+    },
+    {
+      "id": "reference-16",
+      "citation": "Lott, J.N. (2004) 'The quality control of the Integrated Surface Hourly Database', 14th Conference on Applied Climatology, American Meteorological Society, paper 7.8. Available at: https://ams.confex.com/ams/pdfpapers/71929.pdf (Accessed: 17 September 2026).",
+      "url": "https://ams.confex.com/ams/pdfpapers/71929.pdf"
+    },
+    {
+      "id": "reference-17",
+      "citation": "Lucas, J.M. and Saccucci, M.S. (1990) 'Exponentially weighted moving average control schemes: properties and enhancements', Technometrics, 32(1), pp. 1–12. Available at: https://doi.org/10.1080/00401706.1990.10484583.",
+      "url": "https://doi.org/10.1080/00401706.1990.10484583"
+    },
+    {
+      "id": "reference-18",
+      "citation": "Marais, H.L., Zaccaria, V. and Odlare, M. (2022) 'Comparing statistical process control charts for fault detection in wastewater treatment', Water Science and Technology, 85(4), pp. 1250-1262. Available at: https://doi.org/10.2166/wst.2022.037.",
+      "url": "https://doi.org/10.2166/wst.2022.037"
+    },
+    {
+      "id": "reference-19",
+      "citation": "National Data Buoy Center (NDBC) (2023) Handbook of automated data quality control checks and procedures. Technical document T80-10, December. Available at: https://www.ndbc.noaa.gov/publications/NDBCHandbookofAutomatedDataQualityControl2023.pdf (Accessed: 17 September 2026).",
+      "url": "https://www.ndbc.noaa.gov/publications/NDBCHandbookofAutomatedDataQualityControl2023.pdf"
+    },
+    {
+      "id": "reference-20",
+      "citation": "NIST/SEMATECH (no date a) 'Cusum average run length', e-Handbook of Statistical Methods, section 6.3.2.3.1. Available at: https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc3231.htm (Accessed: 17 September 2026).",
+      "url": "https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc3231.htm"
+    },
+    {
+      "id": "reference-21",
+      "citation": "NIST/SEMATECH (no date b) 'EWMA control charts', e-Handbook of Statistical Methods, section 6.3.2.4. Available at: https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc324.htm (Accessed: 17 September 2026).",
+      "url": "https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc324.htm"
+    },
+    {
+      "id": "reference-22",
+      "citation": "Peffers, K., Tuunanen, T., Rothenberger, M.A. and Chatterjee, S. (2007) 'A design science research methodology for information systems research', Journal of Management Information Systems, 24(3), pp. 45–77. Available at: https://doi.org/10.2753/MIS0742-1222240302.",
+      "url": "https://doi.org/10.2753/MIS0742-1222240302"
+    },
+    {
+      "id": "reference-23",
+      "citation": "Roberts, S.W. (1959) 'Control chart tests based on geometric moving averages', Technometrics, 1(3), pp. 239–250. Available at: https://doi.org/10.1080/00401706.1959.10489860.",
+      "url": "https://doi.org/10.1080/00401706.1959.10489860"
+    },
+    {
+      "id": "reference-24",
+      "citation": "Schmid, W. and Schöne, A. (1997) 'Some properties of the EWMA control chart in the presence of autocorrelation', The Annals of Statistics, 25(3), pp. 1277–1283. Available at: https://doi.org/10.1214/aos/1069362748.",
+      "url": "https://doi.org/10.1214/aos/1069362748"
+    },
+    {
+      "id": "reference-25",
+      "citation": "Tatbul, N., Lee, T.J., Zdonik, S., Alam, M. and Gottschlich, J. (2018) 'Precision and recall for time series', Advances in Neural Information Processing Systems, 31. Available at: https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf (Accessed: 17 September 2026).",
+      "url": "https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf"
+    },
+    {
+      "id": "reference-26",
+      "citation": "Teh, H.Y., Kempa-Liehr, A.W. and Wang, K.I.-K. (2020) 'Sensor data quality: a systematic review', Journal of Big Data, 7, article 11. Available at: https://doi.org/10.1186/s40537-020-0285-1.",
+      "url": "https://doi.org/10.1186/s40537-020-0285-1"
+    },
+    {
+      "id": "reference-27",
+      "citation": "Truong, C., Oudre, L. and Vayatis, N. (2020) 'Selective review of offline change point detection methods', Signal Processing, 167, article 107299. Available at: https://doi.org/10.1016/j.sigpro.2019.107299.",
+      "url": "https://doi.org/10.1016/j.sigpro.2019.107299"
+    },
+    {
+      "id": "reference-28",
+      "citation": "Venable, J., Pries-Heje, J. and Baskerville, R. (2016) 'FEDS: a framework for evaluation in design science research', European Journal of Information Systems, 25(1), pp. 77–89. Available at: https://doi.org/10.1057/ejis.2014.36.",
+      "url": "https://doi.org/10.1057/ejis.2014.36"
+    },
+    {
+      "id": "reference-29",
+      "citation": "von Arx, G., Dobbertin, M. and Rebetez, M. (2013) 'Detecting and correcting sensor drifts in long-term weather data', Environmental Monitoring and Assessment, 185(6), pp. 4483-4489. Available at: https://doi.org/10.1007/s10661-012-2831-6.",
+      "url": "https://doi.org/10.1007/s10661-012-2831-6"
+    },
+    {
+      "id": "reference-30",
+      "citation": "World Meteorological Organization (WMO) (2023) Guide to instruments and methods of observation. WMO-No. 8, Volume V: Quality assurance and management of observing systems. Available at: https://amc.namem.gov.mn/wp-content/uploads/WMO/1.%208_V-2023_en.pdf (Accessed: 17 September 2026).",
+      "url": "https://amc.namem.gov.mn/wp-content/uploads/WMO/1.%208_V-2023_en.pdf"
+    }
+  ]
+}

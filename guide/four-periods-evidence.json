@@ -1,0 +1,252 @@
+{
+  "title": "Four study periods: selected evidence summary",
+  "prepared_date": "2026-10-10",
+  "scope": "Selected fields from saved records for examiner review. No fitting, calibration or evaluation was rerun. Original detailed early run records remain in the separate research archive.",
+  "fitting": [
+    {
+      "variable": "T",
+      "candidate": "S",
+      "source_year": 2021,
+      "fitting_rows": 8760,
+      "status": "fitted",
+      "record_sha256": "36b50d01faed001d8d1774527f9c319810cdf3c2511fd6ea3ef8236b14631e21"
+    },
+    {
+      "variable": "T",
+      "candidate": "P",
+      "source_year": 2021,
+      "fitting_rows": 8760,
+      "status": "fitted",
+      "record_sha256": "7523eac4b25b7615c3682dd9635135d43a744888953089f6072a793e259d1bd8"
+    },
+    {
+      "variable": "U",
+      "candidate": "S",
+      "source_year": 2021,
+      "fitting_rows": 8760,
+      "status": "fitted",
+      "record_sha256": "134b54b49be62fcf9d50b3d513e8b59e4762692c0652f58273ee0d06a18f9aa2"
+    },
+    {
+      "variable": "U",
+      "candidate": "P",
+      "source_year": 2021,
+      "fitting_rows": 8760,
+      "status": "fitted",
+      "record_sha256": "e5723583c46829db39eef6fb7b9867a9fa53917b9fe2408cefc1187b26dbed5b"
+    }
+  ],
+  "selection": {
+    "T": {
+      "original_selected_candidate": "P",
+      "original_reason": "all_P_gates_pass",
+      "candidate_checks": {
+        "S": {
+          "own_gates_pass": false,
+          "monthly_bias_failure_months": [
+            2,
+            3,
+            8
+          ]
+        },
+        "P": {
+          "own_gates_pass": true,
+          "monthly_bias_failure_months": []
+        }
+      },
+      "later_development_decision": {
+        "selected_lambda": 0.2,
+        "hits": 102,
+        "denominator": 216,
+        "detected_fraction": 0.4722222222222222,
+        "mean_normalised_delay": 0.7874177715471513,
+        "delay_exact": "407242361/517187160",
+        "reason": "A3_paired_ranking",
+        "variable": "T",
+        "original_A2_eligible": true,
+        "exploratory": false,
+        "revision": "R1-approved-v1",
+        "model": "P",
+        "cutoff": 2.4816976238219928,
+        "alpha_sensitivity_cutoffs": {
+          "0.005": 2.7603226941864003,
+          "0.02": 2.1323005759800266
+        }
+      },
+      "gate_record_sha256": "2ded708660e58be5705675598b13cdc6329bbbaf1dc159f8433486bbe966138c",
+      "development_decision_sha256": "147fcde8dd6b7748648dd504863d4e2f14a27b3a94fe9537130420dad482b214"
+    },
+    "U": {
+      "original_selected_candidate": null,
+      "original_reason": "no_eligible_candidate_revision_required",
+      "candidate_checks": {
+        "S": {
+          "own_gates_pass": false,
+          "monthly_bias_failure_months": [
+            3,
+            6,
+            7,
+            8
+          ]
+        },
+        "P": {
+          "own_gates_pass": false,
+          "monthly_bias_failure_months": [
+            11
+          ]
+        }
+      },
+      "later_development_decision": {
+        "selected_lambda": 0.2,
+        "hits": 126,
+        "denominator": 216,
+        "detected_fraction": 0.5833333333333334,
+        "mean_normalised_delay": 0.7030588172374581,
+        "delay_exact": "121204331/172395720",
+        "reason": "A3_paired_ranking",
+        "variable": "U",
+        "original_A2_eligible": false,
+        "exploratory": true,
+        "revision": "R1-approved-v1",
+        "model": "P",
+        "cutoff": 2.057779719375828,
+        "alpha_sensitivity_cutoffs": {
+          "0.005": 2.2975750425842403,
+          "0.02": 1.7916906157638017
+        }
+      },
+      "gate_record_sha256": "121dea6ce7ec8d60025770e20a399671601da2bc1a5d312f8b516007c7c89e6a",
+      "development_decision_sha256": "0058c3ce89831eb4ae12d23e2b22a3d3bccc04b769b0dca68f11130c3e320a14"
+    }
+  },
+  "validation": {
+    "T": {
+      "source_year": 2023,
+      "previously_exposed": true,
+      "annual": {
+        "flags": 28,
+        "eligible_assumed_normal_ready_hours": 8760,
+        "expected_hours": 8760,
+        "ready_coverage": 1.0,
+        "statistical_stream_FPR": 0.0031963470319634705,
+        "reason": null
+      },
+      "june": {
+        "flags": 8,
+        "eligible_assumed_normal_ready_hours": 720,
+        "expected_hours": 720,
+        "ready_coverage": 1.0,
+        "statistical_stream_FPR": 0.011111111111111112,
+        "reason": null
+      },
+      "public_record": "provenance/validation/T-validation.json",
+      "record_sha256": "81b11f1cb69b0947e2799802310e72d559545e88b38756aceb50a2c231922cde"
+    },
+    "U": {
+      "source_year": 2023,
+      "previously_exposed": true,
+      "annual": {
+        "flags": 107,
+        "eligible_assumed_normal_ready_hours": 8760,
+        "expected_hours": 8760,
+        "ready_coverage": 1.0,
+        "statistical_stream_FPR": 0.01221461187214612,
+        "reason": null
+      },
+      "june": {
+        "flags": 31,
+        "eligible_assumed_normal_ready_hours": 720,
+        "expected_hours": 720,
+        "ready_coverage": 1.0,
+        "statistical_stream_FPR": 0.043055555555555555,
+        "reason": null
+      },
+      "public_record": "provenance/validation/U-validation.json",
+      "record_sha256": "cd62dd71e77d401bff4b58820a6b21f4dc1b2bf6d378326f2f5bd6f162666c2c"
+    }
+  },
+  "final_evaluation": {
+    "T": {
+      "primary_H_gradual_bias": {
+        "row_id": "root_summary:1251",
+        "planned": 216,
+        "effective": 216,
+        "hit": 95,
+        "evaluated_miss": 121,
+        "unavailable_miss": 0,
+        "absent_capability_miss": 0
+      },
+      "primary_H_background_value": {
+        "row_id": "background_points:2176",
+        "FP": 22,
+        "TN": 8535,
+        "n": 8557,
+        "excluded_scored": 203
+      }
+    },
+    "U": {
+      "primary_H_gradual_bias": {
+        "row_id": "root_summary:1290",
+        "planned": 216,
+        "effective": 216,
+        "hit": 154,
+        "evaluated_miss": 62,
+        "unavailable_miss": 0,
+        "absent_capability_miss": 0
+      },
+      "primary_H_background_value": {
+        "row_id": "background_points:2182",
+        "FP": 38,
+        "TN": 8519,
+        "n": 8557,
+        "excluded_scored": 203
+      }
+    },
+    "passes": {
+      "T-range": {
+        "constructed_cases": 936,
+        "effective_cases": 936
+      },
+      "alpha-0005": {
+        "constructed_cases": 936,
+        "effective_cases": 936
+      },
+      "alpha-002": {
+        "constructed_cases": 936,
+        "effective_cases": 936
+      },
+      "primary": {
+        "constructed_cases": 936,
+        "effective_cases": 936
+      }
+    },
+    "source_tables": {
+      "root_summary": "b7e137b15775097348f8a724a20bdda0b309591ca9c5cdb9e7914968d897c5ea",
+      "background_points": "cc215b83181a8b8f772429113124c189d5f561727204d6bb6e7a6242a906dc68",
+      "construction": "16ec58eef51051e37c3303aa292551e69dcaa53690a4806fe6c7a502d3f5a927"
+    }
+  },
+  "freeze": {
+    "state": "frozen",
+    "actual_scientific_freeze": true,
+    "recorded_utc": "2026-10-08T08:17:13.074195+00:00",
+    "final_observation_performance_opened": false,
+    "labels": {
+      "T_original_A2_eligible": true,
+      "U_original_A2_eligible": false,
+      "U_exploratory": true,
+      "revision": "R1-approved-v1",
+      "validation_original_state": "diagnosis_required",
+      "validation_disposition": "negative_U_retained_unchanged",
+      "normal_truth": "assumed_normal_not_certified",
+      "independent_human_review": false,
+      "newly_untouched_holdout": false
+    }
+  },
+  "limitations": [
+    "2023 was previously examined. Final-period exposure is now complete; the final period is not a newly untouched holdout.",
+    "Humidity was originally ineligible and continued under researcher-approved R1; no supervisor approval is recorded.",
+    "2023 statistical-stream rates and final combined-H value-hour rates have different scopes and denominators.",
+    "Background readings were assumed normal, not independently certified fault-free."
+  ]
+}

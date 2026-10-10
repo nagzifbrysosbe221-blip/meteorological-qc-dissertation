@@ -1,0 +1,12 @@
+{
+  "version": "R1-2023-validation-v1",
+  "A3_completed_sha256": "20b0d4a7c448105a26997aff533dae7097e48f3927576623a84125e6f689ec43",
+  "scope": "Frozen transfer to previously exposed 2023; U exploratory under approved R1; statistical stream only",
+  "settings": "Exact saved 2021 models and selected 2022 A3 decisions; no fitting, calibration, candidate selection or automatic retuning",
+  "context": "Source 18-31 December 2022, 336 unscored hours, state zero at context start. Source 1 January-31 December 2023 scored; HH24 retains original source-date ownership.",
+  "FPR": "Strict S01 positives / ready eligible assumed-normal source-2023 hours, annual and source month; unavailable excluded with reasons, zero denominator null. Not whole-H FPR or final-year evaluation.",
+  "diagnosis": "Annual statistical FPR strictly above .01 or any monthly FPR strictly above .03 prompts diagnosis/disclosure. Equality does not trigger. Missing exposure is explicit diagnosis_required. Adverse findings may be retained with unchanged settings under A3; never automatically retune.",
+  "state": "First ready update 228; hold through six unavailable hours then reset at seventh; continuous without monthly resets; no reference fallback",
+  "failure": "Permission/hash/input/resource errors preserve failed attempt. Elevated FPR is a scientific diagnosis result, not execution failure. Fresh folder on rerun; no partial resume.",
+  "later": "Review validation, then scientific integration/prospective final protocol, controlled structural intake/independent labels, actual freeze and measured pilot. No final intake or final batch authorised by this stage."
+}

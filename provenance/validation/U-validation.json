@@ -1,0 +1,140 @@
+{
+  "variable": "U",
+  "source_year": 2023,
+  "previously_exposed": true,
+  "annual": {
+    "flags": 107,
+    "eligible_assumed_normal_ready_hours": 8760,
+    "expected_hours": 8760,
+    "ready_coverage": 1.0,
+    "statistical_stream_FPR": 0.01221461187214612,
+    "reason": null
+  },
+  "monthly": {
+    "1": {
+      "flags": 3,
+      "eligible_assumed_normal_ready_hours": 744,
+      "expected_hours": 744,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.004032258064516129,
+      "reason": null
+    },
+    "2": {
+      "flags": 16,
+      "eligible_assumed_normal_ready_hours": 672,
+      "expected_hours": 672,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.023809523809523808,
+      "reason": null
+    },
+    "3": {
+      "flags": 16,
+      "eligible_assumed_normal_ready_hours": 744,
+      "expected_hours": 744,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.021505376344086023,
+      "reason": null
+    },
+    "4": {
+      "flags": 8,
+      "eligible_assumed_normal_ready_hours": 720,
+      "expected_hours": 720,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.011111111111111112,
+      "reason": null
+    },
+    "5": {
+      "flags": 12,
+      "eligible_assumed_normal_ready_hours": 744,
+      "expected_hours": 744,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.016129032258064516,
+      "reason": null
+    },
+    "6": {
+      "flags": 31,
+      "eligible_assumed_normal_ready_hours": 720,
+      "expected_hours": 720,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.043055555555555555,
+      "reason": null
+    },
+    "7": {
+      "flags": 10,
+      "eligible_assumed_normal_ready_hours": 744,
+      "expected_hours": 744,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.013440860215053764,
+      "reason": null
+    },
+    "8": {
+      "flags": 3,
+      "eligible_assumed_normal_ready_hours": 744,
+      "expected_hours": 744,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.004032258064516129,
+      "reason": null
+    },
+    "9": {
+      "flags": 2,
+      "eligible_assumed_normal_ready_hours": 720,
+      "expected_hours": 720,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.002777777777777778,
+      "reason": null
+    },
+    "10": {
+      "flags": 3,
+      "eligible_assumed_normal_ready_hours": 744,
+      "expected_hours": 744,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.004032258064516129,
+      "reason": null
+    },
+    "11": {
+      "flags": 3,
+      "eligible_assumed_normal_ready_hours": 720,
+      "expected_hours": 720,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.004166666666666667,
+      "reason": null
+    },
+    "12": {
+      "flags": 0,
+      "eligible_assumed_normal_ready_hours": 744,
+      "expected_hours": 744,
+      "ready_coverage": 1.0,
+      "statistical_stream_FPR": 0.0,
+      "reason": null
+    }
+  },
+  "unavailable_reasons": {},
+  "diagnosis_reasons": [
+    "annual_FPR_above_.01",
+    "month_6_FPR_above_.03"
+  ],
+  "state": "diagnosis_required",
+  "settings_transferred_unchanged": {
+    "selected_lambda": 0.2,
+    "hits": 126,
+    "denominator": 216,
+    "detected_fraction": 0.5833333333333334,
+    "mean_normalised_delay": 0.7030588172374581,
+    "delay_exact": "121204331/172395720",
+    "reason": "A3_paired_ranking",
+    "variable": "U",
+    "original_A2_eligible": false,
+    "exploratory": true,
+    "revision": "R1-approved-v1",
+    "model": "P",
+    "cutoff": 2.057779719375828,
+    "alpha_sensitivity_cutoffs": {
+      "0.005": 2.2975750425842403,
+      "0.02": 1.7916906157638017
+    }
+  },
+  "automatic_retuning": false,
+  "scientific_freeze": false,
+  "truth": "assumed normal, not certified",
+  "scope": "S01 statistical stream only; not combined-H FPR or final performance"
+}
