@@ -29,7 +29,7 @@
       purpose: 'Choose the measured variable, or a record-level result where the table provides one. Temperature and humidity have different scientific qualifications.',
       choices: {
         T: 'Air temperature, expressed in degrees Celsius. The selected temperature model passed the original eligibility checks. That does not certify the sensor or background as healthy.',
-        U: 'Relative humidity, expressed as a percentage. These results are exploratory under researcher-approved R1 because the model failed its original eligibility checks. The negative validation finding is retained; supervisor approval is not recorded.',
+        U: 'Relative humidity, expressed as a percentage. These results are exploratory under the R1 revision because the model failed its original eligibility checks. The negative validation finding is retained.',
         __null: 'A result about the record or timestamp rather than one measured variable. The saved variable field is null; this does not mean a zero measurement or missing research result.'
       }
     },
