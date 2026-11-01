@@ -1,6 +1,14 @@
 # Only the reviewed website and its downloads belong in this checkout.
 # Keep research records and maintenance tools outside the public repository.
 /*
+!/chapters/
+/chapters/*
+!/chapters/chapter-1.html
+!/chapters/chapter-2.html
+!/chapters/chapter-3.html
+!/chapters/chapter-4.html
+!/chapters/chapter-5.html
+!/chapters/appendices.html
 !/.gitignore
 !/assets/
 /assets/*
@@ -36,6 +44,11 @@
 !/assets/python-code.css
 !/assets/python-code.js
 !/assets/python-sources.js
+!/assets/companion.css
+!/assets/companion.js
+!/assets/companion-search.js
+!/assets/evidence-shell.css
+!/assets/evidence-shell.js
 !/checks/check_core.py
 !/demo/data.js
 !/demo/datasets.html
